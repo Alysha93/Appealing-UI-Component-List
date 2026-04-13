@@ -188,11 +188,12 @@ function getTemplate(type, index) {
   
   switch(type) {
     case 'badge':
-      const icons = ['', '✦ ', '❤ ', '✨ ', '✓ ', '✉ ', '🛒 ', '⌛ '];
-      const icon = icons[index % icons.length];
+      const bIcons = ['', '✦ ', '❤ ', '✨ ', '✓ ', '✉ ', '🛒 ', '⌛ '];
+      const icon = bIcons[index % bIcons.length];
+      const bRadius = ['var(--radius-full)', 'var(--radius-sm)', '0', 'var(--radius-md)'];
       return `<div class="comp-preview">
         <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <span class="badge badge-${style}" style="font-size: ${8 + (index % 10)}px;">${icon}Badge ${index}</span>
+        <span class="badge badge-${style}" style="font-size: ${8 + (index % 10)}px; border-radius:${bRadius[index % bRadius.length]};">${icon}Badge ${index}</span>
       </div>`;
 
     case 'table':
@@ -246,14 +247,17 @@ function getTemplate(type, index) {
       </div>`;
 
     case 'avatar':
-      const frames = ['', 'border:4px solid var(--primary);', 'border:4px solid var(--gold);', 'box-shadow:var(--shadow-glow);', 'filter:grayscale(100%);'];
-      const frame = frames[index % frames.length];
-      const radius = index % 3 === 0 ? '12px' : '50%';
+      const aShapes = ['50%', '12px', '4px', '30%'];
+      const currentShape = aShapes[index % aShapes.length];
+      const aColors = ['var(--primary)', 'var(--gold)', 'var(--border)', 'transparent'];
+      const currentColor = aColors[index % aColors.length];
+      
       return `<div class="comp-preview">
         <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
         <div class="avatar-wrap" style="position:relative; display:inline-block;">
-          <img src="https://i.pravatar.cc/150?u=${index}" class="avatar avatar-${style}" style="width:${48 + (index%40)}px; height:${48 + (index%40)}px; border-radius:${radius}; ${frame}">
-          ${index % 5 === 0 ? '<span style="position:absolute; bottom:2px; right:2px; width:12px; height:12px; background:#4CAF50; border:2px solid #fff; border-radius:50%;"></span>' : ''}
+          <img src="https://i.pravatar.cc/150?u=${index}" class="avatar avatar-${style}" 
+               style="width:${48 + (index%40)}px; height:${48 + (index%40)}px; border-radius:${currentShape}; border-color:${currentColor}; ${index % 10 === 0 ? 'filter:grayscale(1);' : ''}">
+          ${index % 4 === 0 ? `<span style="position:absolute; bottom:2px; right:2px; width:10px; height:10px; background:#4CAF50; border:2px solid #fff; border-radius:50%;"></span>` : ''}
         </div>
       </div>`;
 
@@ -285,11 +289,14 @@ function getTemplate(type, index) {
 
     case 'selection':
       const selType = index % 3;
+      const sRadius = ['4px', 'var(--radius-full)', '0', '12px'];
+      const currentRadius = sRadius[index % sRadius.length];
+      
       if (selType === 0) {
         return `<div class="comp-preview">
           <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
           <div style="display:flex; align-items:center; gap:10px;">
-            <div class="ux-box ${style} ${index%2 === 0 ? 'active' : ''}">
+            <div class="ux-box ${style} ${index%2 === 0 ? 'active' : ''}" style="border-radius:${currentRadius}">
               ${index%2 === 0 ? '✓' : ''}
             </div>
             <span style="font-size:14px; font-weight:500;">Option ${index}</span>
@@ -299,7 +306,7 @@ function getTemplate(type, index) {
         return `<div class="comp-preview">
           <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
           <div style="display:flex; align-items:center; gap:10px;">
-            <div class="ux-radio ${style} ${index%2 === 0 ? 'active' : ''}"></div>
+            <div class="ux-radio ${style} ${index%2 === 0 ? 'active' : ''}" style="border-width:${index%3+1}px;"></div>
             <span style="font-size:14px; font-weight:500;">Choice ${index}</span>
           </div>
         </div>`;
@@ -307,22 +314,36 @@ function getTemplate(type, index) {
         return `<div class="comp-preview">
           <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
           <div style="display:flex; align-items:center; gap:12px;">
-            <div class="ux-toggle ${index%2 === 0 ? 'active' : ''}" onclick="this.classList.toggle('active')"></div>
-            <span style="font-size:14px; font-weight:500;">Toggle Lux ${index}</span>
+            <div class="ux-toggle ${index%2 === 0 ? 'active' : ''}" 
+                 style="transform:scale(${0.9 + (index%3)*0.1});" 
+                 onclick="this.classList.toggle('active')"></div>
+            <span style="font-size:14px; font-weight:500;">Toggle ${index}</span>
           </div>
         </div>`;
       }
 
     case 'dropdown':
+      const dStyles = ['', 'select-rose', 'select-gold', 'select-glass', 'select-minimal'];
+      const dShapes = ['', 'select-pill'];
+      const dArrows = ['', 'select-arrow-gold', 'select-arrow-dot'];
+      
+      const dStyle = dStyles[index % dStyles.length];
+      const dShape = dShapes[index % dShapes.length];
+      const dArrow = dArrows[index % dArrows.length];
+      
+      const labels = ['Pick a Collection', 'Select Tier', 'Choose Edition', 'Style Option', 'Luxe Category'];
+      const currentLabel = labels[index % labels.length];
+      
       return `<div class="comp-preview">
         <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <div style="position:relative;">
-          <select class="select-lux" style="border-color:${style === 'gold' ? 'var(--gold)' : 'var(--border)'}">
-            <option>Select Option ${index}</option>
-            <option>Premium Tier</option>
-            <option>Standard Access</option>
+        <div style="position:relative; width: fit-content;">
+          <select class="select-lux ${dStyle} ${dShape}">
+            <option>${currentLabel} ${index}</option>
+            <option>Silk Rose Series</option>
+            <option>Golden Hour Elite</option>
+            <option>Glass Prism Collection</option>
           </select>
-          <span style="position:absolute; right:15px; top:50%; transform:translateY(-50%); pointer-events:none; font-size:10px;">▼</span>
+          <div class="select-arrow ${dArrow}">${dArrow === '' ? '▼' : ''}</div>
         </div>
       </div>`;
 
@@ -333,14 +354,33 @@ function getTemplate(type, index) {
           <div class="tooltip-lux tooltip-${style}">Tooltip Highlight ${index}</div>
         </div>`;
       } else {
-        }
+        return `<div class="comp-preview">
+          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+          <div style="width:280px; padding:20px; background:var(--surface); border-radius:var(--radius-lg); box-shadow:var(--shadow-heavy); border:1px solid var(--border);">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+              <span style="background:var(--grad-${style === 'gold' ? 'luxury' : 'rose'}); width:8px; height:8px; border-radius:50%;"></span>
+              <strong style="font-size:13px;">Notification ${index}</strong>
+            </div>
+            <p style="font-size:12px; color:var(--text-muted); margin:0;">Elegant overlay system variant ${index}.</p>
+          </div>
+        </div>`;
+      }
 
     case 'inputs':
+      const iRadii = ['var(--radius-full)', 'var(--radius-lg)', '0', '8px'];
+      const iStyles = ['', 'input-rose', 'input-gold'];
+      const currentIStyle = iStyles[index % iStyles.length];
+      
       return `<div class="comp-preview" style="width:100%; max-width:320px;">
         <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
         <div style="margin-bottom:10px;">
-          <label style="display:block; font-size:11px; font-weight:700; color:var(--primary-dark); margin-bottom:4px; text-transform:uppercase;">Lux Label ${index}</label>
-          <input type="${index%5===0 ? 'password' : 'text'}" class="input-lux ${style === 'rose' ? 'input-rose' : (style === 'gold' ? 'input-gold' : '')}" placeholder="Luxury Placeholder ${index}">
+          <label style="display:block; font-size:11px; font-weight:700; color:var(--primary-dark); margin-bottom:4px; text-transform:uppercase; letter-spacing:0.05em;">Luxe Label ${index}</label>
+          <div style="position:relative;">
+            <input type="${index%7===0 ? 'password' : 'text'}" class="input-lux ${currentIStyle}" 
+                   style="border-radius:${iRadii[index % iRadii.length]}; padding-left:${index%5===0 ? '40px' : '20px'};" 
+                   placeholder="Luxury Variant ${index}">
+            ${index % 5 === 0 ? '<span style="position:absolute; left:15px; top:50%; transform:translateY(-50%); font-size:12px; color:var(--text-muted);">✦</span>' : ''}
+          </div>
         </div>
       </div>`;
 
