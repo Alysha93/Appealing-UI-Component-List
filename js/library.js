@@ -124,15 +124,288 @@ function populateLibrary() {
   }
 }
 
+// ── COMPONENT REGISTRY (Expansion 50x) ──────────────────────
+const COMPONENT_REGISTRY = {
+  tables: () => generateVariants('table', 50),
+  lists: () => generateVariants('list', 50),
+  badges: () => generateVariants('badge', 50),
+  avatars: () => generateVariants('avatar', 50),
+  loaders: () => generateVariants('loader', 50),
+  selection: () => generateVariants('selection', 50),
+  dropdowns: () => generateVariants('dropdown', 50),
+  overlays: () => generateVariants('overlays', 50),
+  inputs: () => generateVariants('input', 50),
+  forms: () => generateVariants('form', 50),
+  pickers: () => generateVariants('picker', 50),
+  navigation: () => generateVariants('navigation', 50),
+  tabs: () => generateVariants('tabs', 50),
+  layout: () => generateVariants('layout', 50),
+  hero: () => generateVariants('hero', 50),
+  footers: () => generateVariants('footers', 50),
+  advanced: () => generateVariants('advanced', 50),
+  dashboard: () => generateVariants('dashboard', 50),
+  cards: () => generateVariants('cards', 50)
+};
+
+/**
+ * Main entry point for rendering expanded sections.
+ */
+function renderSection(id) {
+  const container = document.getElementById('render-' + id);
+  if (!container) return;
+  
+  // Only render if empty to save performance
+  if (container.children.length > 0) return;
+
+  const generator = COMPONENT_REGISTRY[id];
+  if (generator) {
+    const variants = generator();
+    container.innerHTML = `<div class="comp-row wrap" style="gap:24px;">${variants.join('')}</div>`;
+  }
+}
+
+/**
+ * Factory function to generate N unique variants for a type.
+ * This is where the 'girly fancy' magic happens.
+ */
+function generateVariants(type, count) {
+  const variants = [];
+  for (let i = 1; i <= count; i++) {
+    variants.push(getTemplate(type, i));
+  }
+  return variants;
+}
+
+/**
+ * Template switcher for all component types.
+ * Each type has a set of styles (Rose, Gold, Glass, Neumorphic, etc.)
+ */
+function getTemplate(type, index) {
+  const styles = ['rose', 'gold', 'glass', 'neumorphic', 'dark', 'outline', 'glow', 'minimal'];
+  const sizes = ['xs', 'sm', 'md', 'lg', 'xl'];
+  const style = styles[(index - 1) % styles.length];
+  const size = sizes[(index - 1) % sizes.length];
+  
+  switch(type) {
+    case 'badge':
+      const icons = ['', '✦ ', '❤ ', '✨ ', '✓ ', '✉ ', '🛒 ', '⌛ '];
+      const icon = icons[index % icons.length];
+      return `<div class="comp-preview">
+        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+        <span class="badge badge-${style}" style="font-size: ${8 + (index % 10)}px;">${icon}Badge ${index}</span>
+      </div>`;
+
+    case 'table':
+      const tableClasses = ['table-rose', 'table-gold', 'table-glass', 'table-neumorphic'];
+      const currentTableClass = tableClasses[index % tableClasses.length];
+      return `<div class="comp-preview" style="width:100%; max-width:480px;">
+        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+        <table class="table ${currentTableClass}" style="width:100%;">
+          <thead>
+            <tr><th>No.</th><th>Collection</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>#${index.toString().padStart(3, '0')}</td><td>Lux Series ${index}</td><td><span class="badge badge-${style}">Variant</span></td></tr>
+            <tr><td>#${(index+1).toString().padStart(3, '0')}</td><td>Editorial ${index}</td><td><span class="badge badge-minimal">Pending</span></td></tr>
+          </tbody>
+        </table>
+      </div>`;
+
+    case 'avatar':
+      const frames = ['', 'border:4px solid var(--primary);', 'border:4px solid var(--gold);', 'box-shadow:var(--shadow-glow);', 'filter:grayscale(100%);'];
+      const frame = frames[index % frames.length];
+      const radius = index % 3 === 0 ? '12px' : '50%';
+      return `<div class="comp-preview">
+        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+        <div class="avatar-wrap" style="position:relative; display:inline-block;">
+          <img src="https://i.pravatar.cc/150?u=${index}" class="avatar avatar-${style}" style="width:${48 + (index%40)}px; height:${48 + (index%40)}px; border-radius:${radius}; ${frame}">
+          ${index % 5 === 0 ? '<span style="position:absolute; bottom:2px; right:2px; width:12px; height:12px; background:#4CAF50; border:2px solid #fff; border-radius:50%;"></span>' : ''}
+        </div>
+      </div>`;
+
+    case 'loader':
+      if (index % 2 === 0) {
+        return `<div class="comp-preview">
+          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+          <div class="loader-petal" style="border-top-color: var(--${style === 'gold' ? 'gold' : 'primary'}); width:${20 + (index%30)}px; height:${20 + (index%30)}px;"></div>
+        </div>`;
+      } else {
+        return `<div class="comp-preview" style="width:200px;">
+          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+          <div class="loader-shimmer" style="height:${4 + (index%10)}px; background:var(--surface-alt);"></div>
+          <span style="font-size:10px; color:var(--text-muted); margin-top:4px; display:block;">Loading Luxe ${index}%</span>
+        </div>`;
+      }
+
+    case 'list':
+      return `<div class="comp-preview" style="width:100%; max-width:300px;">
+        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+        <div class="notif-item" style="border:1px solid var(--border); margin-bottom:4px; background: ${index % 3 === 0 ? 'var(--primary-light)' : 'var(--surface)'};">
+          <div class="notif-icon" style="background:var(--grad-${style === 'gold' ? 'luxury' : 'rose'});">✦</div>
+          <div class="notif-content">
+            <div class="notif-title">Item ${index}</div>
+            <div class="notif-body">Fancy list item description ${index}</div>
+          </div>
+        </div>
+      </div>`;
+
+    case 'selection':
+      const selType = index % 3;
+      if (selType === 0) {
+        return `<div class="comp-preview">
+          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div class="ux-box ${style} ${index%2 === 0 ? 'active' : ''}">
+              ${index%2 === 0 ? '✓' : ''}
+            </div>
+            <span style="font-size:14px; font-weight:500;">Option ${index}</span>
+          </div>
+        </div>`;
+      } else if (selType === 1) {
+        return `<div class="comp-preview">
+          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <div class="ux-radio ${style} ${index%2 === 0 ? 'active' : ''}"></div>
+            <span style="font-size:14px; font-weight:500;">Choice ${index}</span>
+          </div>
+        </div>`;
+      } else {
+        return `<div class="comp-preview">
+          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+          <div style="display:flex; align-items:center; gap:12px;">
+            <div class="ux-toggle ${index%2 === 0 ? 'active' : ''}" onclick="this.classList.toggle('active')"></div>
+            <span style="font-size:14px; font-weight:500;">Toggle Lux ${index}</span>
+          </div>
+        </div>`;
+      }
+
+    case 'dropdown':
+      return `<div class="comp-preview">
+        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+        <div style="position:relative;">
+          <select class="select-lux" style="border-color:${style === 'gold' ? 'var(--gold)' : 'var(--border)'}">
+            <option>Select Option ${index}</option>
+            <option>Premium Tier</option>
+            <option>Standard Access</option>
+          </select>
+          <span style="position:absolute; right:15px; top:50%; transform:translateY(-50%); pointer-events:none; font-size:10px;">▼</span>
+        </div>
+      </div>`;
+
+    case 'overlays':
+      if (index % 2 === 0) {
+        return `<div class="comp-preview">
+          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+          <div class="tooltip-lux tooltip-${style}">Tooltip Highlight ${index}</div>
+        </div>`;
+      } else {
+        }
+
+    case 'inputs':
+      return `<div class="comp-preview" style="width:100%; max-width:320px;">
+        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+        <div style="margin-bottom:10px;">
+          <label style="display:block; font-size:11px; font-weight:700; color:var(--primary-dark); margin-bottom:4px; text-transform:uppercase;">Lux Label ${index}</label>
+          <input type="${index%5===0 ? 'password' : 'text'}" class="input-lux ${style === 'rose' ? 'input-rose' : (style === 'gold' ? 'input-gold' : '')}" placeholder="Luxury Placeholder ${index}">
+        </div>
+      </div>`;
+
+    case 'forms':
+      return `<div class="comp-preview" style="width:100%; max-width:300px;">
+        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+        <div class="form-lux" style="border-color:${style === 'gold' ? 'var(--gold)' : 'var(--border)'}">
+          <h4 style="font-family:var(--font-heading); font-size:16px;">Elite Form ${index}</h4>
+          <input type="email" class="input-lux" placeholder="your@luxury.com">
+          <button class="btn btn-${style === 'gold' ? 'gold' : 'primary'}" style="width:100%;">Join Collection</button>
+        </div>
+      </div>`;
+
+    case 'pickers':
+      return `<div class="comp-preview" style="width:100%; max-width:260px;">
+        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <span style="font-size:12px; font-weight:600; color:var(--text-muted);">Elegance Range ${index}</span>
+          <input type="range" style="accent-color:var(--${style === 'gold' ? 'gold' : 'primary'}); cursor:pointer;">
+          <div style="display:flex; justify-content:space-between; font-size:10px;"><span>0</span><span>100</span></div>
+        </div>
+      </div>`;
+
+    case 'layout':
+      return `<div class="comp-preview" style="width:100%; max-width:300px;">
+        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+        <div style="border:2px dashed var(--${style === 'gold' ? 'gold' : 'primary'}); padding:20px; border-radius:var(--radius-lg); text-align:center;">
+          <span style="font-size:12px; font-weight:700; color:var(--text-muted);">Container Variant ${index}</span>
+          <div style="margin-top:10px; height:1px; background:var(--border);"></div>
+          <p style="font-size:10px; margin-top:10px;">Divider Styled ${style.toUpperCase()}</p>
+        </div>
+      </div>`;
+
+    case 'hero':
+      const isGoldHero = style === 'gold' || style === 'glow';
+      return `<div class="comp-preview" style="width:100%; max-width:400px;">
+        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+        <div class="hero-mini ${isGoldHero ? 'hero-gold' : (style === 'glass' ? 'hero-glass' : '')}">
+          <h2>Editorial Hero ${index}</h2>
+          <p style="font-size:12px; opacity:0.8; margin-bottom:15px;">Discover the ${style} collection for avant-garde brands.</p>
+          <button class="btn btn-pill ${isGoldHero ? 'btn-gold' : 'btn-primary'}" style="background:#fff; color:var(--text); border:none;">Explore</button>
+        </div>
+      </div>`;
+
+    case 'footers':
+      return `<div class="comp-preview" style="width:100%; max-width:400px;">
+        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+        <footer style="background:var(--surface-alt); padding:20px; border-radius:var(--radius-lg); display:flex; justify-content:space-between; align-items:center;">
+          <span style="font-family:var(--font-heading); font-weight:700; color:var(--primary-dark);">FEMME ${index}</span>
+          <div style="display:flex; gap:12px; font-size:10px; color:var(--text-muted);"><span>Terms</span><span>Privacy</span><span>Inquiry</span></div>
+        </footer>
+      </div>`;
+
+    case 'advanced':
+      return `<div class="comp-preview" style="width:100%; max-width:320px;">
+        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+        <div class="accordion-item" style="border:1px solid var(--border); border-radius:var(--radius-md); background:var(--surface); margin-bottom:2px;">
+          <div style="padding:12px 16px; display:flex; justify-content:space-between; cursor:pointer;">
+            <span style="font-size:13px; font-weight:600;">Advanced Panel ${index}</span>
+            <span>+</span>
+          </div>
+        </div>
+      </div>`;
+
+    case 'dashboard':
+      return `<div class="comp-preview" style="width:100%; max-width:240px;">
+        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+        <div class="dash-card">
+          <span style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Market Value ${index}</span>
+          <div class="dash-stat" style="color:var(--${style === 'gold' ? 'gold-dark' : 'primary-dark'})">$${(index*131).toLocaleString()}</div>
+          <div style="height:4px; width:100%; background:var(--border); border-radius:2px; margin-top:4px;">
+            <div style="height:100%; width:${30 + (index % 60)}%; background:var(--grad-${style === 'gold' ? 'luxury' : 'rose'}); border-radius:2px;"></div>
+          </div>
+        </div>
+      </div>`;
+
+    default:
+      return `<div class="comp-preview">
+        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+        <div class="placeholder-${style}" style="padding:${20 + (index%20)}px;">Luxury ${type} variant ${index}</div>
+      </div>`;
+  }
+}
+
 const sectionCounts = {
   colors: 100, typography: 100, tokens: 18,
-  buttons: 50, badges: 28, cards: 25,
-  forms: 18, navigation: 50, overlays: 10
+  tables: 50, lists: 50, badges: 50, avatars: 50, loaders: 50,
+  selection: 50, dropdowns: 50, overlays: 50,
+  inputs: 50, forms: 50, pickers: 50,
+  navigation: 50, tabs: 50, layout: 50, hero: 50, footers: 50,
+  advanced: 50, cards: 50, dashboard: 50, buttons: 50
 };
 
 function updateComponentCount(id) {
   const el = document.getElementById('lib-count');
   if (el) el.textContent = (sectionCounts[id] || '—') + ' components';
+  
+  // Trigger rendering for expanded sections
+  renderSection(id);
 }
 
 // ── SEARCH ─────────────────────────────────────────────────

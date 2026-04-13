@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="css/tokens.css">
   <link rel="stylesheet" href="css/base.css">
   <link rel="stylesheet" href="css/library.css">
+  <link rel="stylesheet" href="css/components.css">
 </head>
 <body>
 
@@ -65,32 +66,100 @@
           <span class="sidebar-count">18</span>
         </button>
       </div>
-      
+
       <div class="sidebar-section">
-        <span class="sidebar-label">Interactive Elements</span>
-        <button class="lib-nav-item" onclick="showSection('buttons', this)">
-          <span>💅 Buttons</span>
+        <span class="sidebar-label">Data & Displays</span>
+        <button class="lib-nav-item" onclick="showSection('tables', this)">
+          <span>📊 Tables & Grids</span>
+          <span class="sidebar-count">50</span>
+        </button>
+        <button class="lib-nav-item" onclick="showSection('lists', this)">
+          <span>📝 Lists & Rows</span>
           <span class="sidebar-count">50</span>
         </button>
         <button class="lib-nav-item" onclick="showSection('badges', this)">
           <span>🏷️ Badges & Tags</span>
-          <span class="sidebar-count">28</span>
+          <span class="sidebar-count">50</span>
+        </button>
+        <button class="lib-nav-item" onclick="showSection('avatars', this)">
+          <span>👤 Avatars</span>
+          <span class="sidebar-count">50</span>
+        </button>
+        <button class="lib-nav-item" onclick="showSection('loaders', this)">
+          <span>⏳ Loaders & Spinners</span>
+          <span class="sidebar-count">50</span>
         </button>
       </div>
 
       <div class="sidebar-section">
-        <span class="sidebar-label">Layout & Display</span>
-        <button class="lib-nav-item" onclick="showSection('cards', this)">
-          <span>🧁 Cards</span>
-          <span class="sidebar-count">25</span>
+        <span class="sidebar-label">Selection & Controls</span>
+        <button class="lib-nav-item" onclick="showSection('selection', this)">
+          <span>🔘 Selection Controls</span>
+          <span class="sidebar-count">50</span>
         </button>
-        <button class="lib-nav-item" onclick="showSection('navigation', this)">
-          <span>🧭 Navigation</span>
+        <button class="lib-nav-item" onclick="showSection('dropdowns', this)">
+          <span>🔽 Dropdowns & Selects</span>
           <span class="sidebar-count">50</span>
         </button>
         <button class="lib-nav-item" onclick="showSection('overlays', this)">
-          <span>🪟 Overlays</span>
-          <span class="sidebar-count">10</span>
+          <span>🪟 Overlays & Dialogs</span>
+          <span class="sidebar-count">50</span>
+        </button>
+      </div>
+
+      <div class="sidebar-section">
+        <span class="sidebar-label">Forms & Inputs</span>
+        <button class="lib-nav-item" onclick="showSection('inputs', this)">
+          <span>⌨️ Input Fields</span>
+          <span class="sidebar-count">50</span>
+        </button>
+        <button class="lib-nav-item" onclick="showSection('forms', this)">
+          <span>📋 Full Forms</span>
+          <span class="sidebar-count">50</span>
+        </button>
+        <button class="lib-nav-item" onclick="showSection('pickers', this)">
+          <span>📅 Pickers & Sliders</span>
+          <span class="sidebar-count">50</span>
+        </button>
+      </div>
+
+      <div class="sidebar-section">
+        <span class="sidebar-label">Layout & Navigation</span>
+        <button class="lib-nav-item" onclick="showSection('navigation', this)">
+          <span>🧭 Navigation Bars</span>
+          <span class="sidebar-count">50</span>
+        </button>
+        <button class="lib-nav-item" onclick="showSection('tabs', this)">
+          <span>📑 Tabs & Menus</span>
+          <span class="sidebar-count">50</span>
+        </button>
+        <button class="lib-nav-item" onclick="showSection('layout', this)">
+          <span>🏺 Layout Elements</span>
+          <span class="sidebar-count">50</span>
+        </button>
+        <button class="lib-nav-item" onclick="showSection('hero', this)">
+          <span>✨ Hero & Banners</span>
+          <span class="sidebar-count">50</span>
+        </button>
+        <button class="lib-nav-item" onclick="showSection('footers', this)">
+          <span>🦶 Footers</span>
+          <span class="sidebar-count">50</span>
+        </button>
+      </div>
+
+      <div class="sidebar-section">
+        <span class="sidebar-label">Advanced Components</span>
+        <button class="lib-nav-item" onclick="showSection('advanced', this)">
+          <span>🚀 Advanced UI</span>
+          <span class="sidebar-count">50</span>
+        </button>
+        <button class="lib-nav-item" onclick="showSection('cards', this)">
+          <span>🧁 Luxury Cards</span>
+          <span class="sidebar-count">50</span>
+        </button>
+        <button class="lib-nav-item" onclick="showSection('dashboard', this)">
+          <span>📊 Dashboards</span>
+          <span class="sidebar-count">50</span>
         </button>
       </div>
     </aside>
@@ -448,6 +517,159 @@
             </div>
           </div>
         </div>
+      </section>
+      <!-- ====================================================
+           📊 TABLES & GRIDS
+      ===================================================== -->
+      <section id="sec-tables" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">📊 Tables & Grids</h1>
+          <p class="lib-section-sub">50 luxury data presentation layouts.</p>
+        </div>
+        <div id="render-tables" class="render-container"></div>
+      </section>
+
+      <!-- ====================================================
+           📝 LISTS & ROWS
+      ===================================================== -->
+      <section id="sec-lists" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">📝 Lists & Rows</h1>
+          <p class="lib-section-sub">50 elegant horizontal and vertical list variants.</p>
+        </div>
+        <div id="render-lists" class="render-container"></div>
+      </section>
+
+      <!-- ====================================================
+           👤 AVATARS
+      ===================================================== -->
+      <section id="sec-avatars" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">👤 Avatars</h1>
+          <p class="lib-section-sub">50 user profile and imagery placeholders.</p>
+        </div>
+        <div id="render-avatars" class="render-container"></div>
+      </section>
+
+      <!-- ====================================================
+           ⏳ LOADERS & SPINNERS
+      ===================================================== -->
+      <section id="sec-loaders" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">⏳ Loaders & Spinners</h1>
+          <p class="lib-section-sub">50 premium loading animations and progress indicators.</p>
+        </div>
+        <div id="render-loaders" class="render-container"></div>
+      </section>
+
+      <!-- ====================================================
+           🔘 SELECTION CONTROLS
+      ===================================================== -->
+      <section id="sec-selection" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">🔘 Selection Controls</h1>
+          <p class="lib-section-sub">50 variants of checkboxes, radios, and toggle switches.</p>
+        </div>
+        <div id="render-selection" class="render-container"></div>
+      </section>
+
+      <!-- ====================================================
+           🔽 DROPDOWNS & SELECTS
+      ===================================================== -->
+      <section id="sec-dropdowns" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">🔽 Dropdowns & Selects</h1>
+          <p class="lib-section-sub">50 elegant picker and menu selection controls.</p>
+        </div>
+        <div id="render-dropdowns" class="render-container"></div>
+      </section>
+
+      <!-- ====================================================
+           ⌨️ INPUT FIELDS
+      ===================================================== -->
+      <section id="sec-inputs" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">⌨️ Input Fields</h1>
+          <p class="lib-section-sub">50 typography-focused input and textarea designs.</p>
+        </div>
+        <div id="render-inputs" class="render-container"></div>
+      </section>
+
+      <!-- ====================================================
+           📋 FULL FORMS
+      ===================================================== -->
+      <section id="sec-forms" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">📋 Full Forms</h1>
+          <p class="lib-section-sub">50 integrated form layouts for various use cases.</p>
+        </div>
+        <div id="render-forms" class="render-container"></div>
+      </section>
+
+      <!-- ====================================================
+           📅 PICKERS & SLIDERS
+      ===================================================== -->
+      <section id="sec-pickers" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">📅 Pickers & Sliders</h1>
+          <p class="lib-section-sub">50 date selectors and range sliders.</p>
+        </div>
+        <div id="render-pickers" class="render-container"></div>
+      </section>
+
+      <!-- ====================================================
+           🏺 LAYOUT ELEMENTS
+      ===================================================== -->
+      <section id="sec-layout" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">🏺 Layout Elements</h1>
+          <p class="lib-section-sub">50 containers, grids, and dividers.</p>
+        </div>
+        <div id="render-layout" class="render-container"></div>
+      </section>
+
+      <!-- ====================================================
+           ✨ HERO & BANNERS
+      ===================================================== -->
+      <section id="sec-hero" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">✨ Hero & Banners</h1>
+          <p class="lib-section-sub">50 high-impact landing page components.</p>
+        </div>
+        <div id="render-hero" class="render-container"></div>
+      </section>
+
+      <!-- ====================================================
+           🦶 FOOTERS
+      ===================================================== -->
+      <section id="sec-footers" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">🦶 Footers</h1>
+          <p class="lib-section-sub">50 luxury footer designs.</p>
+        </div>
+        <div id="render-footers" class="render-container"></div>
+      </section>
+
+      <!-- ====================================================
+           🚀 ADVANCED UI
+      ===================================================== -->
+      <section id="sec-advanced" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">🚀 Advanced UI</h1>
+          <p class="lib-section-sub">50 complex components (Accordions, Carousels, etc.).</p>
+        </div>
+        <div id="render-advanced" class="render-container"></div>
+      </section>
+
+      <!-- ====================================================
+           📊 DASHBOARDS
+      ===================================================== -->
+      <section id="sec-dashboard" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">📊 Dashboards</h1>
+          <p class="lib-section-sub">50 integrated dashboard views.</p>
+        </div>
+        <div id="render-dashboard" class="render-container"></div>
       </section>
     </main>
   </div>
