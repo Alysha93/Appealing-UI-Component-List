@@ -196,19 +196,53 @@ function getTemplate(type, index) {
       </div>`;
 
     case 'table':
-      const tableClasses = ['table-rose', 'table-gold', 'table-glass', 'table-neumorphic'];
-      const currentTableClass = tableClasses[index % tableClasses.length];
+      const tStyles = ['table-rose', 'table-gold', 'table-glass', 'table-neumorphic'];
+      const tExtras = ['', 'table-striped-rose', 'table-striped-gold', 'table-bordered', 'table-dashed-gold', 'table-glow-rose', 'table-tight', 'table-airy'];
+      
+      const baseClass = tStyles[index % tStyles.length];
+      const extraClass = tExtras[index % tExtras.length];
+      const combinedClass = `${baseClass} ${extraClass}`;
+      
+      const hasIcon = index % 3 === 0;
+      const colLabels = [['#ID', 'Member', 'Dues'], ['Ref', 'Design', 'Phase'], ['No.', 'Asset', 'Value']][index % 3];
+      
       return `<div class="comp-preview" style="width:100%; max-width:480px;">
         <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <table class="table ${currentTableClass}" style="width:100%;">
+        <table class="table ${combinedClass}" style="width:100%;">
           <thead>
-            <tr><th>No.</th><th>Collection</th><th>Status</th></tr>
+            <tr><th>${colLabels[0]}</th><th>${colLabels[1]}</th><th>${colLabels[2]}</th></tr>
           </thead>
           <tbody>
-            <tr><td>#${index.toString().padStart(3, '0')}</td><td>Lux Series ${index}</td><td><span class="badge badge-${style}">Variant</span></td></tr>
-            <tr><td>#${(index+1).toString().padStart(3, '0')}</td><td>Editorial ${index}</td><td><span class="badge badge-minimal">Pending</span></td></tr>
+            <tr>
+              <td>${index.toString().padStart(3, '0')}</td>
+              <td>${hasIcon ? '✦ ' : ''}Luxury Item ${index}</td>
+              <td style="font-weight:700;">$${(index + 1) * 45}</td>
+            </tr>
+            <tr>
+              <td>${(index + 1).toString().padStart(3, '0')}</td>
+              <td>${hasIcon ? '✨ ' : ''}Edition ${index}</td>
+              <td><span class="badge badge-${style}">Variant</span></td>
+            </tr>
           </tbody>
         </table>
+      </div>`;
+
+    case 'layout':
+      const layoutStyles = ['grid-stack', 'grid-2', 'grid-3'];
+      const currentLayout = layoutStyles[index % layoutStyles.length];
+      const boxStyle = `padding:20px; border-radius:12px; border:1.5px solid var(--${style === 'gold' ? 'gold' : 'primary-light'}); background:var(--surface-alt); text-align:center;`;
+      
+      return `<div class="comp-preview" style="width:100%; max-width:500px;">
+        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+        <div class="grid-preview ${currentLayout}">
+          <div style="${boxStyle}">
+            <h5 style="margin:0; font-size:12px; color:var(--primary-dark);">Panel A (V${index})</h5>
+          </div>
+          <div style="${boxStyle}">
+            <h5 style="margin:0; font-size:12px; color:var(--primary-dark);">Panel B (V${index})</h5>
+          </div>
+          ${currentLayout === 'grid-3' ? `<div style="${boxStyle}"><h5 style="margin:0; font-size:12px; color:var(--primary-dark);">Panel C</h5></div>` : ''}
+        </div>
       </div>`;
 
     case 'avatar':

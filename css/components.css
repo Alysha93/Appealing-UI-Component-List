@@ -25,15 +25,35 @@
 .badge-minimal { background: var(--surface-alt); color: var(--text-muted); border: 1px solid var(--border); }
 
 /* ── TABLES ── */
-.table { margin-bottom: 2rem; }
+.table { margin-bottom: 2rem; border-spacing: 0; width: 100%; }
 .table th { text-align: left; padding: 12px 20px; font-family: var(--font-heading); background: var(--surface-alt); color: var(--primary-dark); border-bottom: 2px solid var(--border); }
-.table td { padding: 12px 20px; border-bottom: 1px solid var(--border); font-size: 14px; }
+.table td { padding: 12px 20px; border-bottom: 1px solid var(--border); font-size: 14px; transition: 0.2s; }
 
+/* Table Theme Variants */
 .table-rose tr:hover { background: var(--primary-light); }
-.table-gold th { background: var(--grad-luxury); color: var(--gold-dark); }
-.table-glass { background: rgba(255,255,255,0.1); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.2); }
-.table-neumorphic { border-radius: var(--radius-xl); box-shadow: var(--shadow-soft); border: none; }
-.table-neumorphic td, .table-neumorphic th { border: none; }
+.table-gold th { background: var(--grad-luxury); color: var(--gold-dark); border-bottom-color: var(--gold); }
+.table-gold td { border-bottom-color: rgba(212, 175, 55, 0.2); }
+.table-glass { background: rgba(255,255,255,0.05); backdrop-filter: blur(15px); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden; }
+.table-glass td { border-bottom-color: rgba(255,255,255,0.1); }
+.table-neumorphic { border-radius: var(--radius-xl); box-shadow: var(--shadow-soft); border: none; background: var(--surface); padding: 10px; }
+.table-neumorphic td, .table-neumorphic th { border: none; padding: 15px 20px; }
+.table-neumorphic tr:not(:last-child) td { border-bottom: 1px solid rgba(0,0,0,0.03); }
+
+/* Table Utility Extras for Super Variety */
+.table-striped-rose tr:nth-child(even) { background: rgba(253, 220, 236, 0.3); }
+.table-striped-gold tr:nth-child(even) { background: rgba(230, 190, 138, 0.1); }
+.table-bordered { border: 1.5px solid var(--border); border-radius: 8px; overflow: hidden; }
+.table-bordered td, .table-bordered th { border: 1px solid var(--border); }
+.table-dashed-gold { border: 2px dashed var(--gold); border-radius: 12px; }
+.table-glow-rose { box-shadow: 0 0 20px rgba(232, 111, 163, 0.15); border: 1px solid var(--primary-light); }
+.table-tight td, .table-tight th { padding: 8px 15px; }
+.table-airy td, .table-airy th { padding: 20px 25px; }
+
+/* Grid Specific Items */
+.grid-preview { display: grid; gap: 16px; width: 100%; }
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-stack { display: flex; flex-direction: column; gap: 12px; }
 
 /* ── AVATARS ── */
 .avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid var(--border); transition: 0.3s; }
