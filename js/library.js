@@ -169,804 +169,208 @@ function populateLibrary() {
   }
 }
 
-// â”€â”€ COMPONENT REGISTRY (Expansion 50x) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// -- COMPONENT REGISTRY (20 Distinct Variants Each) --
 const COMPONENT_REGISTRY = {
-  tables: () => generateVariants('table', 50),
-  lists: () => generateVariants('list', 50),
-  badges: () => generateVariants('badge', 50),
-  avatars: () => generateVariants('avatar', 50),
-  loaders: () => generateVariants('loader', 50),
-  selection: () => generateVariants('selection', 50),
-  dropdowns: () => generateVariants('dropdown', 50),
-  overlays: () => generateVariants('overlays', 50),
-  inputs: () => generateVariants('input', 50),
-  forms: () => generateVariants('form', 50),
-  pickers: () => generateVariants('picker', 50),
-  navigation: () => generateVariants('navigation', 50),
-  tabs: () => generateVariants('tabs', 50),
-  layout: () => generateVariants('layout', 50),
-  hero: () => generateVariants('hero', 50),
-  footers: () => generateVariants('footers', 50),
-  advanced: () => generateVariants('advanced', 50),
-  dashboard: () => generateVariants('dashboard', 50),
-  cards: () => generateVariants('cards', 50)
+  tables:     () => getTemplateArray('table'),
+  lists:      () => getTemplateArray('list'),
+  badges:     () => getTemplateArray('badge'),
+  avatars:    () => getTemplateArray('avatar'),
+  loaders:    () => getTemplateArray('loader'),
+  selection:  () => getTemplateArray('selection'),
+  dropdowns:  () => getTemplateArray('dropdown'),
+  overlays:   () => getTemplateArray('overlays'),
+  inputs:     () => getTemplateArray('inputs'),
+  forms:      () => getTemplateArray('forms'),
+  pickers:    () => getTemplateArray('pickers'),
+  navigation: () => getTemplateArray('navigation'),
+  tabs:       () => getTemplateArray('tabs'),
+  layout:     () => getTemplateArray('layout'),
+  hero:       () => getTemplateArray('hero'),
+  footers:    () => getTemplateArray('footers'),
+  advanced:   () => getTemplateArray('advanced'),
+  dashboard:  () => getTemplateArray('dashboard'),
+  cards:      () => getTemplateArray('cards')
 };
 
-/**
- * Main entry point for rendering expanded sections.
- */
 function renderSection(id) {
   const container = document.getElementById('render-' + id);
   if (!container) return;
-  
-  // Only render if empty to save performance
   if (container.children.length > 0) return;
-
   const generator = COMPONENT_REGISTRY[id];
   if (generator) {
     const variants = generator();
-    container.innerHTML = `<div class="comp-row wrap" style="gap:24px;">${variants.join('')}</div>`;
+    container.innerHTML = '<div class="comp-row wrap" style="gap:28px;">' + variants.join('') + '</div>';
   }
 }
 
-/**
- * Factory function to generate N unique variants for a type.
- * This is where the 'girly fancy' magic happens.
- */
-function generateVariants(type, count) {
-  const variants = [];
-  for (let i = 1; i <= count; i++) {
-    variants.push(getTemplate(type, i));
-  }
-  return variants;
+function updateComponentCount(sectionId) {
+  const counter = document.getElementById('lib-count');
+  if (!counter) return;
+  const counts = {
+    colors:100,typography:100,tokens:18,
+    tables:20,lists:20,badges:20,avatars:20,loaders:20,
+    selection:20,dropdowns:20,overlays:20,
+    inputs:20,forms:20,pickers:20,
+    navigation:20,tabs:20,layout:20,hero:20,footers:20,
+    advanced:20,cards:20,dashboard:20
+  };
+  counter.textContent = (counts[sectionId] || 0) + ' components';
 }
-
-/**
- * Template switcher for all component types.
- * Each type has a set of styles (Rose, Gold, Glass, Neumorphic, etc.)
- */
-function getTemplate(type, index) {
-  const styles = ['rose', 'gold', 'glass', 'neumorphic', 'dark', 'outline', 'glow', 'minimal'];
-  const sizes = ['xs', 'sm', 'md', 'lg', 'xl'];
-  const style = styles[(index - 1) % styles.length];
-  const size = sizes[(index - 1) % sizes.length];
-
-  switch(type) {
-    case 'badge': {
-      const icons = ['', 'âœ¦ ', 'â¤ ', 'âœ¨ ', 'âœ“ ', 'âœ‰ ', 'ðŸ›’ ', 'âŒ› '];
-      const icon = icons[index % icons.length];
-      const radii = ['var(--radius-full)', 'var(--radius-sm)', '0', 'var(--radius-md)'];
-      return `<div class="comp-preview">
-        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <span class="badge badge-${style}" style="font-size:${8 + (index % 10)}px; border-radius:${radii[index % radii.length]};">${icon}Badge ${index}</span>
-      </div>`;
-    }
-
-    case 'table': {
-      const tStyles = ['table-rose','table-gold','table-glass','table-neumorphic'];
-      const tExtras = ['','table-striped-rose','table-striped-gold','table-bordered','table-dashed-gold','table-glow-rose','table-tight','table-airy'];
-      const baseClass = tStyles[index % tStyles.length];
-      const extraClass = tExtras[index % tExtras.length];
-      const hasIcon = index % 3 === 0;
-      const colLabels = [['#ID','Member','Dues'],['Ref','Design','Phase'],['No.','Asset','Value']][index % 3];
-      return `<div class="comp-preview" style="width:100%;max-width:480px;">
-        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <table class="table ${baseClass} ${extraClass}" style="width:100%;">
-          <thead><tr><th>${colLabels[0]}</th><th>${colLabels[1]}</th><th>${colLabels[2]}</th></tr></thead>
-          <tbody>
-            <tr><td>${index.toString().padStart(3,'0')}</td><td>${hasIcon?'âœ¦ ':''}Luxury Item ${index}</td><td style="font-weight:700;">$${(index+1)*45}</td></tr>
-            <tr><td>${(index+1).toString().padStart(3,'0')}</td><td>${hasIcon?'âœ¨ ':''}Edition ${index}</td><td><span class="badge badge-${style}">Variant</span></td></tr>
-          </tbody>
-        </table>
-      </div>`;
-    }
-
-    case 'layout': {
-      const layouts = ['grid-2','grid-3','grid-stack'];
-      const lType = index % layouts.length;
-      const lAccent = style === 'gold' ? 'gold' : 'primary-light';
-      const box = `padding:18px;border-radius:12px;border:1.5px solid var(--border);background:var(--surface);text-align:center;transition:0.3s;cursor:pointer;`;
-      return `<div class="comp-preview" style="width:100%;max-width:500px;">
-        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <div class="grid-preview ${layouts[lType]}" style="gap:15px;border:1px dashed var(--${lAccent});padding:10px;border-radius:15px;">
-          <div style="${box}" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'"><h5 style="margin:0;font-size:12px;">Panel A (${index})</h5></div>
-          <div style="${box}" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'"><h5 style="margin:0;font-size:12px;">Panel B (${index})</h5></div>
-          ${lType === 2 ? `<div style="${box}"><h5 style="margin:0;font-size:12px;">Panel C</h5></div>` : ''}
-        </div>
-      </div>`;
-    }
-
-    case 'avatar': {
-      const shapes = ['50%','12px','4px','30%'];
-      const borderColors = ['var(--primary)','var(--gold)','var(--border)','transparent'];
-      const shape = shapes[index % shapes.length];
-      const bColor = borderColors[index % borderColors.length];
-      const sz = 48 + (index % 40);
-      return `<div class="comp-preview">
-        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <div class="avatar-wrap" style="position:relative;display:inline-block;">
-          <img src="https://i.pravatar.cc/150?u=${index}" class="avatar avatar-${style}"
-               style="width:${sz}px;height:${sz}px;border-radius:${shape};border-color:${bColor};${index%10===0?'filter:grayscale(1);':''}">
-          ${index % 4 === 0 ? '<span style="position:absolute;bottom:2px;right:2px;width:10px;height:10px;background:#4CAF50;border:2px solid #fff;border-radius:50%;"></span>' : ''}
-        </div>
-      </div>`;
-    }
-
-    case 'loader': {
-      if (index % 2 === 0) {
-        const sz = 20 + (index % 30);
-        return `<div class="comp-preview">
-          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div class="loader-petal" style="border-top-color:var(--${style==='gold'?'gold':'primary'});width:${sz}px;height:${sz}px;"></div>
-        </div>`;
-      } else {
-        return `<div class="comp-preview" style="width:200px;">
-          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div class="loader-shimmer" style="height:${4+(index%10)}px;background:var(--surface-alt);"></div>
-          <span style="font-size:10px;color:var(--text-muted);margin-top:4px;display:block;">Loading Luxe ${index}%</span>
-        </div>`;
-      }
-    }
-
-    case 'list': {
-      const listTypes = ['notif','user','message','task','activity'];
-      const lType = listTypes[index % listTypes.length];
-      const lAccent = style === 'gold' ? 'gold' : 'primary';
-      if (lType === 'notif') {
-        return `<div class="comp-preview" style="width:100%;max-width:300px;">
-          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div class="notif-item" style="border:1px solid var(--border);background:${index%4===0?'var(--primary-light)':'var(--surface)'};">
-            <div class="notif-icon" style="background:var(--grad-${style==='gold'?'luxury':'rose'});">âœ¦</div>
-            <div class="notif-content">
-              <div class="notif-title">Elite Status Update ${index}</div>
-              <div class="notif-body">Your luxury experience has been upgraded.</div>
-            </div>
-          </div>
-        </div>`;
-      } else if (lType === 'user') {
-        return `<div class="comp-preview" style="width:100%;max-width:320px;">
-          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--surface);border-radius:12px;border:1px solid var(--border);">
-            <img src="https://i.pravatar.cc/100?u=${index}" style="width:40px;height:40px;border-radius:50%;border:2px solid var(--${lAccent});">
-            <div style="flex:1;">
-              <div style="font-size:13px;font-weight:700;">Curator ${index}</div>
-              <div style="font-size:11px;color:var(--text-muted);">${index%2===0?'Active Now':'Last seen 2h ago'}</div>
-            </div>
-            <button class="btn btn-pill" style="padding:4px 12px;font-size:10px;">Follow</button>
-          </div>
-        </div>`;
-      } else if (lType === 'message') {
-        return `<div class="comp-preview" style="width:100%;max-width:280px;">
-          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div style="padding:12px;background:var(--${style==='gold'?'surface-alt':'primary-light'});border-radius:16px 16px 16px 4px;">
-            <p style="margin:0;font-size:12px;line-height:1.4;">Hey! The ${style} collection is simply stunning. âœ¨</p>
-            <span style="font-size:9px;opacity:0.6;display:block;margin-top:4px;">12:0${index%10} PM</span>
-          </div>
-        </div>`;
-      } else {
-        return `<div class="comp-preview" style="width:100%;max-width:300px;">
-          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div style="display:flex;justify-content:space-between;align-items:center;padding:15px;border-bottom:1px solid var(--border);">
-            <span style="font-size:13px;font-weight:600;">Luxury Milestone ${index}</span>
-            <span class="badge badge-${style}" style="font-size:9px;">Completed</span>
-          </div>
-        </div>`;
-      }
-    }
-
-    case 'selection': {
-      const selType = index % 3;
-      const radii = ['4px','var(--radius-full)','0','12px'];
-      const sRadius = radii[index % radii.length];
-      if (selType === 0) {
-        const icons = ['âœ“','âœ¦','â¤','âœ¨'];
-        return `<div class="comp-preview">
-          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div style="display:flex;align-items:center;gap:10px;">
-            <div class="ux-box ${style} ${index%2===0?'active':''}" style="border-radius:${sRadius}">${index%2===0?icons[index%icons.length]:''}</div>
-            <span style="font-size:14px;font-weight:500;">Selection ${index}</span>
-          </div>
-        </div>`;
-      } else if (selType === 1) {
-        return `<div class="comp-preview">
-          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div style="display:flex;align-items:center;gap:10px;">
-            <div class="ux-radio ${style} ${index%2===0?'active':''}" style="border-width:${index%3+1}px;${index%5===0?'box-shadow:var(--shadow-glow);':''}"></div>
-            <span style="font-size:14px;font-weight:500;">Choice ${index}</span>
-          </div>
-        </div>`;
-      } else {
-        return `<div class="comp-preview">
-          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div style="display:flex;align-items:center;gap:12px;">
-            <div class="ux-toggle ${index%2===0?'active':''}"
-                 style="transform:scale(${0.9+(index%3)*0.1});background:${index%2===0?`var(--grad-${style==='gold'?'luxury':'rose'})`:'var(--border)'};"
-                 onclick="this.classList.toggle('active')"></div>
-            <span style="font-size:14px;font-weight:500;">Toggle Lux ${index}</span>
-          </div>
-        </div>`;
-      }
-    }
-
-    case 'dropdown': {
-      const dStyles = ['','select-rose','select-gold','select-glass','select-minimal'];
-      const dShapes = ['','select-pill'];
-      const dArrows = ['','select-arrow-gold','select-arrow-dot'];
-      const dStyle = dStyles[index % dStyles.length];
-      const dShape = dShapes[index % dShapes.length];
-      const dArrow = dArrows[index % dArrows.length];
-      const labels = ['Pick a Collection','Select Tier','Choose Edition','Style Option','Luxe Category'];
-      return `<div class="comp-preview">
-        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <div style="position:relative;width:fit-content;">
-          <select class="select-lux ${dStyle} ${dShape}">
-            <option>${labels[index % labels.length]} ${index}</option>
-            <option>Silk Rose Series</option>
-            <option>Golden Hour Elite</option>
-            <option>Glass Prism Collection</option>
-          </select>
-          <div class="select-arrow ${dArrow}">${dArrow===''?'â–¼':''}</div>
-        </div>
-      </div>`;
-    }
-
-    case 'overlays': {
-      if (index % 3 === 0) {
-        return `<div class="comp-preview">
-          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div class="tooltip-lux tooltip-${style}">Premium Insight ${index}</div>
-        </div>`;
-      } else if (index % 3 === 1) {
-        return `<div class="comp-preview">
-          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div style="width:240px;padding:15px;background:var(--surface);border-radius:12px;box-shadow:var(--shadow-heavy);border:1px solid var(--border);position:relative;">
-            <div style="font-size:12px;font-weight:700;color:var(--primary-dark);">Toast Notification ${index}</div>
-            <div style="font-size:10px;color:var(--text-muted);">Successfully synchronized.</div>
-            <div style="position:absolute;top:8px;right:8px;font-size:10px;opacity:0.3;">âœ•</div>
-          </div>
-        </div>`;
-      } else {
-        return `<div class="comp-preview">
-          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div style="width:200px;height:120px;background:rgba(255,255,255,0.7);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.3);border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;box-shadow:0 20px 40px rgba(0,0,0,0.1);">
-            <div style="width:30px;height:30px;background:var(--grad-${style==='gold'?'luxury':'rose'});border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;">âœ“</div>
-            <span style="font-size:11px;font-weight:700;">Confirmed ${index}</span>
-          </div>
-        </div>`;
-      }
-    }
-
-    case 'inputs': {
-      const iRadii = ['var(--radius-full)','var(--radius-lg)','0','12px'];
-      const iBorders = [
-        '1.5px solid var(--border)',
-        'none; border-bottom:2px solid var(--primary); border-radius:0;',
-        '2px solid var(--primary-light)',
-        '1px solid var(--gold)'
-      ];
-      const iRadius = iRadii[index % iRadii.length];
-      const iBorder = iBorders[index % iBorders.length];
-      const hasIcon = index % 5 === 0;
-      return `<div class="comp-preview" style="width:100%;max-width:320px;">
-        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <div style="margin-bottom:10px;">
-          <label style="display:block;font-size:11px;font-weight:700;color:var(--primary-dark);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">Luxe Label ${index}</label>
-          <div style="position:relative;">
-            <input type="${index%7===0?'password':'text'}" class="input-lux"
-                   style="border-radius:${iRadius};border:${iBorder};padding-left:${hasIcon?'40px':'20px'};"
-                   placeholder="Enter Details ${index}...">
-            ${hasIcon ? '<span style="position:absolute;left:15px;top:50%;transform:translateY(-50%);font-size:12px;color:var(--text-muted);">âœ¦</span>' : ''}
-          </div>
-        </div>
-      </div>`;
-    }
-
-    case 'forms': {
-      const fType = index % 3;
-      if (fType === 0) {
-        return `<div class="comp-preview" style="width:100%;max-width:320px;">
-          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div class="form-lux" style="border-top:4px solid var(--${style==='gold'?'gold':'primary'});box-shadow:0 15px 40px rgba(0,0,0,0.05);">
-            <h4 style="font-family:var(--font-heading);font-size:18px;margin-bottom:5px;">Luxe Login ${index}</h4>
-            <p style="font-size:11px;color:var(--text-muted);margin-bottom:15px;">Enter your credentials to enter the circle.</p>
-            <input type="text" class="input-lux" placeholder="Email Address">
-            <input type="password" class="input-lux" placeholder="Secret Key">
-            <button class="btn btn-primary" style="width:100%;margin-top:10px;">Enter</button>
-          </div>
-        </div>`;
-      } else if (fType === 1) {
-        return `<div class="comp-preview" style="width:100%;max-width:400px;">
-          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div style="display:flex;gap:10px;background:var(--surface-alt);padding:20px;border-radius:var(--radius-full);border:1.5px solid var(--border);">
-            <input type="email" class="input-lux" style="border:none;background:transparent;padding:0 10px;flex:1;" placeholder="Newsletter ${index}...">
-            <button class="btn btn-pill btn-${style==='gold'?'gold':'primary'}" style="white-space:nowrap;">Join List</button>
-          </div>
-        </div>`;
-      } else {
-        return `<div class="comp-preview" style="width:100%;max-width:300px;">
-          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div style="background:var(--surface);border:1px solid var(--border);border-radius:24px;padding:30px;text-align:center;">
-            <div style="width:50px;height:50px;background:var(--grad-rose);border-radius:50%;margin:0 auto 20px;display:flex;align-items:center;justify-content:center;color:#fff;">âœ‰</div>
-            <h4 style="font-size:16px;margin-bottom:15px;">Inquiry ${index}</h4>
-            <textarea class="input-lux" style="height:80px;resize:none;margin-bottom:15px;" placeholder="Message..."></textarea>
-            <button class="btn btn-gold" style="width:100%;">Send Request</button>
-          </div>
-        </div>`;
-      }
-    }
-
-    case 'pickers': {
-      const pStyleCls = ['','slider-rose','slider-gold','slider-glass'][index % 4];
-      const pThickCls = ['','slider-thick','slider-thin'][index % 3];
-      const pShapeCls = ['','slider-pill'][index % 2];
-      return `<div class="comp-preview" style="width:100%;max-width:280px;">
-        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <div style="display:flex;flex-direction:column;gap:12px;padding:10px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;">
-            <span style="font-size:11px;font-weight:700;color:var(--primary-dark);text-transform:uppercase;">Volume Level ${index}</span>
-            <span style="font-size:10px;color:var(--text-muted);font-weight:600;">${index * 2}%</span>
-          </div>
-          <input type="range" class="slider-lux ${pStyleCls} ${pThickCls} ${pShapeCls}" value="${index % 100}">
-          ${index % 3 === 0 ? '<div style="display:flex;justify-content:space-between;font-size:9px;color:var(--text-muted);font-weight:700;"><span>MIN</span><span>MAX</span></div>' : ''}
-        </div>
-      </div>`;
-    }
-
-    case 'hero': {
-      const hType = index % 3;
-      if (hType === 0) {
-        return `<div class="comp-preview" style="width:100%;max-width:400px;">
-          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div class="hero-mini" style="background:var(--grad-${style==='gold'?'luxury':'rose'});">
-            <h2 style="font-size:24px;">Editorial Hero ${index}</h2>
-            <p style="font-size:11px;opacity:0.8;">The world's first ${style} collection for avant-garde brands.</p>
-            <button class="btn btn-pill" style="margin-top:15px;background:#fff;color:var(--text);border:none;">Explore</button>
-          </div>
-        </div>`;
-      } else if (hType === 1) {
-        return `<div class="comp-preview" style="width:100%;max-width:450px;">
-          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div style="padding:60px 20px;text-align:center;border:2px solid var(--${style==='gold'?'gold':'primary-light'});border-radius:20px;background:var(--surface);">
-            <span style="font-size:10px;font-weight:700;color:var(--primary);letter-spacing:2px;">NEW ARRIVAL ${index}</span>
-            <h1 style="font-family:var(--font-heading);font-size:32px;margin:10px 0;">Style &amp; Grace</h1>
-            <div style="height:2px;width:40px;background:var(--primary);margin:20px auto;"></div>
-            <p style="font-size:13px;max-width:300px;margin:0 auto;">Limited edition ${style} curated just for you.</p>
-          </div>
-        </div>`;
-      } else {
-        return `<div class="comp-preview" style="width:100%;max-width:400px;">
-          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div style="height:200px;border-radius:20px;overflow:hidden;position:relative;display:flex;align-items:flex-end;padding:20px;background:linear-gradient(rgba(0,0,0,0),rgba(0,0,0,0.8)),url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=400&auto=format&fit=crop');background-size:cover;">
-            <div style="color:#fff;">
-              <h3 style="margin:0;font-size:18px;">Visual Collection ${index}</h3>
-              <span style="font-size:10px;opacity:0.7;">Modern ${style.toUpperCase()} Aesthetic</span>
-            </div>
-          </div>
-        </div>`;
-      }
-    }
-
-    case 'footers': {
-      const fAccent = style === 'gold' ? 'gold' : 'primary';
-      return `<div class="comp-preview" style="width:100%;max-width:400px;">
-        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <footer style="background:var(--surface-alt);padding:24px;border-radius:15px;display:flex;justify-content:space-between;align-items:center;border-left:5px solid var(--${fAccent});">
-          <span style="font-family:var(--font-heading);font-weight:800;font-size:16px;color:var(--primary-dark);">FEMME ${index}</span>
-          <div style="display:flex;gap:15px;font-size:11px;font-weight:600;color:var(--text-muted);">
-            <span>Terms</span><span>Privacy</span><span>Inquiry</span>
-          </div>
-        </footer>
-      </div>`;
-    }
-
-    case 'advanced': {
-      return `<div class="comp-preview" style="width:100%;max-width:320px;">
-        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <div class="accordion-item" style="border:1px solid var(--border);border-radius:12px;background:var(--surface);overflow:hidden;">
-          <div style="padding:15px 20px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;" onclick="this.nextElementSibling.classList.toggle('hidden')">
-            <span style="font-size:13px;font-weight:700;">Expansion Module ${index}</span>
-            <span style="color:var(--primary);font-size:18px;">+</span>
-          </div>
-          <div class="hidden" style="padding:0 20px 20px;font-size:12px;color:var(--text-muted);line-height:1.5;">
-            Luxury accordion system with ${style} accents. Optimized for mobile and desktop.
-          </div>
-        </div>
-      </div>`;
-    }
-
-    case 'cards': {
-      const cAccent = style === 'gold' ? 'luxury' : 'rose';
-      return `<div class="comp-preview" style="width:100%;max-width:280px;">
-        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <div style="padding:24px;border-radius:16px;border:1px solid var(--border);background:var(--surface);box-shadow:var(--shadow-soft);">
-          <div style="height:120px;border-radius:8px;background:var(--grad-${cAccent});margin-bottom:15px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;">âœ¦</div>
-          <h4 style="margin:0;font-size:16px;">Luxe Card ${index}</h4>
-          <p style="font-size:12px;color:var(--text-muted);margin:8px 0;">Premium card variant with ${style} accents.</p>
-          <button class="btn btn-pill" style="width:100%;font-size:11px;">View Detail</button>
-        </div>
-      </div>`;
-    }
-
-    case 'buttons': {
-      const bType = index % 4;
-      const bTexts = ['Explore','Reserve','Purchase','Contact'];
-      const bText = bTexts[index % bTexts.length];
-      let bHtml;
-      if (bType === 0) {
-        bHtml = `<button class="btn btn-pill btn-${style}">${bText} ${index}</button>`;
-      } else if (bType === 1) {
-        bHtml = `<button class="btn btn-outline" style="border-color:var(--${style==='gold'?'gold':'primary'})">${bText} ${index}</button>`;
-      } else if (bType === 2) {
-        bHtml = `<button class="btn" style="background:var(--grad-${style==='gold'?'luxury':'rose'});color:#fff;box-shadow:var(--shadow-glow);border:none;">âœ¦ ${bText} ${index}</button>`;
-      } else {
-        bHtml = `<button class="btn btn-glass">${bText} ${index} âœ¨</button>`;
-      }
-      return `<div class="comp-preview">
-        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        ${bHtml}
-      </div>`;
-    }
-
-    case 'dashboard': {
-      const dAccent = style === 'gold' ? 'luxury' : 'rose';
-      const dColor = style === 'gold' ? 'gold-dark' : 'primary-dark';
-      return `<div class="comp-preview" style="width:100%;max-width:260px;">
-        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <div class="dash-card" style="position:relative;overflow:hidden;">
-          <div style="position:absolute;top:0;right:0;width:60px;height:60px;background:var(--grad-${dAccent});opacity:0.1;border-radius:0 0 0 100%;"></div>
-          <span style="font-size:11px;text-transform:uppercase;color:var(--text-muted);font-weight:700;letter-spacing:1px;">Market Cap ${index}</span>
-          <div class="dash-stat" style="color:var(--${dColor});margin:5px 0;">$${(index*242).toLocaleString()}</div>
-          <div style="height:4px;width:100%;background:var(--border);border-radius:2px;margin-top:8px;">
-            <div style="height:100%;width:${20+(index%70)}%;background:var(--grad-${dAccent});border-radius:2px;"></div>
-          </div>
-          <div style="font-size:9px;margin-top:10px;color:#4CAF50;font-weight:700;">+${index%12}% from yesterday</div>
-        </div>
-      </div>`;
-    }
-
-    default:
-      return `<div class="comp-preview">
-        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <div class="placeholder-${style}" style="padding:${20+(index%20)}px;">Luxury ${type} variant ${index}</div>
-      </div>`;
-  }
-}
-
-
-
-
-
 
 function copyComponentHTML(el) {
-  // Create a deep clone to manipulate without affecting DOM
   const clone = el.cloneNode(true);
-  
-  // Remove the copy button itself and any specific library overlays
-  const copyBtn = clone.querySelector('.copy-btn-pop');
-  if (copyBtn) copyBtn.remove();
-  
-  // Get the innerHTML of the remaining content
-  const htmlToCopy = clone.innerHTML.trim();
-  
-  copyToClipboard(htmlToCopy).then(() => {
-    showToast('success', 'ðŸ§¬ HTML Copied!', 'The component code is ready for use.');
-  }).catch(err => {
-    showToast('error', 'Copy Failed', 'Please try again.');
+  const btn = clone.querySelector('.copy-btn-pop');
+  if (btn) btn.remove();
+  copyToClipboard(clone.innerHTML.trim()).then(() => {
+    showToast('success','HTML Copied!','Paste it anywhere.');
+  }).catch(() => showToast('error','Copy Failed','Try again.'));
+}
+
+const toastIcons = {success:'OK',warning:'!',error:'X',info:'i'};
+function showToast(type, title, message, duration=3500) {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+  const toast = document.createElement('div');
+  toast.className = 'toast toast-' + type;
+  toast.innerHTML = '<div class="toast-icon">' + (toastIcons[type]||'i') + '</div><div class="toast-content"><div class="toast-title">' + title + '</div>' + (message ? '<div class="toast-body">' + message + '</div>' : '') + '</div><button class="toast-close" onclick="this.closest(\'.toast\').remove()">x</button>';
+  container.appendChild(toast);
+  setTimeout(() => { toast.style.opacity='0'; setTimeout(()=>toast.remove(),300); }, duration);
+}
+
+async function copyToClipboard(text) {
+  try {
+    if (navigator.clipboard && window.isSecureContext) return await navigator.clipboard.writeText(text);
+    const t = document.createElement('textarea');
+    t.value = text; t.style.position='fixed'; t.style.left='-9999px';
+    document.body.appendChild(t); t.focus(); t.select();
+    document.execCommand('copy'); t.remove();
+  } catch(e) { console.error(e); }
+}
+
+function copyHex(el) {
+  const hex = el.querySelector('.color-hex')?.textContent || '';
+  if (hex) copyToClipboard(hex).then(() => showToast('success','Color Copied!', hex));
+}
+
+function searchComponents(query) {
+  const q = query.toLowerCase().trim();
+  document.querySelectorAll('.lib-nav-item').forEach(item => {
+    item.classList.toggle('hidden', q !== '' && !item.textContent.toLowerCase().includes(q));
+  });
+  document.querySelectorAll('.sidebar-section').forEach(section => {
+    const visible = section.querySelectorAll('.lib-nav-item:not(.hidden)').length;
+    section.style.display = (q === '' || visible > 0) ? 'block' : 'none';
   });
 }
 
-/**
- * Enhanced toast notification system.
- */
-function showToast(type, message) {
-  const container = document.getElementById('toast-container');
-  if (!container) return;
-
-  const toast = document.createElement('div');
-  toast.className = `toast toast-${type}`;
-  toast.style.cssText = `
-    background: var(--text);
-    color: #fff;
-    padding: 12px 24px;
-    border-radius: 8px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    animation: toastScaleIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-    font-size: 14px;
-    font-weight: 500;
-  `;
-  
-  const icon = type === 'success' ? 'âœ“' : 'âœ•';
-  toast.innerHTML = `<span style="background:rgba(255,255,255,0.2); width:20px; height:20px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-size:10px;">${icon}</span> ${message}`;
-  
-  container.appendChild(toast);
-  
-  setTimeout(() => {
-    toast.style.animation = 'toastScaleOut 0.3s forwards';
-    setTimeout(() => toast.remove(), 300);
-  }, 3000);
-}
-
-// Add these to CSS keyframes if missing
-// @keyframes toastScaleIn { from { transform: scale(0.8) translateY(20px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
-// @keyframes toastScaleOut { from { transform: scale(1); opacity: 1; } to { transform: scale(0.8) translateY(20px); opacity: 0; } }
-
-// â”€â”€ DARK MODE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 let isDark = false;
 function toggleTheme() {
   isDark = !isDark;
   document.documentElement.setAttribute('data-theme', isDark ? 'dark' : '');
-  document.getElementById('theme-btn').textContent = isDark ? 'â˜€ï¸' : 'ðŸŒ™';
 }
 
-// â”€â”€ MODAL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function openModal(id) {
-  const m = document.getElementById(id);
-  if (m) { m.classList.remove('hidden'); document.body.style.overflow = 'hidden'; }
-}
 
-function closeModal(id) {
-  const m = document.getElementById(id);
-  if (m) { m.classList.add('hidden'); document.body.style.overflow = ''; }
-}
+function cp(html) { return '<div class="comp-preview">' + html + '</div>'; }
+function cpw(html, w) { return '<div class="comp-preview" style="width:100%;max-width:' + w + 'px;">' + html + '</div>'; }
+function copyBtn() { return '<button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy</button>'; }
 
-function closeModalOnBackdrop(e, id) {
-  if (e.target === document.getElementById(id)) closeModal(id);
-}
+function getTemplateArray(type) {
+  const b = copyBtn();
+  switch(type) {
 
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape')
-    document.querySelectorAll('.modal-backdrop:not(.hidden)').forEach(m => { m.classList.add('hidden'); document.body.style.overflow = ''; });
-});
+  case 'badge': return [
+    cp(b + '<span style="background:linear-gradient(135deg,#F8A8C4,#E86FA3);color:#fff;padding:4px 14px;border-radius:999px;font-size:12px;font-weight:700;">NEW</span>'),
+    cp(b + '<span style="background:transparent;border:2px solid #E86FA3;color:#E86FA3;padding:3px 12px;border-radius:999px;font-size:12px;font-weight:700;">SALE</span>'),
+    cp(b + '<span style="background:#D4AF37;color:#fff;padding:4px 12px;border-radius:4px;font-size:11px;font-weight:800;letter-spacing:1px;">GOLD</span>'),
+    cp(b + '<span style="background:#1a1a2e;color:#CDB4FF;padding:4px 16px;border-radius:999px;font-size:11px;font-weight:700;border:1px solid #CDB4FF;">PRO</span>'),
+    cp(b + '<span style="background:#EDE5FF;color:#5D3FD3;padding:4px 12px;border-radius:8px;font-size:12px;font-weight:700;">Beta</span>'),
+    cp(b + '<span style="display:inline-flex;align-items:center;gap:5px;background:#FFF0F5;border:1px solid #F8A8C4;color:#E86FA3;padding:4px 12px;border-radius:999px;font-size:12px;"><span style="width:7px;height:7px;background:#4CAF50;border-radius:50%;display:inline-block;"></span>Online</span>'),
+    cp(b + '<span style="background:linear-gradient(135deg,#D4AF37,#C5A059);color:#fff;padding:5px 16px;border-radius:4px;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;">VIP</span>'),
+    cp(b + '<span style="background:#FFF5F5;color:#D44D5C;padding:4px 14px;border-radius:0;font-size:12px;font-weight:700;border-left:3px solid #D44D5C;">HOT</span>'),
+    cp(b + '<span style="background:#E0F2F1;color:#00796B;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:600;">Verified &#10003;</span>'),
+    cp(b + '<span style="background:#1a1a2e;color:#FFD700;padding:5px 14px;border-radius:999px;font-size:11px;font-weight:800;">&#9733; FEATURED</span>'),
+    cp(b + '<span style="display:inline-flex;align-items:center;gap:6px;background:#FFF9C4;border:1px solid #F9E076;color:#856404;padding:4px 12px;border-radius:8px;font-size:12px;">&#9889; Flash</span>'),
+    cp(b + '<span style="background:#F8A8C4;color:#fff;padding:6px 16px;border-radius:12px;font-size:11px;font-weight:700;box-shadow:0 4px 12px rgba(248,168,196,0.5);">TRENDING</span>'),
+    cp(b + '<span style="background:rgba(205,180,255,0.15);backdrop-filter:blur(8px);border:1px solid rgba(205,180,255,0.4);color:#5D3FD3;padding:4px 14px;border-radius:999px;font-size:12px;">Glass</span>'),
+    cp(b + '<span style="background:#fff;color:#333;padding:4px 12px;border-radius:8px;font-size:11px;font-weight:700;box-shadow:3px 3px 6px rgba(0,0,0,0.1),-1px -1px 4px rgba(255,255,255,0.8);">Soft</span>'),
+    cp(b + '<span style="background:linear-gradient(135deg,#9B72FF,#E86FA3);color:#fff;padding:4px 14px;border-radius:999px;font-size:12px;font-weight:700;">&#10024; Magic</span>'),
+    cp(b + '<div style="display:inline-flex;align-items:center;background:#fff;border:1px solid #eee;border-radius:999px;padding:3px 10px 3px 4px;gap:8px;"><img src="https://i.pravatar.cc/20?u=1" style="width:20px;height:20px;border-radius:50%;"><span style="font-size:11px;font-weight:600;">Sophie</span></div>'),
+    cp(b + '<div style="position:relative;display:inline-block;"><span style="background:#E86FA3;color:#fff;padding:4px 12px;border-radius:999px;font-size:12px;font-weight:700;">Inbox</span><span style="position:absolute;top:-6px;right:-6px;background:#D44D5C;color:#fff;width:18px;height:18px;border-radius:50%;font-size:10px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid #fff;">3</span></div>'),
+    cp(b + '<span style="background:transparent;color:#888;padding:3px 10px;border-radius:4px;font-size:11px;border:1px dashed #ccc;font-weight:600;">Draft</span>'),
+    cp(b + '<span style="background:linear-gradient(90deg,#F8A8C4,#CDB4FF,#9B72FF);color:#fff;padding:5px 16px;border-radius:999px;font-size:12px;font-weight:700;">Aurora</span>'),
+    cp(b + '<span style="background:#1a1a2e;color:#fff;padding:4px 14px;border-radius:6px;font-size:11px;font-weight:700;letter-spacing:1px;">SOLD OUT</span>'),
+  ];
 
-// â”€â”€ TOAST â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-const toastIcons = { success:'âœ…', warning:'âš ï¸', error:'âŒ', info:'ðŸ’œ' };
+  case 'inputs': return [
+    cpw(b + '<div><label style="display:block;font-size:10px;font-weight:700;color:#E86FA3;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;">Email Address</label><input type="email" style="width:100%;border:1.5px solid #F8A8C4;border-radius:12px;padding:12px 16px;font-size:14px;outline:none;background:#fff;box-sizing:border-box;" placeholder="hello@femme.com"></div>', 320),
+    cpw(b + '<div><label style="display:block;font-size:11px;font-weight:600;color:#555;margin-bottom:6px;">Your Name</label><input type="text" style="width:100%;border:none;border-bottom:2px solid #F8A8C4;border-radius:0;padding:10px 0;font-size:14px;outline:none;background:transparent;box-sizing:border-box;" placeholder="Sophia Rose"></div>', 300),
+    cpw(b + '<input type="search" style="width:100%;border:1.5px solid #eee;border-radius:999px;padding:12px 20px;font-size:14px;outline:none;background:#FFF7FB;box-sizing:border-box;" placeholder="&#128269; Search...">', 320),
+    cpw(b + '<div style="position:relative;"><input type="text" style="width:100%;border:2px solid #D4AF37;border-radius:12px;padding:12px 16px;font-size:14px;outline:none;background:#FFFDF5;box-sizing:border-box;" placeholder="Gold luxury input"><span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:#D4AF37;">&#10022;</span></div>', 320),
+    cpw(b + '<div style="position:relative;"><span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#E86FA3;font-size:16px;">@</span><input type="text" style="width:100%;border:1.5px solid #F8A8C4;border-radius:8px;padding:12px 16px 12px 38px;font-size:14px;outline:none;background:#fff;box-sizing:border-box;" placeholder="username"></div>', 280),
+    cpw(b + '<div style="position:relative;display:flex;"><input type="text" style="flex:1;border:1.5px solid #eee;border-radius:12px 0 0 12px;padding:12px 16px;font-size:14px;outline:none;background:#fff;border-right:none;" placeholder="Enter code..."><button style="background:linear-gradient(135deg,#F8A8C4,#E86FA3);color:#fff;border:none;border-radius:0 12px 12px 0;padding:12px 18px;font-size:12px;font-weight:700;cursor:pointer;">Apply</button></div>', 320),
+    cpw(b + '<div style="background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.3);border-radius:16px;padding:4px;box-shadow:0 4px 20px rgba(248,168,196,0.1);"><input type="text" style="width:100%;background:transparent;border:none;outline:none;padding:12px 16px;font-size:14px;color:#333;box-sizing:border-box;" placeholder="Glass input field..."></div>', 300),
+    cpw(b + '<div><div style="display:flex;justify-content:space-between;margin-bottom:4px;"><label style="font-size:11px;font-weight:600;color:#555;">Bio</label><span style="font-size:10px;color:#aaa;">0 / 150</span></div><textarea style="width:100%;border:1.5px solid #eee;border-radius:12px;padding:12px 16px;font-size:14px;outline:none;resize:none;height:90px;box-sizing:border-box;font-family:inherit;" placeholder="Write something beautiful..."></textarea></div>', 320),
+    cpw(b + '<div style="background:#1a1a2e;padding:20px;border-radius:16px;"><label style="display:block;font-size:10px;font-weight:700;color:#CDB4FF;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Password</label><div style="position:relative;"><input type="password" style="width:100%;background:rgba(255,255,255,0.1);border:1px solid rgba(205,180,255,0.3);border-radius:10px;padding:12px 40px 12px 16px;color:#fff;font-size:14px;outline:none;box-sizing:border-box;" placeholder="••••••••"><span style="position:absolute;right:12px;top:50%;transform:translateY(-50%);color:#9B72FF;cursor:pointer;">&#128065;</span></div></div>', 300),
+    cpw(b + '<div style="display:flex;gap:8px;justify-content:center;">' + Array(6).fill(0).map(()=>'<input type="text" maxlength="1" style="width:42px;height:48px;border:2px solid #F8A8C4;border-radius:10px;text-align:center;font-size:20px;font-weight:700;outline:none;color:#E86FA3;">').join('') + '</div>', 340),
+    cpw(b + '<div style="position:relative;"><input type="text" style="width:100%;border:2px solid #eee;border-radius:12px;padding:12px 16px;font-size:14px;outline:none;box-sizing:border-box;padding-right:90px;" placeholder="yoursite"><span style="position:absolute;right:0;top:0;background:#F8F8F8;height:100%;display:flex;align-items:center;padding:0 14px;border-radius:0 12px 12px 0;font-size:13px;color:#888;border-left:1px solid #eee;">.com</span></div>', 300),
+    cpw(b + '<div style="border:1.5px solid #4CAF50;border-radius:12px;padding:12px 16px;display:flex;align-items:center;gap:10px;"><input type="text" style="flex:1;border:none;outline:none;font-size:14px;" value="sophia@femme.co" readonly><span style="color:#4CAF50;font-size:16px;">&#10003;</span></div>', 300),
+    cpw(b + '<div style="border:1.5px solid #D44D5C;border-radius:12px;padding:12px 16px;"><input type="text" style="width:100%;border:none;outline:none;font-size:14px;color:#D44D5C;box-sizing:border-box;" placeholder="Invalid field"><div style="font-size:10px;color:#D44D5C;margin-top:4px;">&#9888; This field is required</div></div>', 300),
+    cpw(b + '<div style="display:flex;align-items:center;background:#fff;border:1.5px solid #eee;border-radius:8px;overflow:hidden;"><span style="background:#FFF0F5;padding:12px 14px;color:#E86FA3;font-weight:700;font-size:14px;border-right:1px solid #eee;">$</span><input type="number" style="flex:1;border:none;outline:none;padding:12px;font-size:14px;" placeholder="0.00"></div>', 280),
+    cpw(b + '<div style="display:flex;flex-wrap:wrap;gap:6px;border:1.5px solid #F8A8C4;border-radius:12px;padding:10px;"><span style="background:#FFF0F5;color:#E86FA3;padding:4px 10px;border-radius:999px;font-size:12px;display:flex;align-items:center;gap:4px;">Design <span style="cursor:pointer;opacity:0.6;">&#215;</span></span><span style="background:#FFF0F5;color:#E86FA3;padding:4px 10px;border-radius:999px;font-size:12px;display:flex;align-items:center;gap:4px;">UI Kit <span style="cursor:pointer;opacity:0.6;">&#215;</span></span><input style="border:none;outline:none;padding:4px 8px;font-size:13px;flex:1;min-width:80px;" placeholder="Add tag..."></div>', 320),
+    cpw(b + '<div><label style="font-size:10px;font-weight:700;color:#9B72FF;text-transform:uppercase;letter-spacing:1px;display:block;margin-bottom:4px;">Card Number</label><div style="display:flex;align-items:center;border:1.5px solid #CDB4FF;border-radius:12px;padding:12px 16px;gap:10px;"><span>&#128179;</span><input type="text" style="flex:1;border:none;outline:none;font-size:15px;letter-spacing:3px;" placeholder="4242  4242  4242" maxlength="19"></div></div>', 320),
+    cpw(b + '<div style="position:relative;padding-top:20px;"><span style="position:absolute;top:4px;left:12px;font-size:10px;font-weight:700;color:#E86FA3;background:#fff;padding:0 4px;">Full Name</span><input type="text" style="width:100%;border:1.5px solid #F8A8C4;border-radius:8px;padding:14px 16px;font-size:14px;outline:none;box-sizing:border-box;background:#fff;" placeholder=" "></div>', 300),
+    cpw(b + '<input type="text" style="width:100%;border:none;border-bottom:1.5px solid #eee;border-radius:0;padding:12px 0;font-size:14px;outline:none;background:transparent;box-sizing:border-box;color:#888;" placeholder="Minimal — no border...">', 280),
+    cpw(b + '<div style="background:#F0F4F8;border-radius:12px;padding:4px;display:flex;align-items:center;gap:8px;"><span style="padding:10px 14px;color:#888;">&#128269;</span><input type="search" style="flex:1;border:none;background:transparent;outline:none;font-size:14px;padding:10px 0;" placeholder="Quick search..."><span style="background:#fff;padding:6px 12px;border-radius:8px;font-size:11px;color:#aaa;white-space:nowrap;">Enter</span></div>', 320),
+    cpw(b + '<div style="display:flex;gap:6px;flex-wrap:wrap;">' + ['Mon','Tue','Wed','Thu','Fri'].map((d,i)=>'<button style="padding:8px 12px;border-radius:8px;border:1.5px solid #F8A8C4;background:' + (i===1?'linear-gradient(135deg,#F8A8C4,#E86FA3)':'#fff') + ';color:' + (i===1?'#fff':'#666') + ';font-size:12px;font-weight:600;cursor:pointer;">' + d + '</button>').join('') + '</div>', 340),
+  ];
 
-function showToast(type, title, message, duration = 4500) {
-  const container = document.getElementById('toast-container');
-  const toast = document.createElement('div');
-  toast.className = `toast toast-${type}`;
-  toast.innerHTML = `
-    <div class="toast-icon">${toastIcons[type]||'ðŸ’¬'}</div>
-    <div class="toast-content">
-      <div class="toast-title">${title}</div>
-      ${message ? `<div class="toast-body">${message}</div>` : ''}
-    </div>
-    <button class="toast-close" onclick="dismissToast(this.closest('.toast'))">âœ•</button>`;
-  container.appendChild(toast);
-  setTimeout(() => dismissToast(toast), duration);
-}
+  case 'avatar': return [
+    cp(b + '<img src="https://i.pravatar.cc/72?u=1" style="width:72px;height:72px;border-radius:50%;border:3px solid #F8A8C4;display:block;">'),
+    cp(b + '<img src="https://i.pravatar.cc/64?u=2" style="width:64px;height:64px;border-radius:12px;border:3px solid #D4AF37;display:block;">'),
+    cp(b + '<div style="position:relative;display:inline-block;"><img src="https://i.pravatar.cc/60?u=3" style="width:60px;height:60px;border-radius:50%;border:2px solid #9B72FF;display:block;"><span style="position:absolute;bottom:2px;right:2px;width:14px;height:14px;background:#4CAF50;border:2px solid #fff;border-radius:50%;"></span></div>'),
+    cp(b + '<div style="width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#F8A8C4,#E86FA3);display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;font-weight:700;font-family:serif;">SL</div>'),
+    cp(b + '<div style="display:flex;">' + [1,2,3,4].map((n,i)=>'<img src="https://i.pravatar.cc/44?u=' + n + '" style="width:44px;height:44px;border-radius:50%;border:3px solid #fff;margin-left:' + (i?'-14px':'0') + ';z-index:' + (4-i) + ';position:relative;">').join('') + '<div style="width:44px;height:44px;border-radius:50%;background:#FFF0F5;border:3px solid #fff;margin-left:-14px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#E86FA3;z-index:0;">+8</div></div>'),
+    cp(b + '<div style="text-align:center;"><img src="https://i.pravatar.cc/80?u=5" style="width:80px;height:80px;border-radius:50%;border:4px solid #F8A8C4;display:block;margin:0 auto 8px;"><div style="font-size:13px;font-weight:700;">Sophie L.</div><div style="font-size:11px;color:#E86FA3;">Art Director</div></div>'),
+    cp(b + '<div style="display:flex;align-items:center;gap:12px;"><img src="https://i.pravatar.cc/48?u=6" style="width:48px;height:48px;border-radius:50%;border:2px solid #F8A8C4;"><div><div style="font-size:13px;font-weight:700;">Elena V.</div><div style="font-size:11px;color:#aaa;">Active now</div></div></div>'),
+    cp(b + '<div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#D4AF37,#C5A059);display:flex;align-items:center;justify-content:center;color:#fff;font-size:24px;font-weight:800;box-shadow:0 4px 16px rgba(212,175,55,0.4);">M</div>'),
+    cp(b + '<div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#9B72FF,#5D3FD3);display:flex;align-items:center;justify-content:center;color:#fff;font-size:22px;">&#128102;</div>'),
+    cp(b + '<div style="display:flex;flex-direction:column;align-items:center;gap:10px;">' + [1,2,3].map((n,i)=>'<div style="display:flex;align-items:center;gap:10px;"><img src="https://i.pravatar.cc/36?u=' + n + '" style="width:36px;height:36px;border-radius:50%;"><span style="font-size:12px;font-weight:600;">User ' + n + '</span></div>').join('') + '</div>'),
+    cp(b + '<div style="display:flex;align-items:center;gap:10px;background:#FFF7FB;padding:10px 14px;border-radius:12px;border:1px solid #FFE4F0;"><img src="https://i.pravatar.cc/40?u=7" style="width:40px;height:40px;border-radius:50%;border:2px solid #F8A8C4;"><div style="flex:1;"><div style="font-size:13px;font-weight:700;">Mia Chen</div><div style="font-size:11px;color:#aaa;">Sent you a message</div></div><button style="background:linear-gradient(135deg,#F8A8C4,#E86FA3);color:#fff;border:none;border-radius:999px;padding:5px 12px;font-size:11px;font-weight:700;cursor:pointer;">Reply</button></div>'),
+    cp(b + '<img src="https://i.pravatar.cc/72?u=8" style="width:72px;height:72px;border-radius:16px;border:3px solid #CDB4FF;display:block;">'),
+    cp(b + '<div style="position:relative;display:inline-block;"><img src="https://i.pravatar.cc/60?u=9" style="width:60px;height:60px;border-radius:50%;filter:grayscale(1);display:block;"><span style="position:absolute;bottom:2px;right:2px;width:14px;height:14px;background:#D44D5C;border:2px solid #fff;border-radius:50%;"></span></div>'),
+    cp(b + '<div style="display:flex;gap:8px;">' + [1,2,3].map((n,i)=>'<div style="<text-align:center;"><img src="https://i.pravatar.cc/48?u=' + (n+9) + '" style="width:48px;height:48px;border-radius:50%;border:2px solid ' + ['#F8A8C4','#D4AF37','#9B72FF'][i] + ';display:block;margin:0 auto 4px;"><div style="font-size:10px;font-weight:700;color:#666;">User ' + n + '</div></div>').join('') + '</div>'),
+    cp(b + '<div style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#F8A8C4,#9B72FF);display:flex;align-items:center;justify-content:center;font-size:24px;">&#128151;</div>'),
+    cp(b + '<div style="text-align:center;"><div style="position:relative;display:inline-block;"><img src="https://i.pravatar.cc/80?u=10" style="width:80px;height:80px;border-radius:50%;display:block;"><div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#D4AF37,#C5A059);color:#fff;font-size:9px;font-weight:800;padding:2px 8px;border-radius:999px;white-space:nowrap;">VIP</div></div></div>'),
+    cp(b + '<div style="display:flex;align-items:center;gap:12px;background:#1a1a2e;padding:12px 16px;border-radius:12px;"><img src="https://i.pravatar.cc/44?u=11" style="width:44px;height:44px;border-radius:50%;border:2px solid #9B72FF;"><div><div style="font-size:13px;font-weight:700;color:#fff;">Luna Dark</div><div style="font-size:11px;color:#9B72FF;">&#9679; Online</div></div></div>'),
+    cp(b + '<div style="display:flex;flex-direction:column;gap:8px;">' + ['Sophia','Elena','Mia'].map((n,i)=>'<div style="display:flex;align-items:center;gap:8px;"><img src="https://i.pravatar.cc/36?u=' + (i+12) + '" style="width:36px;height:36px;border-radius:50%;border:2px solid #F8A8C4;"><span style="font-size:12px;font-weight:600;">' + n + '</span><span style="margin-left:auto;width:8px;height:8px;background:#4CAF50;border-radius:50%;"></span></div>').join('') + '</div>'),
+    cp(b + '<div style="width:64px;height:64px;border-radius:50%;background:#f0f0f0;display:flex;align-items:center;justify-content:center;font-size:26px;border:2px dashed #ccc;">+</div>'),
+    cp(b + '<img src="https://i.pravatar.cc/80?u=15" style="width:80px;height:80px;border-radius:0;border:3px solid #1a1a2e;display:block;">'),
+  ];
 
-/**
- * Logic to dismiss a toast notification with a fade-out animation.
- */
-function dismissToast(toast) {
-  if (!toast) return;
-  toast.style.opacity = '0';
-  toast.style.transform = 'translateY(10px) scale(0.95)';
-  setTimeout(() => toast.remove(), 300);
-}
+  case 'loader': return [
+    cp(b + '<div style="width:40px;height:40px;border:4px solid #FFF0F5;border-top:4px solid #E86FA3;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto;"></div>'),
+    cp(b + '<div style="width:200px;height:6px;background:#FFF0F5;border-radius:3px;overflow:hidden;"><div style="height:100%;width:65%;background:linear-gradient(90deg,#F8A8C4,#E86FA3);border-radius:3px;animation:shimmer 1.5s ease-in-out infinite;"></div></div>'),
+    cp(b + '<div style="display:flex;gap:6px;justify-content:center;">' + [0,1,2].map(i=>'<div style="width:10px;height:10px;background:#E86FA3;border-radius:50%;animation:bounce 1.4s ease-in-out ' + (i*0.2) + 's infinite;"></div>').join('') + '</div>'),
+    cp(b + '<div style="position:relative;width:60px;height:60px;margin:0 auto;"><svg viewBox="0 0 42 42" width="60" height="60" style="transform:rotate(-90deg);"><circle cx="21" cy="21" r="16" fill="none" stroke="#FFF0F5" stroke-width="4"/><circle cx="21" cy="21" r="16" fill="none" stroke="#E86FA3" stroke-width="4" stroke-dasharray="60 40" stroke-linecap="round"/></svg></div>'),
+    cp(b + '<div style="display:flex;gap:4px;align-items:center;justify-content:center;">' + [1,2,3,4,5].map((n,i)=>'<div style="width:4px;background:#E86FA3;border-radius:2px;animation:bar 1.2s ease-in-out ' + (i*0.15) + 's infinite;height:' + [20,32,24,36,20][i] + 'px;"></div>').join('') + '</div>'),
+    cp(b + '<div style="width:200px;background:#f5f5f5;border-radius:12px;overflow:hidden;"><div style="height:12px;background:linear-gradient(90deg,#FFF0F5 25%,#F8A8C4 50%,#FFF0F5 75%);background-size:200%;animation:shimmer 1.5s infinite;"></div></div>'),
+    cp(b + '<div style="width:200px;"><div style="height:10px;background:#f5f5f5;border-radius:8px;margin-bottom:8px;overflow:hidden;"><div style="width:80%;height:100%;background:linear-gradient(90deg,#FFF0F5 25%,#F8A8C4 50%,#FFF0F5 75%);background-size:200%;animation:shimmer 1.5s infinite;"></div></div><div style="height:8px;background:#f5f5f5;border-radius:8px;width:60%;overflow:hidden;"><div style="height:100%;background:linear-gradient(90deg,#FFF0F5 25%,#F8A8C4 50%,#FFF0F5 75%);background-size:200%;animation:shimmer 1.5s infinite;"></div></div></div>'),
+    cp(b + '<div style="width:40px;height:40px;border:4px solid #D4AF37;border-top:4px solid transparent;border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto;"></div>'),
+    cp(b + '<div style="width:40px;height:40px;border:4px solid transparent;border-top:4px solid #9B72FF;border-right:4px solid #9B72FF;border-radius:50%;animation:spin 1s linear infinite;margin:0 auto;"></div>'),
+    cp(b + '<div style="display:flex;align-items:center;gap:12px;padding:12px 16px;background:#FFF7FB;border-radius:12px;border:1px solid #FFE4F0;"><div style="width:36px;height:36px;border:3px solid #F8A8C4;border-top:3px solid #E86FA3;border-radius:50%;animation:spin 1s linear infinite;flex-shrink:0;"></div><span style="font-size:13px;color:#888;font-weight:600;">Loading...</span></div>'),
+    cp(b + '<div style="width:48px;height:48px;margin:0 auto;position:relative;animation:spin 2s linear infinite;"><div style="width:10px;height:10px;background:#F8A8C4;border-radius:50%;position:absolute;top:0;left:50%;transform:translateX(-50%);"></div><div style="width:10px;height:10px;background:#E86FA3;border-radius:50%;position:absolute;bottom:0;left:50%;transform:translateX(-50%);"></div><div style="width:10px;height:10px;background:#CDB4FF;border-radius:50%;position:absolute;left:0;top:50%;transform:translateY(-50%);"></div><div style="width:10px;height:10px;background:#9B72FF;border-radius:50%;position:absolute;right:0;top:50%;transform:translateY(-50%);"></div></div>'),
+    cp(b + '<div style="width:200px;padding:16px;background:#fff;border-radius:12px;box-shadow:0 4px 16px rgba(0,0,0,0.06);"><div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;"><div style="width:36px;height:36px;border-radius:50%;background:linear-gradient(90deg,#f5f5f5 25%,#e9e9e9 50%,#f5f5f5 75%);background-size:200%;animation:shimmer 1.5s infinite;"></div><div style="flex:1;"><div style="height:10px;background:linear-gradient(90deg,#f5f5f5 25%,#e9e9e9 50%,#f5f5f5 75%);background-size:200%;animation:shimmer 1.5s infinite;border-radius:4px;margin-bottom:6px;"></div><div style="height:8px;width:60%;background:linear-gradient(90deg,#f5f5f5 25%,#e9e9e9 50%,#f5f5f5 75%);background-size:200%;animation:shimmer 1.5s infinite;border-radius:4px;"></div></div></div><div style="height:10px;background:linear-gradient(90deg,#f5f5f5 25%,#e9e9e9 50%,#f5f5f5 75%);background-size:200%;animation:shimmer 1.5s infinite;border-radius:4px;margin-bottom:6px;"></div><div style="height:10px;width:75%;background:linear-gradient(90deg,#f5f5f5 25%,#e9e9e9 50%,#f5f5f5 75%);background-size:200%;animation:shimmer 1.5s infinite;border-radius:4px;"></div></div>'),
+    cp(b + '<div style="text-align:center;"><div style="font-size:10px;font-weight:700;color:#aaa;text-transform:uppercase;letter-spacing:2px;margin-bottom:8px;">Loading</div><div style="display:flex;justify-content:center;gap:4px;">' + [1,2,3,4,5,6,7,8].map((n,i)=>'<div style="width:3px;height:' + [12,18,24,30,30,24,18,12][i] + 'px;background:' + ['#F8A8C4','#E86FA3','#CDB4FF','#9B72FF','#9B72FF','#CDB4FF','#E86FA3','#F8A8C4'][i] + ';border-radius:2px;animation:bar 1.2s ease-in-out ' + (i*0.1) + 's infinite;"></div>').join('') + '</div></div>'),
+    cp(b + '<div style="width:200px;height:6px;background:#EDE5FF;border-radius:3px;overflow:hidden;"><div style="height:100%;background:linear-gradient(90deg,#9B72FF,#CDB4FF);border-radius:3px;width:45%;animation:progress 2s ease-in-out infinite;"></div></div>'),
+    cp(b + '<div style="width:56px;height:56px;margin:0 auto;border:5px solid #FFF0F5;border-radius:50%;position:relative;animation:spin 1s linear infinite;"><div style="position:absolute;top:-5px;left:-5px;right:-5px;bottom:-5px;border:5px solid transparent;border-top:5px solid #E86FA3;border-radius:50%;animation:spin 0.75s linear infinite reverse;"></div></div>'),
+    cp(b + '<div style="display:flex;align-items:center;gap:8px;padding:10px 16px;background:#1a1a2e;border-radius:12px;width:200px;"><div style="width:28px;height:28px;border:3px solid #9B72FF;border-top:3px solid transparent;border-radius:50%;animation:spin 0.8s linear infinite;flex-shrink:0;"></div><span style="font-size:13px;color:#CDB4FF;font-weight:600;">Processing...</span></div>'),
+    cp(b + '<div style="text-align:center;"><div style="display:inline-flex;align-items:flex-end;gap:3px;height:40px;"><div style="width:8px;background:linear-gradient(0deg,#F8A8C4,#E86FA3);border-radius:4px 4px 2px 2px;animation:bar 1s ease-in-out 0s infinite;" style="height:60%;"></div><div style="width:8px;background:linear-gradient(0deg,#CDB4FF,#9B72FF);border-radius:4px 4px 2px 2px;animation:bar 1s ease-in-out 0.2s infinite;"></div><div style="width:8px;background:linear-gradient(0deg,#F8A8C4,#E86FA3);border-radius:4px 4px 2px 2px;animation:bar 1s ease-in-out 0.4s infinite;"></div></div></div>'),
+    cp(b + '<div style="text-align:center;padding:20px;"><div style="font-size:11px;font-weight:700;color:#E86FA3;letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;">Please wait</div><div style="width:160px;height:4px;background:#FFF0F5;border-radius:2px;overflow:hidden;margin:0 auto;"><div style="height:100%;background:linear-gradient(90deg,#F8A8C4,#E86FA3,#F8A8C4);background-size:200%;animation:shimmer 1.5s infinite;"></div></div></div>'),
+    cp(b + '<div style="display:flex;flex-direction:column;gap:8px;width:200px;">' + [90,70,55].map(w=>'<div style="height:10px;background:#f5f5f5;border-radius:5px;width:' + w + '%;overflow:hidden;"><div style="height:100%;background:linear-gradient(90deg,#f5f5f5 25%,#e9e9e9 50%,#f5f5f5 75%);background-size:200%;animation:shimmer 1.5s infinite;"></div></div>').join('') + '</div>'),
+    cp(b + '<div style="display:flex;align-items:center;gap:10px;padding:14px;background:#fff;border-radius:12px;border:1px dotted #F8A8C4;width:200px;"><div style="display:flex;gap:4px;">' + [0,1,2].map(i=>'<div style="width:8px;height:8px;border-radius:50%;background:#F8A8C4;animation:bounce 1.2s ease-in-out ' + (i*0.2) + 's infinite;"></div>').join('') + '</div><span style="font-size:12px;color:#E86FA3;font-weight:600;">Typing...</span></div>'),
+  ];
 
-/**
- * Generic utility to copy text to the user's clipboard.
- * @param {string} text - The string to copy.
- * @returns {Promise} Resolves when the copy is complete.
- */
-async function copyToClipboard(text) {
-  try {
-    if (navigator.clipboard && window.isSecureContext) {
-      return await navigator.clipboard.writeText(text);
-    } else {
-      // Fallback for older browsers or non-secure contexts
-      const textArea = document.createElement("textarea");
-      textArea.value = text;
-      textArea.style.position = "fixed";
-      textArea.style.left = "-9999px";
-      textArea.style.top = "0";
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-      return new Promise((res, rej) => {
-        document.execCommand('copy') ? res() : rej();
-        textArea.remove();
-      });
-    }
-  } catch (err) {
-    console.error('Failed to copy text: ', err);
+  default: return [cp(b + '<div style="padding:20px;background:#FFF0F5;border-radius:12px;font-weight:700;color:#E86FA3;">' + type + ' variant</div>')];
   }
 }
 
-/**
- * Specialized handler for copying color hex codes from swatch UI elements.
- * Extracts the hex code from the .color-hex sibling of the clicked element.
- * @param {HTMLElement} el - The clicked swatch wrapper.
- */
-function copyHex(el) {
-  const hex = el.querySelector('.color-hex')?.textContent || '';
-  if (hex) {
-    copyToClipboard(hex).then(() => {
-      showToast('success', 'ðŸŽ¨ Color Copied!', `${hex} is now in your clipboard.`);
-    });
-  }
-}
-
-// â”€â”€ TABS (for nav section) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function switchTab2(groupId, contentId, btn) {
-  const group = document.getElementById(groupId);
-  if (!group) return;
-  // Hide all panes belonging to this group
-  const allIds = Array.from(group.querySelectorAll('button')).map(b => {
-    const m = b.getAttribute('onclick')?.match(/switchTab2\('[^']+','([^']+)'/);
-    return m ? m[1] : null;
-  }).filter(Boolean);
-  allIds.forEach(id => { const p = document.getElementById(id); if (p) p.classList.add('hidden'); });
-  // Show target
-  const target = document.getElementById(contentId);
-  if (target) target.classList.remove('hidden');
-  // Update tabs
-  group.querySelectorAll('button').forEach(b => b.classList.remove('active'));
-  if (btn) btn.classList.add('active');
-}
-
-// â”€â”€ ACCORDION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function toggleAccordion(trigger) {
-  const item = trigger.closest('.accordion-item');
-  const body = item.querySelector('.accordion-body');
-  const icon = item.querySelector('.accordion-icon');
-  const isOpen = item.classList.contains('active');
-  document.querySelectorAll('.accordion-item').forEach(i => {
-    i.classList.remove('active');
-    i.querySelector('.accordion-body').style.display = 'none';
-    i.querySelector('.accordion-icon').textContent = 'â†“';
-  });
-  if (!isOpen) {
-    item.classList.add('active');
-    body.style.display = 'block';
-    icon.textContent = 'â†‘';
-  }
-}
-
-// â”€â”€ TAGS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function toggleTag(el) { el.classList.toggle('active'); }
-
-// â”€â”€ WISHLIST â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function toggleWishlist(btn) {
-  btn.classList.toggle('active');
-  showToast(btn.classList.contains('active') ? 'success' : 'info',
-            btn.classList.contains('active') ? 'ðŸ’– Added to Wishlist' : 'Removed from Wishlist', '');
-}
-
-// â”€â”€ ADD TO CART â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function addToCart(name, price) {
-  showToast('success', `ðŸ›ï¸ Added to Bag!`, `${name} (${price}) has been added.`);
-}
-
-// â”€â”€ CART QUANTITY â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function adjustQty(btn, delta) {
-  const w = btn.closest('.qty-stepper');
-  const v = w.querySelector('.qty-val');
-  let n = parseInt(v.textContent) + delta;
-  if (n < 1) n = 1; if (n > 99) n = 99;
-  v.textContent = n;
-}
-
-// â”€â”€ REMOVE CART ITEM â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function removeCartItem(btn) {
-  const item = btn.closest('.cart-item');
-  if (item) {
-    item.style.transition = 'all .3s ease';
-    item.style.opacity = '0';
-    item.style.transform = 'translateX(-20px)';
-    setTimeout(() => item.remove(), 300);
-    showToast('info', 'Item removed', '');
-  }
-}
-
-// â”€â”€ LOADING BUTTON â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function loadingBtn(btnId, spinnerId) {
-  const btn = document.getElementById(btnId);
-  const spinner = document.getElementById(spinnerId);
-  const text = btn.querySelector('span:first-child');
-  btn.disabled = true;
-  text.textContent = 'Processingâ€¦';
-  spinner.classList.remove('hidden');
-  setTimeout(() => {
-    btn.disabled = false;
-    text.textContent = 'âœ“ Done!';
-    spinner.classList.add('hidden');
-    btn.style.background = 'linear-gradient(135deg,#A8E6CF,#4CAF80)';
-    showToast('success','âœ“ Order Confirmed!','Your order is being processed.');
-    setTimeout(() => { text.textContent = 'Place Order'; btn.style.background = ''; }, 3000);
-  }, 2000);
-}
-
-// â”€â”€ NEWSLETTER â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-function subscribeNewsletter(inputId) {
-  const input = document.getElementById(inputId || 'nl-email');
-  const email = input?.value.trim();
-  if (!email || !email.includes('@')) {
-    showToast('error','Invalid email','Please enter a valid email address.'); return;
-  }
-  showToast('success','ðŸ’Œ Welcome to the circle!',`We'll send beauty tips to ${email}`);
-  if (input) input.value = '';
-}
-
-// â”€â”€ TESTIMONIALS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-let currentTestimonial = 0;
-let testimonialTimer = null;
-
-function goToTestimonial(index) {
-  const cards = document.querySelectorAll('.testimonial-card');
-  const dots  = document.querySelectorAll('.t-dot');
-  cards.forEach(c => c.classList.remove('active'));
-  dots.forEach(d => d.classList.remove('active'));
-  if (cards[index]) cards[index].classList.add('active');
-  if (dots[index])  dots[index].classList.add('active');
-  currentTestimonial = index;
-}
-
-function startTestimonialAuto() {
-  testimonialTimer = setInterval(() => {
-    const total = document.querySelectorAll('.testimonial-card').length;
-    goToTestimonial((currentTestimonial + 1) % total);
-  }, 5000);
-}
-
-// â”€â”€ BOOKING CALENDAR â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-let calYear = 2026, calMonth = 3;
-const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-const DAY_NAMES   = ['Su','Mo','Tu','We','Th','Fr','Sa'];
-const BOOKED      = ['9:00 AM','11:00 AM','3:00 PM'];
-
-function renderCalendar() {
-  const grid = document.getElementById('calendar-grid');
-  if (!grid) return;
-  document.getElementById('cal-month-label').textContent = `${MONTH_NAMES[calMonth]} ${calYear}`;
-  const firstDay = new Date(calYear, calMonth, 1).getDay();
-  const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
-  const today = new Date();
-  let html = DAY_NAMES.map(d => `<div class="cal-day-header">${d}</div>`).join('');
-  for (let i = 0; i < firstDay; i++) html += `<div class="cal-day cal-empty"></div>`;
-  for (let d = 1; d <= daysInMonth; d++) {
-    const date = new Date(calYear, calMonth, d);
-    const isToday = date.toDateString() === today.toDateString();
-    const isPast  = date < new Date(today.getFullYear(), today.getMonth(), today.getDate());
-    let cls = 'cal-day' + (isToday ? ' cal-today' : '') + (isPast ? ' cal-past' : '');
-    html += `<div class="${cls}" onclick="selectDay(this,${d})">${d}</div>`;
-  }
-  grid.innerHTML = html;
-}
-
-function selectDay(el, day) {
-  if (el.classList.contains('cal-past') || el.classList.contains('cal-empty')) return;
-  document.querySelectorAll('.cal-day.cal-selected').forEach(d => d.classList.remove('cal-selected'));
-  el.classList.add('cal-selected');
-  renderTimeSlots(day);
-}
-
-function renderTimeSlots(day) {
-  const slots = document.getElementById('time-slots');
-  const allSlots = ['9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM'];
-  let html = `<h5 style="font-size:var(--text-sm);color:var(--text-muted);margin-bottom:12px;font-weight:600">Available Times Â· ${MONTH_NAMES[calMonth]} ${day}</h5><div class="time-slots-grid">`;
-  allSlots.forEach(slot => {
-    const booked = BOOKED.includes(slot);
-    html += `<button class="time-slot ${booked ? 'booked' : ''}" onclick="selectTimeSlot(this,'${slot}')" ${booked ? 'disabled' : ''}>${slot}</button>`;
-  });
-  html += `</div>`;
-  slots.innerHTML = html;
-}
-
-function selectTimeSlot(el, time) {
-  document.querySelectorAll('.time-slot.selected').forEach(s => s.classList.remove('selected'));
-  el.classList.add('selected');
-  showToast('success', 'ðŸ• Time Selected', `${time} is reserved. Click Confirm to book.`);
-}
-
-function shiftMonth(delta) {
-  calMonth += delta;
-  if (calMonth > 11) { calMonth = 0; calYear++; }
-  if (calMonth < 0)  { calMonth = 11; calYear--; }
-  renderCalendar();
-}
