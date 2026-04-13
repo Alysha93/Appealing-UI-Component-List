@@ -165,12 +165,27 @@
 .hero-gold { background: var(--grad-luxury); color: var(--gold-dark); }
 .hero-glass { background: rgba(255,255,255,0.2); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.3); color: var(--primary-dark); }
 
-/* ── DASHBOARD MINI ── */
-.dash-card {
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
-  padding: 16px; display: flex; flex-direction: column; gap: 8px; box-shadow: var(--shadow-soft);
+/* ── SLIDERS & PICKERS ── */
+.slider-lux {
+  -webkit-appearance: none; width: 100%; height: 6px; background: var(--surface-alt);
+  border-radius: 5px; outline: none; transition: 0.3s;
 }
-.dash-stat { font-size: 24px; font-weight: 800; color: var(--primary-dark); }
+.slider-lux::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--primary); cursor: pointer; transition: 0.2s;
+  box-shadow: var(--shadow-soft); border: 2px solid #fff;
+}
+.slider-lux::-webkit-slider-thumb:hover { transform: scale(1.2); box-shadow: var(--shadow-glow); }
 
-/* ── FORM STYLES ── */
-.form-lux { display: flex; flex-direction: column; gap: 12px; padding: 20px; border-radius: var(--radius-xl); background: var(--surface); border: 1px solid var(--border); }
+.slider-rose::-webkit-slider-thumb { background: var(--grad-rose); }
+.slider-gold::-webkit-slider-thumb { background: var(--grad-luxury); border-color: var(--gold); }
+.slider-glass { background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.1); }
+.slider-glass::-webkit-slider-thumb { background: rgba(255,255,255,0.8); backdrop-filter: blur(5px); }
+
+.slider-thick { height: 12px; }
+.slider-thin { height: 2px; }
+.slider-pill::-webkit-slider-thumb { border-radius: 4px; width: 10px; height: 22px; }
+
+/* ── FORM STYLES (Refined) ── */
+.form-lux { display: flex; flex-direction: column; gap: 12px; padding: 20px; border-radius: var(--radius-xl); background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-soft); }

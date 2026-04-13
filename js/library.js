@@ -14,6 +14,9 @@
  * @param {HTMLElement} btn - The sidebar button that was clicked.
  */
 function showSection(id, btn) {
+  // Render the section if it hasn't been rendered yet
+  renderSection(id);
+
   // Hide all sections using a common class selector
   document.querySelectorAll('.lib-section').forEach(s => s.classList.remove('active'));
   
@@ -34,12 +37,54 @@ function showSection(id, btn) {
   updateComponentCount(id);
 }
 
+/**
+ * Updates the component count in the top-left header logo area.
+ */
+function updateComponentCount(sectionId) {
+  const counter = document.getElementById('lib-count');
+  if (!counter) return;
+  
+  const counts = {
+    colors: 100, typography: 100, tokens: 18,
+    tables: 50, lists: 50, badges: 50, avatars: 50, loaders: 50,
+    selection: 50, dropdowns: 50, overlays: 50,
+    inputs: 50, forms: 50, pickers: 50,
+    navigation: 50, tabs: 50, layout: 50, hero: 50, footers: 50,
+    advanced: 50, cards: 50, dashboard: 50, buttons: 50
+  };
+  
+  const count = counts[sectionId] || 0;
+  counter.textContent = count + ' components';
+}
+
 // Show first section on load
 document.addEventListener('DOMContentLoaded', () => {
   populateLibrary();
   showSection('colors', document.querySelector('.lib-nav-item'));
   updateComponentCount('colors');
 });
+
+/**
+ * Filters sidebar navigation items based on search input.
+ * @param {string} query - The search string.
+ */
+function searchComponents(query) {
+  const q = query.toLowerCase().trim();
+  const items = document.querySelectorAll('.lib-nav-item');
+  const sections = document.querySelectorAll('.sidebar-section');
+  
+  items.forEach(item => {
+    const text = item.textContent.toLowerCase();
+    const isMatch = text.includes(q);
+    item.classList.toggle('hidden', !isMatch);
+  });
+
+  // Hide empty sections
+  sections.forEach(section => {
+    const visibleItems = section.querySelectorAll('.lib-nav-item:not(.hidden)');
+    section.style.display = visibleItems.length > 0 || q === '' ? 'block' : 'none';
+  });
+}
 
 // ── COMPONENT DATA ────────────────────────────────────────
 const COLOR_PALETTE = [
@@ -276,37 +321,73 @@ function getTemplate(type, index) {
       }
 
     case 'list':
-      return `<div class="comp-preview" style="width:100%; max-width:300px;">
-        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <div class="notif-item" style="border:1px solid var(--border); margin-bottom:4px; background: ${index % 3 === 0 ? 'var(--primary-light)' : 'var(--surface)'};">
-          <div class="notif-icon" style="background:var(--grad-${style === 'gold' ? 'luxury' : 'rose'});">✦</div>
-          <div class="notif-content">
-            <div class="notif-title">Item ${index}</div>
-            <div class="notif-body">Fancy list item description ${index}</div>
+      const listTypes = ['notif', 'user', 'message', 'task', 'activity'];
+      const currentListType = listTypes[index % listTypes.length];
+      const lStyle = styles[index % styles.length];
+      
+      if (currentListType === 'notif') {
+        return `<div class="comp-preview" style="width:100%; max-width:300px;">
+          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+          <div class="notif-item" style="border:1px solid var(--border); margin-bottom:4px; background: ${index % 4 === 0 ? 'var(--primary-light)' : 'var(--surface)'};">
+            <div class="notif-icon" style="background:var(--grad-${lStyle === 'gold' ? 'luxury' : 'rose'});">✦</div>
+            <div class="notif-content">
+              <div class="notif-title">Elite Status Update ${index}</div>
+              <div class="notif-body">Your luxury experience has been upgraded.</div>
+            </div>
           </div>
-        </div>
-      </div>`;
+        </div>`;
+      } else if (currentListType === 'user') {
+        return `<div class="comp-preview" style="width:100%; max-width:320px;">
+          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+          <div style="display:flex; align-items:center; gap:12px; padding:12px; background:var(--surface); border-radius:12px; border:1px solid var(--border);">
+            <img src="https://i.pravatar.cc/100?u=${index}" style="width:40px; height:40px; border-radius:50%; border:2px solid var(--${lStyle === 'gold' ? 'gold' : 'primary'});">
+            <div style="flex:1;">
+              <div style="font-size:13px; font-weight:700;">Curator ${index}</div>
+              <div style="font-size:11px; color:var(--text-muted);">${index % 2 === 0 ? 'Active Now' : 'Last seen 2h ago'}</div>
+            </div>
+            <button class="btn btn-pill" style="padding:4px 12px; font-size:10px;">Follow</button>
+          </div>
+        </div>`;
+      } else if (currentListType === 'message') {
+        return `<div class="comp-preview" style="width:100%; max-width:280px;">
+          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+          <div style="padding:12px; background:var(--${lStyle === 'gold' ? 'surface-alt' : 'primary-light'}); border-radius:16px 16px 16px 4px;">
+            <p style="margin:0; font-size:12px; line-height:1.4;">Hey! Just wanted to let you know the ${lStyle} collection is simply stunning. ✨</p>
+            <span style="font-size:9px; opacity:0.6; display:block; margin-top:4px;">12:0${index%10} PM</span>
+          </div>
+        </div>`;
+      } else {
+        return `<div class="comp-preview" style="width:100%; max-width:300px;">
+          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:15px; border-bottom:1px solid var(--border);">
+            <span style="font-size:13px; font-weight:600;">Luxury Milestone ${index}</span>
+            <span class="badge badge-${lStyle}" style="font-size:9px;">Completed</span>
+          </div>
+        </div>`;
+      }
 
     case 'selection':
       const selType = index % 3;
       const sRadius = ['4px', 'var(--radius-full)', '0', '12px'];
       const currentRadius = sRadius[index % sRadius.length];
+      const sStyle = styles[index % styles.length];
       
       if (selType === 0) {
+        const icons = ['✓', '✦', '❤', '✨'];
         return `<div class="comp-preview">
           <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
           <div style="display:flex; align-items:center; gap:10px;">
-            <div class="ux-box ${style} ${index%2 === 0 ? 'active' : ''}" style="border-radius:${currentRadius}">
-              ${index%2 === 0 ? '✓' : ''}
+            <div class="ux-box ${sStyle} ${index%2 === 0 ? 'active' : ''}" style="border-radius:${currentRadius}">
+              ${index%2 === 0 ? icons[index%icons.length] : ''}
             </div>
-            <span style="font-size:14px; font-weight:500;">Option ${index}</span>
+            <span style="font-size:14px; font-weight:500;">Selection ${index}</span>
           </div>
         </div>`;
       } else if (selType === 1) {
         return `<div class="comp-preview">
           <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
           <div style="display:flex; align-items:center; gap:10px;">
-            <div class="ux-radio ${style} ${index%2 === 0 ? 'active' : ''}" style="border-width:${index%3+1}px;"></div>
+            <div class="ux-radio ${sStyle} ${index%2 === 0 ? 'active' : ''}" style="border-width:${index%3+1}px; ${index%5===0 ? 'box-shadow:var(--shadow-glow);' : ''}"></div>
             <span style="font-size:14px; font-weight:500;">Choice ${index}</span>
           </div>
         </div>`;
@@ -315,9 +396,9 @@ function getTemplate(type, index) {
           <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
           <div style="display:flex; align-items:center; gap:12px;">
             <div class="ux-toggle ${index%2 === 0 ? 'active' : ''}" 
-                 style="transform:scale(${0.9 + (index%3)*0.1});" 
+                 style="transform:scale(${0.9 + (index%3)*0.1}); background:${index%2===0 ? `var(--grad-${sStyle === 'gold' ? 'luxury' : 'rose'})` : 'var(--border)'};" 
                  onclick="this.classList.toggle('active')"></div>
-            <span style="font-size:14px; font-weight:500;">Toggle ${index}</span>
+            <span style="font-size:14px; font-weight:500;">Toggle Lux ${index}</span>
           </div>
         </div>`;
       }
@@ -348,112 +429,231 @@ function getTemplate(type, index) {
       </div>`;
 
     case 'overlays':
-      if (index % 2 === 0) {
+      const oStyle = styles[index % styles.length];
+      if (index % 3 === 0) {
         return `<div class="comp-preview">
           <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div class="tooltip-lux tooltip-${style}">Tooltip Highlight ${index}</div>
+          <div class="tooltip-lux tooltip-${oStyle}">Premium Insight ${index}</div>
+        </div>`;
+      } else if (index % 3 === 1) {
+        return `<div class="comp-preview">
+          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+          <div style="width:240px; padding:15px; background:var(--surface); border-radius:12px; box-shadow:var(--shadow-heavy); border:1px solid var(--border); position:relative;">
+             <div style="font-size:12px; font-weight:700; color:var(--primary-dark);">Toast Notification ${index}</div>
+             <div style="font-size:10px; color:var(--text-muted);">Successfully synchronized.</div>
+             <div style="position:absolute; top:8px; right:8px; font-size:10px; opacity:0.3;">✕</div>
+          </div>
         </div>`;
       } else {
         return `<div class="comp-preview">
           <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-          <div style="width:280px; padding:20px; background:var(--surface); border-radius:var(--radius-lg); box-shadow:var(--shadow-heavy); border:1px solid var(--border);">
-            <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-              <span style="background:var(--grad-${style === 'gold' ? 'luxury' : 'rose'}); width:8px; height:8px; border-radius:50%;"></span>
-              <strong style="font-size:13px;">Notification ${index}</strong>
-            </div>
-            <p style="font-size:12px; color:var(--text-muted); margin:0;">Elegant overlay system variant ${index}.</p>
+          <div style="width:200px; height:120px; background:rgba(255,255,255,0.7); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.3); border-radius:20px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px; box-shadow:0 20px 40px rgba(0,0,0,0.1);">
+            <div style="width:30px; height:30px; background:var(--grad-${oStyle === 'gold' ? 'luxury' : 'rose'}); border-radius:50%; display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px;">✓</div>
+            <span style="font-size:11px; font-weight:700;">Confirmed ${index}</span>
           </div>
         </div>`;
       }
 
     case 'inputs':
-      const iRadii = ['var(--radius-full)', 'var(--radius-lg)', '0', '8px'];
-      const iStyles = ['', 'input-rose', 'input-gold'];
-      const currentIStyle = iStyles[index % iStyles.length];
+      const iRadii = ['var(--radius-full)', 'var(--radius-lg)', '0', '12px'];
+      const iBorders = ['1.5px solid var(--border)', 'none; border-bottom: 2px solid var(--primary); border-radius: 0;', '2px solid var(--primary-light)', '1px solid var(--gold)'];
+      const currentIRadius = iRadii[index % iRadii.length];
+      const currentIBorder = iBorders[index % iBorders.length];
       
       return `<div class="comp-preview" style="width:100%; max-width:320px;">
         <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
         <div style="margin-bottom:10px;">
           <label style="display:block; font-size:11px; font-weight:700; color:var(--primary-dark); margin-bottom:4px; text-transform:uppercase; letter-spacing:0.05em;">Luxe Label ${index}</label>
           <div style="position:relative;">
-            <input type="${index%7===0 ? 'password' : 'text'}" class="input-lux ${currentIStyle}" 
-                   style="border-radius:${iRadii[index % iRadii.length]}; padding-left:${index%5===0 ? '40px' : '20px'};" 
-                   placeholder="Luxury Variant ${index}">
+            <input type="${index%7===0 ? 'password' : 'text'}" class="input-lux" 
+                   style="border-radius:${currentIRadius}; border:${currentIBorder}; padding-left:${index%5===0 ? '40px' : '20px'};" 
+                   placeholder="Enter Details ${index}...">
             ${index % 5 === 0 ? '<span style="position:absolute; left:15px; top:50%; transform:translateY(-50%); font-size:12px; color:var(--text-muted);">✦</span>' : ''}
           </div>
         </div>
       </div>`;
 
     case 'forms':
-      return `<div class="comp-preview" style="width:100%; max-width:300px;">
-        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <div class="form-lux" style="border-color:${style === 'gold' ? 'var(--gold)' : 'var(--border)'}">
-          <h4 style="font-family:var(--font-heading); font-size:16px;">Elite Form ${index}</h4>
-          <input type="email" class="input-lux" placeholder="your@luxury.com">
-          <button class="btn btn-${style === 'gold' ? 'gold' : 'primary'}" style="width:100%;">Join Collection</button>
-        </div>
-      </div>`;
+      const fStyle = styles[index % styles.length];
+      const fType = index % 3;
+      
+      if (fType === 0) {
+        return `<div class="comp-preview" style="width:100%; max-width:320px;">
+          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+          <div class="form-lux" style="border-top: 4px solid var(--${fStyle === 'gold' ? 'gold' : 'primary'}); box-shadow:0 15px 40px rgba(0,0,0,0.05);">
+            <h4 style="font-family:var(--font-heading); font-size:18px; margin-bottom:5px;">Luxe Login ${index}</h4>
+            <p style="font-size:11px; color:var(--text-muted); margin-bottom:15px;">Enter your credentials to enter the circle.</p>
+            <input type="text" class="input-lux" placeholder="Email Address">
+            <input type="password" class="input-lux" placeholder="Secret Key">
+            <button class="btn btn-primary" style="width:100%; margin-top:10px;">Enter</button>
+          </div>
+        </div>`;
+      } else if (fType === 1) {
+        return `<div class="comp-preview" style="width:100%; max-width:400px;">
+          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+          <div style="display:flex; gap:10px; background:var(--surface-alt); padding:20px; border-radius:var(--radius-full); border:1.5px solid var(--border);">
+            <input type="email" class="input-lux" style="border:none; background:transparent; padding:0 10px; flex:1;" placeholder="Newsletter ${index}...">
+            <button class="btn btn-pill btn-${fStyle === 'gold' ? 'gold' : 'primary'}" style="white-space:nowrap;">Join List</button>
+          </div>
+        </div>`;
+      } else {
+        return `<div class="comp-preview" style="width:100%; max-width:300px;">
+          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+          <div style="background:var(--surface); border:1px solid var(--border); border-radius:24px; padding:30px; text-align:center;">
+             <div style="width:50px; height:50px; background:var(--grad-rose); border-radius:50%; margin:0 auto 20px; display:flex; align-items:center; justify-content:center; color:#fff;">✉</div>
+             <h4 style="font-size:16px; margin-bottom:15px;">Inquiry ${index}</h4>
+             <textarea class="input-lux" style="height:80px; resize:none; margin-bottom:15px;" placeholder="Message..."></textarea>
+             <button class="btn btn-gold" style="width:100%;">Send Request</button>
+          </div>
+        </div>`;
+      }
 
     case 'pickers':
-      return `<div class="comp-preview" style="width:100%; max-width:260px;">
+      const pStyles = ['', 'slider-rose', 'slider-gold', 'slider-glass'];
+      const pThickness = ['', 'slider-thick', 'slider-thin'];
+      const pShapes = ['', 'slider-pill'];
+      
+      const pStyle = pStyles[index % pStyles.length];
+      const pThick = pThickness[index % pThickness.length];
+      const pShape = pShapes[index % pShapes.length];
+      
+      return `<div class="comp-preview" style="width:100%; max-width:280px;">
         <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <div style="display:flex; flex-direction:column; gap:10px;">
-          <span style="font-size:12px; font-weight:600; color:var(--text-muted);">Elegance Range ${index}</span>
-          <input type="range" style="accent-color:var(--${style === 'gold' ? 'gold' : 'primary'}); cursor:pointer;">
-          <div style="display:flex; justify-content:space-between; font-size:10px;"><span>0</span><span>100</span></div>
+        <div style="display:flex; flex-direction:column; gap:12px; padding:10px;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+             <span style="font-size:11px; font-weight:700; color:var(--primary-dark); text-transform:uppercase;">Volume Level ${index}</span>
+             <span style="font-size:10px; color:var(--text-muted); font-weight:600;">${index * 2}%</span>
+          </div>
+          <input type="range" class="slider-lux ${pStyle} ${pThick} ${pShape}" value="${index%100}">
+          ${index % 3 === 0 ? `<div style="display:flex; justify-content:space-between; font-size:9px; color:var(--text-muted); font-weight:700;"><span>MIN</span><span>MAX</span></div>` : ''}
         </div>
       </div>`;
 
     case 'layout':
-      return `<div class="comp-preview" style="width:100%; max-width:300px;">
+      const lStyles = ['grid-stack', 'grid-2', 'grid-3'];
+      const lTypes = index % 3;
+      const lStyleClass = styles[index % styles.length];
+      const boxStyle = `padding:20px; border-radius:12px; border:1.5px solid var(--border); background:var(--surface); text-align:center; transition:0.3s; cursor:pointer;`;
+      
+      return `<div class="comp-preview" style="width:100%; max-width:500px;">
         <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <div style="border:2px dashed var(--${style === 'gold' ? 'gold' : 'primary'}); padding:20px; border-radius:var(--radius-lg); text-align:center;">
-          <span style="font-size:12px; font-weight:700; color:var(--text-muted);">Container Variant ${index}</span>
-          <div style="margin-top:10px; height:1px; background:var(--border);"></div>
-          <p style="font-size:10px; margin-top:10px;">Divider Styled ${style.toUpperCase()}</p>
+        <div class="grid-preview ${lStyles[lTypes]}" style="gap:15px; border:1px dashed var(--${lStyleClass === 'gold' ? 'gold' : 'primary-light'}); padding:10px; border-radius:15px;">
+          <div style="${boxStyle}" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+            <h5 style="margin:0; font-size:12px;">Panel A (${index})</h5>
+          </div>
+          <div style="${boxStyle}" onmouseover="this.style.borderColor='var(--primary)'" onmouseout="this.style.borderColor='var(--border)'">
+            <h5 style="margin:0; font-size:12px;">Panel B (${index})</h5>
+          </div>
+          ${lTypes === 2 ? `<div style="${boxStyle}"><h5 style="margin:0; font-size:12px;">Panel C</h5></div>` : ''}
         </div>
       </div>`;
 
     case 'hero':
-      const isGoldHero = style === 'gold' || style === 'glow';
-      return `<div class="comp-preview" style="width:100%; max-width:400px;">
-        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <div class="hero-mini ${isGoldHero ? 'hero-gold' : (style === 'glass' ? 'hero-glass' : '')}">
-          <h2>Editorial Hero ${index}</h2>
-          <p style="font-size:12px; opacity:0.8; margin-bottom:15px;">Discover the ${style} collection for avant-garde brands.</p>
-          <button class="btn btn-pill ${isGoldHero ? 'btn-gold' : 'btn-primary'}" style="background:#fff; color:var(--text); border:none;">Explore</button>
-        </div>
-      </div>`;
+      const hStyle = styles[index % styles.length];
+      const hType = index % 3;
+      if (hType === 0) {
+        return `<div class="comp-preview" style="width:100%; max-width:400px;">
+          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+          <div class="hero-mini" style="background:var(--grad-${hStyle === 'gold' ? 'luxury' : 'rose'});">
+            <h2 style="font-size:24px;">Editorial Hero ${index}</h2>
+            <p style="font-size:11px; opacity:0.8;">The world's first ${hStyle} collection for avant-garde brands.</p>
+            <button class="btn btn-pill" style="margin-top:15px; background:#fff; color:var(--text); border:none;">Explore</button>
+          </div>
+        </div>`;
+      } else if (hType === 1) {
+        return `<div class="comp-preview" style="width:100%; max-width:450px;">
+          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+          <div style="padding:60px 20px; text-align:center; border:2px solid var(--${hStyle === 'gold' ? 'gold' : 'primary-light'}); border-radius:20px; background:var(--surface);">
+            <span style="font-size:10px; font-weight:700; color:var(--primary); letter-spacing:2px;">NEW ARRIVAL ${index}</span>
+            <h1 style="font-family:var(--font-heading); font-size:32px; margin:10px 0;">Style & Grace</h1>
+            <div style="height:2px; width:40px; background:var(--primary); margin:20px auto;"></div>
+            <p style="font-size:13px; max-width:300px; margin:0 auto;">Limited edition ${hStyle} curated just for you.</p>
+          </div>
+        </div>`;
+      } else {
+        return `<div class="comp-preview" style="width:100%; max-width:400px;">
+          <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+          <div style="height:200px; border-radius:20px; overflow:hidden; position:relative; display:flex; align-items:flex-end; padding:20px; background:linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=400&auto=format&fit=crop'); background-size:cover;">
+             <div style="color:#fff;">
+                <h3 style="margin:0; font-size:18px;">Visual Collection ${index}</h3>
+                <span style="font-size:10px; opacity:0.7;">Modern ${hStyle.toUpperCase()} Aesthetic</span>
+             </div>
+          </div>
+        </div>`;
+      }
 
     case 'footers':
+      const footStyle = styles[index % styles.length];
       return `<div class="comp-preview" style="width:100%; max-width:400px;">
         <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <footer style="background:var(--surface-alt); padding:20px; border-radius:var(--radius-lg); display:flex; justify-content:space-between; align-items:center;">
-          <span style="font-family:var(--font-heading); font-weight:700; color:var(--primary-dark);">FEMME ${index}</span>
-          <div style="display:flex; gap:12px; font-size:10px; color:var(--text-muted);"><span>Terms</span><span>Privacy</span><span>Inquiry</span></div>
+        <footer style="background:var(--surface-alt); padding:24px; border-radius:15px; display:flex; justify-content:space-between; align-items:center; border-left: 5px solid var(--${footStyle === 'gold' ? 'gold' : 'primary'});">
+          <span style="font-family:var(--font-heading); font-weight:800; font-size:16px; color:var(--primary-dark);">FEMME ${index}</span>
+          <div style="display:flex; gap:15px; font-size:11px; font-weight:600; color:var(--text-muted);">
+            <span>Terms</span><span>Privacy</span><span>Inquiry</span>
+          </div>
         </footer>
       </div>`;
 
     case 'advanced':
+      const advStyle = styles[index % styles.length];
       return `<div class="comp-preview" style="width:100%; max-width:320px;">
         <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <div class="accordion-item" style="border:1px solid var(--border); border-radius:var(--radius-md); background:var(--surface); margin-bottom:2px;">
-          <div style="padding:12px 16px; display:flex; justify-content:space-between; cursor:pointer;">
-            <span style="font-size:13px; font-weight:600;">Advanced Panel ${index}</span>
-            <span>+</span>
+        <div class="accordion-item" style="border:1px solid var(--border); border-radius:12px; background:var(--surface); margin-bottom:5px; overflow:hidden;">
+          <div style="padding:15px 20px; display:flex; justify-content:space-between; align-items:center; cursor:pointer;" onclick="this.nextElementSibling.classList.toggle('hidden')">
+            <span style="font-size:13px; font-weight:700;">Expansion Module ${index}</span>
+            <span style="color:var(--primary); font-size:18px;">+</span>
+          </div>
+          <div class="hidden" style="padding:0 20px 20px; font-size:12px; color:var(--text-muted); line-height:1.5;">
+             Luxury accordion system with ${advStyle} accents. This component is optimized for mobile and desktop views.
           </div>
         </div>
       </div>`;
 
-    case 'dashboard':
-      return `<div class="comp-preview" style="width:100%; max-width:240px;">
+    case 'cards':
+      const cStyle = styles[index % styles.length];
+      return `<div class="comp-preview" style="width:100%; max-width:280px;">
         <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
-        <div class="dash-card">
-          <span style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:700;">Market Value ${index}</span>
-          <div class="dash-stat" style="color:var(--${style === 'gold' ? 'gold-dark' : 'primary-dark'})">$${(index*131).toLocaleString()}</div>
-          <div style="height:4px; width:100%; background:var(--border); border-radius:2px; margin-top:4px;">
-            <div style="height:100%; width:${30 + (index % 60)}%; background:var(--grad-${style === 'gold' ? 'luxury' : 'rose'}); border-radius:2px;"></div>
+        <div class="card-${cStyle}" style="padding:24px; border-radius:16px; border:1px solid var(--border); background:var(--surface); box-shadow:var(--shadow-soft);">
+           <div style="height:120px; border-radius:8px; background:var(--grad-${cStyle === 'gold' ? 'luxury' : 'rose'}); margin-bottom:15px; display:flex; align-items:center; justify-content:center; color:#fff; font-size:24px;">✦</div>
+           <h4 style="margin:0; font-size:16px;">Luxe Card ${index}</h4>
+           <p style="font-size:12px; color:var(--text-muted); margin:8px 0;">Premium card variant with ${cStyle} accents.</p>
+           <button class="btn btn-pill" style="width:100%; font-size:11px;">View Detail</button>
+        </div>
+      </div>`;
+
+    case 'buttons':
+      const bStyle = styles[index % styles.length];
+      const bType = index % 4;
+      const bText = ['Explore', 'Reserve', 'Purchase', 'Contact'][index % 4];
+      
+      let bHtml = '';
+      if (bType === 0) {
+        bHtml = `<button class="btn btn-pill btn-${bStyle}">${bText} ${index}</button>`;
+      } else if (bType === 1) {
+        bHtml = `<button class="btn btn-outline" style="border-color:var(--${bStyle === 'gold' ? 'gold' : 'primary'})">${bText} ${index}</button>`;
+      } else if (bType === 2) {
+        bHtml = `<button class="btn" style="background:var(--grad-${bStyle === 'gold' ? 'luxury' : 'rose'}); color:#fff; box-shadow:var(--shadow-glow); border:none;">✦ ${bText} ${index}</button>`;
+      } else {
+        bHtml = `<button class="btn btn-glass">${bText} ${index} ✨</button>`;
+      }
+      
+      return `<div class="comp-preview">
+        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+        ${bHtml}
+      </div>`;
+
+    case 'dashboard':
+      const dshStyle = styles[index % styles.length];
+      return `<div class="comp-preview" style="width:100%; max-width:260px;">
+        <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+        <div class="dash-card" style="position:relative; overflow:hidden;">
+          <div style="position:absolute; top:0; right:0; width:60px; height:60px; background:var(--grad-${dshStyle === 'gold' ? 'luxury' : 'rose'}); opacity:0.1; border-radius:0 0 0 100%;"></div>
+          <span style="font-size:11px; text-transform:uppercase; color:var(--text-muted); font-weight:700; letter-spacing:1px;">Market Cap ${index}</span>
+          <div class="dash-stat" style="color:var(--${dshStyle === 'gold' ? 'gold-dark' : 'primary-dark'}); margin:5px 0;">$${(index*242).toLocaleString()}</div>
+          <div style="height:4px; width:100%; background:var(--border); border-radius:2px; margin-top:8px;">
+            <div style="height:100%; width:${20 + (index % 70)}%; background:var(--grad-${dshStyle === 'gold' ? 'luxury' : 'rose'}); border-radius:2px;"></div>
           </div>
+          <div style="font-size:9px; margin-top:10px; color:#4CAF50; font-weight:700;">+${index%12}% from yesterday</div>
         </div>
       </div>`;
 
@@ -465,32 +665,6 @@ function getTemplate(type, index) {
   }
 }
 
-const sectionCounts = {
-  colors: 100, typography: 100, tokens: 18,
-  tables: 50, lists: 50, badges: 50, avatars: 50, loaders: 50,
-  selection: 50, dropdowns: 50, overlays: 50,
-  inputs: 50, forms: 50, pickers: 50,
-  navigation: 50, tabs: 50, layout: 50, hero: 50, footers: 50,
-  advanced: 50, cards: 50, dashboard: 50, buttons: 50
-};
-
-function updateComponentCount(id) {
-  const el = document.getElementById('lib-count');
-  if (el) el.textContent = (sectionCounts[id] || '—') + ' components';
-  
-  // Trigger rendering for expanded sections
-  renderSection(id);
-}
-
-// ── SEARCH ─────────────────────────────────────────────────
-function searchComponents(query) {
-  const q = query.toLowerCase().trim();
-  const navItems = document.querySelectorAll('.lib-nav-item');
-  navItems.forEach(item => {
-    const text = item.textContent.toLowerCase();
-    item.style.display = (!q || text.includes(q)) ? '' : 'none';
-  });
-}
 
 function copyComponentHTML(el) {
   // Create a deep clone to manipulate without affecting DOM
@@ -592,6 +766,16 @@ function showToast(type, title, message, duration = 4500) {
     <button class="toast-close" onclick="dismissToast(this.closest('.toast'))">✕</button>`;
   container.appendChild(toast);
   setTimeout(() => dismissToast(toast), duration);
+}
+
+/**
+ * Logic to dismiss a toast notification with a fade-out animation.
+ */
+function dismissToast(toast) {
+  if (!toast) return;
+  toast.style.opacity = '0';
+  toast.style.transform = 'translateY(10px) scale(0.95)';
+  setTimeout(() => toast.remove(), 300);
 }
 
 /**

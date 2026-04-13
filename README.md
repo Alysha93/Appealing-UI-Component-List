@@ -2,15 +2,18 @@
 
 <div align="center">
 
+[![Live Demo](https://img.shields.io/badge/🌐%20Live%20Demo-View%20Now-F8A8C4?style=for-the-badge)](https://alysha93.github.io/Appealing-UI-Component-List/)
 ![FemmeUI Banner](https://img.shields.io/badge/FemmeUI-Soft%20Luxury%20Design%20System-F8A8C4?style=for-the-badge&logo=heart&logoColor=white)
-![Components](https://img.shields.io/badge/Components-32%2B-CDB4FF?style=for-the-badge)
+![Components](https://img.shields.io/badge/Components-2000%2B-CDB4FF?style=for-the-badge)
 ![CSS](https://img.shields.io/badge/Vanilla%20CSS-No%20Framework-FFD6A5?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-A8E6CF?style=for-the-badge)
 
 **A complete feminine UI design system for beauty brands, boutiques & salons.**  
 Pastel palettes · Glassmorphism · Micro-animations · Editorial typography
 
-[🌸 View Live Demo](#) · [📖 Docs](#components) · [💌 Report Issue](#)
+### 🌸 [**→ View Live Demo**](https://alysha93.github.io/Appealing-UI-Component-List/) 🌸
+
+[📖 Docs](#components) · [💌 Report Issue](https://github.com/Alysha93/Appealing-UI-Component-List/issues)
 
 </div>
 
@@ -18,9 +21,9 @@ Pastel palettes · Glassmorphism · Micro-animations · Editorial typography
 
 ## ✨ Features
 
-- 🎨 **Full Color System** — Blush, Lavender, Peach, Gold, and Champagne palettes
-- ✍️ **Elegant Typography** — Playfair Display, Cormorant Garamond, Poppins & Quicksand
-- 💅 **32+ Components** — Fully styled and interactive out of the box
+- 🎨 **Full Color System** — 100 curated colors: Blush, Lavender, Peach, Gold, and Champagne palettes
+- ✍️ **Elegant Typography** — 100 luxury fonts: Playfair Display, Cormorant Garamond, Poppins & Quicksand
+- 💅 **2,000+ Component Variants** — 50 unique styles per category, fully interactive
 - 🪟 **Glassmorphism** — Frosted glass cards, modals, and overlays
 - 🪄 **Micro-animations** — Smooth hover effects, reveals, loaders, and transitions
 - 🛍️ **Commerce Kit** — Product cards, cart drawer, checkout stepper, booking calendar
