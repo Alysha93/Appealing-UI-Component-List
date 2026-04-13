@@ -1,1089 +1,465 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>💖 FemmeUI — Feminine Component Library</title>
-  <meta name="description" content="Soft luxury feminine UI component library — 20-30 variants of every component for beauty, boutique & salon brands."/>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="css/tokens.css"/>
-  <link rel="stylesheet" href="css/base.css"/>
-  <link rel="stylesheet" href="css/components.css"/>
-  <link rel="stylesheet" href="css/animations.css"/>
-  <link rel="stylesheet" href="css/library.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FemmeUI | Premium Component Library</title>
+  
+  <!-- SEO & Meta -->
+  <meta name="description" content="A premium, soft-luxury UI component library designed for feminine and elegant web applications. Featuring 100 colors, 100 fonts, and 300+ component variants.">
+  <meta name="keywords" content="UI Library, Feminine Design, Luxury Web Design, Component Library, HTML/CSS Components">
+  
+  <!-- Google Fonts Imports -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Cinzel:wght@400..900&family=Bodoni+Moda:ital,wght@0,400..900;1,400..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:wght@200;300;400;500;600;700&family=Montserrat:wght@200;300;400;500;600;700&family=Raleway:wght@200;300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Alice&family=Spectral:wght@300;400;500;600&family=Prata&family=Marcellus&family=Bellefair&family=Forum&family=Outfit:wght@300;400;500;600&family=Dancing+Script:wght@400..700&family=Great+Vibes&family=Sacramento&family=Pinyon+Script&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/tokens.css">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/library.css">
 </head>
 <body>
 
-<!-- ░░ TOP HEADER ░░ -->
-<header class="lib-header glass">
-  <div class="lib-brand">
-    <span class="brand-icon">🌸</span>
-    <span class="brand-name">FemmeUI</span>
-    <span class="brand-tag">Component Library</span>
-  </div>
-  <div class="lib-search-wrap">
-    <input class="lib-search" id="lib-search" type="text" placeholder="🔍  Search components…" oninput="searchComponents(this.value)"/>
-  </div>
-  <div class="lib-header-actions">
-    <span class="lib-count" id="lib-count">0 components</span>
-    <button class="btn-icon btn-icon-secondary" onclick="toggleTheme()" title="Toggle dark mode" id="theme-btn">🌙</button>
-  </div>
-</header>
+  <!-- ====================================================
+       Header & Navigation
+  ===================================================== -->
+  <header class="lib-header">
+    <div class="lib-header-inner" style="display:flex; align-items:center; width:100%; gap:var(--space-lg);">
+      <div class="lib-logo" style="display:flex; align-items:center; gap:var(--space-sm);">
+        <span class="logo-emoji" style="font-size:1.5rem;">🌸</span>
+        <div class="logo-text">
+          <h1 style="font-size:1.25rem; margin:0; font-family:var(--font-heading); color:var(--primary-dark);">FemmeUI</h1>
+          <span id="lib-count" class="lib-count">100 components</span>
+        </div>
+      </div>
+      
+      <div class="lib-search-wrap" style="flex:1; max-width:400px; margin-left:var(--space-xl);">
+        <input type="text" class="lib-search" placeholder="Search components..." oninput="searchComponents(this.value)">
+      </div>
 
-<div class="lib-layout">
-
-  <!-- ░░ SIDEBAR ░░ -->
-  <aside class="lib-sidebar" id="lib-sidebar">
-    <div class="sidebar-section">
-      <div class="sidebar-label">Foundation</div>
-      <button class="lib-nav-item active" data-section="colors"     onclick="showSection('colors',this)">🎨 Colors & Palettes</button>
-      <button class="lib-nav-item"        data-section="typography" onclick="showSection('typography',this)">✍️ Typography</button>
-      <button class="lib-nav-item"        data-section="tokens"     onclick="showSection('tokens',this)">🧮 Design Tokens</button>
+      <div class="lib-header-actions" style="margin-left:auto;">
+        <a href="https://github.com/Alysha93/Appealing-UI-Component-List" target="_blank" class="github-link" title="View on GitHub">
+          <svg height="24" viewBox="0 0 16 16" width="24" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+        </a>
+      </div>
     </div>
-    <div class="sidebar-section">
-      <div class="sidebar-label">Components</div>
-      <button class="lib-nav-item" data-section="buttons"       onclick="showSection('buttons',this)">💅 Buttons <span class="sidebar-count">30</span></button>
-      <button class="lib-nav-item" data-section="badges"        onclick="showSection('badges',this)">🏷️ Badges & Tags <span class="sidebar-count">28</span></button>
-      <button class="lib-nav-item" data-section="cards"         onclick="showSection('cards',this)">🧁 Cards <span class="sidebar-count">25</span></button>
-      <button class="lib-nav-item" data-section="forms"         onclick="showSection('forms',this)">🧾 Forms <span class="sidebar-count">22</span></button>
-      <button class="lib-nav-item" data-section="avatars"       onclick="showSection('avatars',this)">👤 Avatars <span class="sidebar-count">20</span></button>
-      <button class="lib-nav-item" data-section="progress"      onclick="showSection('progress',this)">📊 Progress & Loaders <span class="sidebar-count">24</span></button>
-      <button class="lib-nav-item" data-section="navigation"    onclick="showSection('navigation',this)">🧭 Navigation <span class="sidebar-count">20</span></button>
-      <button class="lib-nav-item" data-section="overlays"      onclick="showSection('overlays',this)">🪟 Modals & Sheets <span class="sidebar-count">12</span></button>
-      <button class="lib-nav-item" data-section="notifications" onclick="showSection('notifications',this)">📢 Notifications <span class="sidebar-count">20</span></button>
-    </div>
-    <div class="sidebar-section">
-      <div class="sidebar-label">Commerce</div>
-      <button class="lib-nav-item" data-section="products"  onclick="showSection('products',this)">🛍️ Product Cards <span class="sidebar-count">20</span></button>
-      <button class="lib-nav-item" data-section="services"  onclick="showSection('services',this)">💄 Service Cards <span class="sidebar-count">15</span></button>
-      <button class="lib-nav-item" data-section="booking"   onclick="showSection('booking',this)">📅 Booking <span class="sidebar-count">6</span></button>
-      <button class="lib-nav-item" data-section="cart"      onclick="showSection('cart',this)">🛒 Cart & Checkout <span class="sidebar-count">5</span></button>
-    </div>
-    <div class="sidebar-section">
-      <div class="sidebar-label">Motion & Layout</div>
-      <button class="lib-nav-item" data-section="animations" onclick="showSection('animations',this)">🪄 Animations <span class="sidebar-count">20</span></button>
-      <button class="lib-nav-item" data-section="layout"     onclick="showSection('layout',this)">📐 Layout Sections <span class="sidebar-count">10</span></button>
-    </div>
-  </aside>
+  </header>
 
-  <!-- ░░ MAIN CONTENT ░░ -->
-  <main class="lib-main" id="lib-main">
+  <div class="lib-layout">
+    <!-- ====================================================
+         Sidebar
+    ===================================================== -->
+    <aside class="lib-sidebar">
+      <div class="sidebar-section">
+        <span class="sidebar-label">Core Identity</span>
+        <button class="lib-nav-item active" onclick="showSection('colors', this)">
+          <span>🎨 Colors & Palettes</span>
+          <span class="sidebar-count">100</span>
+        </button>
+        <button class="lib-nav-item" onclick="showSection('typography', this)">
+          <span>✍️ Typography</span>
+          <span class="sidebar-count">100</span>
+        </button>
+        <button class="lib-nav-item" onclick="showSection('tokens', this)">
+          <span>🧮 Design Tokens</span>
+          <span class="sidebar-count">18</span>
+        </button>
+      </div>
+      
+      <div class="sidebar-section">
+        <span class="sidebar-label">Interactive Elements</span>
+        <button class="lib-nav-item" onclick="showSection('buttons', this)">
+          <span>💅 Buttons</span>
+          <span class="sidebar-count">50</span>
+        </button>
+        <button class="lib-nav-item" onclick="showSection('badges', this)">
+          <span>🏷️ Badges & Tags</span>
+          <span class="sidebar-count">28</span>
+        </button>
+      </div>
+
+      <div class="sidebar-section">
+        <span class="sidebar-label">Layout & Display</span>
+        <button class="lib-nav-item" onclick="showSection('cards', this)">
+          <span>🧁 Cards</span>
+          <span class="sidebar-count">25</span>
+        </button>
+        <button class="lib-nav-item" onclick="showSection('navigation', this)">
+          <span>🧭 Navigation</span>
+          <span class="sidebar-count">50</span>
+        </button>
+        <button class="lib-nav-item" onclick="showSection('overlays', this)">
+          <span>🪟 Overlays</span>
+          <span class="sidebar-count">10</span>
+        </button>
+      </div>
+    </aside>
 
     <!-- ====================================================
-         🎨 COLORS
+         Main Content
     ===================================================== -->
-    <section id="sec-colors" class="lib-section active">
-      <div class="lib-section-header">
-        <h1 class="lib-section-title">🎨 Colors &amp; Palettes</h1>
-        <p class="lib-section-sub">The full soft-luxury color system — 20 curated swatches</p>
-      </div>
+    <main class="lib-main" id="lib-main">
 
-      <div class="comp-group">
-        <h3 class="comp-group-title">Core Palette</h3>
-        <div class="swatch-grid">
-          <div class="swatch-wrap"><div class="swatch" style="background:#FFF7FB;border:1px solid #F2DCE5"></div><b>Background</b><code>#FFF7FB</code></div>
-          <div class="swatch-wrap"><div class="swatch" style="background:#FFFFFF;border:1px solid #F2DCE5"></div><b>Surface</b><code>#FFFFFF</code></div>
-          <div class="swatch-wrap"><div class="swatch" style="background:#FEF0F7"></div><b>Surface Alt</b><code>#FEF0F7</code></div>
-          <div class="swatch-wrap"><div class="swatch" style="background:#F8A8C4"></div><b>Primary Blush</b><code>#F8A8C4</code></div>
-          <div class="swatch-wrap"><div class="swatch" style="background:#E86FA3"></div><b>Primary Dark</b><code>#E86FA3</code></div>
-          <div class="swatch-wrap"><div class="swatch" style="background:#FDDCEC"></div><b>Primary Light</b><code>#FDDCEC</code></div>
-          <div class="swatch-wrap"><div class="swatch" style="background:#CDB4FF"></div><b>Lavender</b><code>#CDB4FF</code></div>
-          <div class="swatch-wrap"><div class="swatch" style="background:#9B72FF"></div><b>Lavender Dark</b><code>#9B72FF</code></div>
-          <div class="swatch-wrap"><div class="swatch" style="background:#EDE5FF"></div><b>Lavender Light</b><code>#EDE5FF</code></div>
-          <div class="swatch-wrap"><div class="swatch" style="background:#FFD6A5"></div><b>Peach Gold</b><code>#FFD6A5</code></div>
-          <div class="swatch-wrap"><div class="swatch" style="background:#F5AE5A"></div><b>Peach Dark</b><code>#F5AE5A</code></div>
-          <div class="swatch-wrap"><div class="swatch" style="background:#BDE0FE"></div><b>Baby Blue</b><code>#BDE0FE</code></div>
-          <div class="swatch-wrap"><div class="swatch" style="background:#D4AF37"></div><b>Gold</b><code>#D4AF37</code></div>
-          <div class="swatch-wrap"><div class="swatch" style="background:#F7E7CE"></div><b>Champagne</b><code>#F7E7CE</code></div>
-          <div class="swatch-wrap"><div class="swatch" style="background:#A8E6CF"></div><b>Mint</b><code>#A8E6CF</code></div>
-          <div class="swatch-wrap"><div class="swatch" style="background:#FFD166"></div><b>Warning</b><code>#FFD166</code></div>
-          <div class="swatch-wrap"><div class="swatch" style="background:#FF8FAB"></div><b>Error</b><code>#FF8FAB</code></div>
-          <div class="swatch-wrap"><div class="swatch" style="background:#2B2B2B"></div><b>Ink Text</b><code>#2B2B2B</code></div>
-          <div class="swatch-wrap"><div class="swatch" style="background:#6B6B6B"></div><b>Muted Text</b><code>#6B6B6B</code></div>
-          <div class="swatch-wrap"><div class="swatch" style="background:#F2DCE5"></div><b>Border</b><code>#F2DCE5</code></div>
+      <!-- ====================================================
+           🎨 COLORS
+      ===================================================== -->
+      <section id="sec-colors" class="lib-section active">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">🎨 Colors & Palettes</h1>
+          <p class="lib-section-sub">A curated system of 100 soft-luxury colors for high-end feminine design.</p>
         </div>
-      </div>
 
-      <div class="comp-group">
-        <h3 class="comp-group-title">Gradients</h3>
-        <div class="gradient-grid">
-          <div class="grad-swatch" style="background:linear-gradient(135deg,#F8A8C4,#E86FA3)"><span>Rose Blush</span></div>
-          <div class="grad-swatch" style="background:linear-gradient(135deg,#CDB4FF,#BDE0FE)"><span>Lavender Sky</span></div>
-          <div class="grad-swatch" style="background:linear-gradient(135deg,#FFD6A5,#F8A8C4)"><span>Peach Glow</span></div>
-          <div class="grad-swatch" style="background:linear-gradient(135deg,#D4AF37,#F7E7CE,#D4AF37)"><span>Luxury Gold</span></div>
-          <div class="grad-swatch" style="background:linear-gradient(135deg,#F8A8C4,#CDB4FF,#BDE0FE)"><span>Aurora</span></div>
-          <div class="grad-swatch" style="background:linear-gradient(135deg,#A8E6CF,#BDE0FE)"><span>Mint Blue</span></div>
-          <div class="grad-swatch" style="background:linear-gradient(135deg,#FFF7FB,#FDDCEC,#EDE5FF)"><span>Hero Mist</span></div>
-          <div class="grad-swatch" style="background:linear-gradient(160deg,#1A0E1F,#2B1A30)"><span style="color:#fff">Dark Luxury</span></div>
+        <div class="comp-group" style="border:none; background:transparent; box-shadow:none;">
+          <h3 class="comp-group-title">Core Palette</h3>
+          <p style="font-size: var(--text-sm); color: var(--text-muted); margin-bottom: var(--space-md);">Click any color swatch to copy its hex code.</p>
+          <div class="swatch-grid" id="main-swatch-grid">
+            <!-- Populated by JS -->
+          </div>
         </div>
-      </div>
-    </section>
 
-    <!-- ====================================================
-         ✍️ TYPOGRAPHY
-    ===================================================== -->
-    <section id="sec-typography" class="lib-section">
-      <div class="lib-section-header">
-        <h1 class="lib-section-title">✍️ Typography</h1>
-        <p class="lib-section-sub">20 text styles across 4 beautiful font families</p>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Playfair Display — Headings</h3>
-        <div class="type-list">
-          <div class="type-row"><span class="type-label">H1 · 4.5rem</span><div style="font-family:'Playfair Display',serif;font-size:3.5rem;font-weight:700;color:var(--text)">Luxury Beauty Awaits</div></div>
-          <div class="type-row"><span class="type-label">H2 · 3rem</span><div style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:600;color:var(--text)">Crafted With Elegance</div></div>
-          <div class="type-row"><span class="type-label">H3 · 2rem</span><div style="font-family:'Playfair Display',serif;font-size:2rem;color:var(--text)">Soft &amp; Feminine</div></div>
-          <div class="type-row"><span class="type-label">H1 Gradient</span><div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:700;background:linear-gradient(135deg,#F8A8C4,#E86FA3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Rose Petal Dreams</div></div>
-          <div class="type-row"><span class="type-label">H1 Gold</span><div style="font-family:'Playfair Display',serif;font-size:3rem;font-weight:700;background:linear-gradient(135deg,#D4AF37,#F7E7CE,#D4AF37);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Gold Hour Collection</div></div>
+        <div class="comp-group" style="border:none; background:transparent; box-shadow:none;">
+          <h3 class="comp-group-title">Luxury Gradients</h3>
+          <div class="gradient-grid">
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy CSS</button><div class="grad-swatch" style="background:linear-gradient(135deg,#F8A8C4,#E86FA3)"><span>Rose Blush</span></div></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy CSS</button><div class="grad-swatch" style="background:linear-gradient(135deg,#CDB4FF,#BDE0FE)"><span>Lavender Sky</span></div></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy CSS</button><div class="grad-swatch" style="background:linear-gradient(135deg,#FFD6A5,#F8A8C4)"><span>Peach Glow</span></div></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy CSS</button><div class="grad-swatch" style="background:linear-gradient(135deg,#D4AF37,#F7E7CE,#D4AF37)"><span>Luxury Gold</span></div></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy CSS</button><div class="grad-swatch" style="background:linear-gradient(135deg,#F8A8C4,#CDB4FF,#BDE0FE)"><span>Aurora</span></div></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy CSS</button><div class="grad-swatch" style="background:linear-gradient(135deg,#A8E6CF,#BDE0FE)"><span>Mint Blue</span></div></div>
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div class="comp-group">
-        <h3 class="comp-group-title">Cormorant Garamond — Editorial</h3>
-        <div class="type-list">
-          <div class="type-row"><span class="type-label">Italic Light</span><div style="font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-style:italic;font-weight:300;color:var(--text)">A touch of pure elegance</div></div>
-          <div class="type-row"><span class="type-label">Regular</span><div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:var(--text)">Beauty Is A State Of Mind</div></div>
-          <div class="type-row"><span class="type-label">Italic Bold</span><div style="font-family:'Cormorant Garamond',serif;font-size:2rem;font-style:italic;font-weight:600;color:var(--primary-dark)">Blooming Into Yourself</div></div>
-          <div class="type-row"><span class="type-label">Large Quote</span><div style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;font-style:italic;color:var(--secondary-dark)">"She wore confidence like a crown of flowers."</div></div>
+      <!-- ====================================================
+           ✍️ TYPOGRAPHY
+      ===================================================== -->
+      <section id="sec-typography" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">✍️ Typography</h1>
+          <p class="lib-section-sub">100 premium fonts for luxury and feminine brands.</p>
         </div>
-      </div>
 
-      <div class="comp-group">
-        <h3 class="comp-group-title">Poppins — Body & UI</h3>
-        <div class="type-list">
-          <div class="type-row"><span class="type-label">Body Large</span><div style="font-family:'Poppins',sans-serif;font-size:1.125rem;color:var(--text-muted)">Clean, modern, and feminine. Every word feels considered and every sentence breathes with generous spacing.</div></div>
-          <div class="type-row"><span class="type-label">Body Regular</span><div style="font-family:'Poppins',sans-serif;font-size:1rem;color:var(--text-muted)">Our formulas are crafted with love, using only the finest botanical ingredients sourced sustainably.</div></div>
-          <div class="type-row"><span class="type-label">Body Small</span><div style="font-family:'Poppins',sans-serif;font-size:0.875rem;color:var(--text-muted)">Free shipping on orders over $75. Returns accepted within 30 days. See full policy for details.</div></div>
-          <div class="type-row"><span class="type-label">Caption</span><div style="font-family:'Poppins',sans-serif;font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--primary-dark)">New Arrival · Limited Edition</div></div>
-          <div class="type-row"><span class="type-label">Lead / Subtitle</span><div style="font-family:'Poppins',sans-serif;font-size:1.25rem;font-weight:300;color:var(--text-muted)">Designed for the modern woman who values herself.</div></div>
+        <div class="comp-group" style="border:none; background:transparent; box-shadow:none;">
+          <h3 class="comp-group-title">Type Scale & Preview</h3>
+          <div class="type-list" id="main-type-list">
+            <!-- Populated by JS -->
+          </div>
         </div>
-      </div>
+      </section>
 
-      <div class="comp-group">
-        <h3 class="comp-group-title">Quicksand — Brand Accent</h3>
-        <div class="type-list">
-          <div class="type-row"><span class="type-label">Brand Bold</span><div style="font-family:'Quicksand',sans-serif;font-size:2rem;font-weight:700;color:var(--primary-dark)">✨ Blush &amp; Bloom ✨</div></div>
-          <div class="type-row"><span class="type-label">Tagline</span><div style="font-family:'Quicksand',sans-serif;font-size:1.25rem;font-weight:600;color:var(--secondary-dark)">Soft · Playful · Feminine · You</div></div>
-          <div class="type-row"><span class="type-label">Price Tag</span><div style="font-family:'Quicksand',sans-serif;font-size:2.5rem;font-weight:700;color:var(--primary-dark)">$68<span style="font-size:1rem;font-weight:400;color:var(--text-muted)">.00</span></div></div>
+      <!-- ====================================================
+           🧮 DESIGN TOKENS
+      ===================================================== -->
+      <section id="sec-tokens" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">🧮 Design Tokens</h1>
+          <p class="lib-section-sub">The core building blocks of the FemmeUI system.</p>
         </div>
-      </div>
 
-      <div class="comp-group">
-        <h3 class="comp-group-title">Special Text Effects</h3>
-        <div class="type-list">
-          <div class="type-row"><span class="type-label">Shimmer</span><div class="shimmer-text" style="font-size:2rem;font-family:'Playfair Display',serif;font-weight:700">Shimmer &amp; Shine Collection</div></div>
-          <div class="type-row"><span class="type-label">Gradient Rose</span><div style="font-size:2rem;font-family:'Playfair Display',serif;font-weight:700;background:linear-gradient(135deg,#F8A8C4,#E86FA3,#CDB4FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">Aurora Beauty Studio</div></div>
-          <div class="type-row"><span class="type-label">Outline Text</span><div style="font-size:3rem;font-family:'Playfair Display',serif;font-weight:700;-webkit-text-stroke:2px #E86FA3;color:transparent">Blush Rose</div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================
-         🧮 DESIGN TOKENS
-    ===================================================== -->
-    <section id="sec-tokens" class="lib-section">
-      <div class="lib-section-header">
-        <h1 class="lib-section-title">🧮 Design Tokens</h1>
-        <p class="lib-section-sub">Copy-paste ready CSS variables for every design decision</p>
-      </div>
-      <div class="comp-group">
-        <h3 class="comp-group-title">Spacing Scale</h3>
-        <div class="token-grid">
-          <div class="token-row"><div class="token-bar" style="width:4px;height:16px;background:var(--primary)"></div><code>--space-xs: 4px</code></div>
-          <div class="token-row"><div class="token-bar" style="width:8px;height:16px;background:var(--primary)"></div><code>--space-sm: 8px</code></div>
-          <div class="token-row"><div class="token-bar" style="width:16px;height:16px;background:var(--primary)"></div><code>--space-md: 16px</code></div>
-          <div class="token-row"><div class="token-bar" style="width:24px;height:16px;background:var(--primary)"></div><code>--space-lg: 24px</code></div>
-          <div class="token-row"><div class="token-bar" style="width:40px;height:16px;background:var(--primary)"></div><code>--space-xl: 40px</code></div>
-          <div class="token-row"><div class="token-bar" style="width:64px;height:16px;background:var(--primary)"></div><code>--space-xxl: 64px</code></div>
-        </div>
-      </div>
-      <div class="comp-group">
-        <h3 class="comp-group-title">Border Radius</h3>
-        <div class="token-grid">
-          <div class="token-row"><div class="token-radius" style="border-radius:4px"></div><code>--radius-xs: 4px</code></div>
-          <div class="token-row"><div class="token-radius" style="border-radius:8px"></div><code>--radius-sm: 8px</code></div>
-          <div class="token-row"><div class="token-radius" style="border-radius:16px"></div><code>--radius-md: 16px</code></div>
-          <div class="token-row"><div class="token-radius" style="border-radius:24px"></div><code>--radius-lg: 24px</code></div>
-          <div class="token-row"><div class="token-radius" style="border-radius:32px"></div><code>--radius-xl: 32px</code></div>
-          <div class="token-row"><div class="token-radius" style="border-radius:999px"></div><code>--radius-full: 999px</code></div>
-        </div>
-      </div>
-      <div class="comp-group">
-        <h3 class="comp-group-title">Shadows</h3>
-        <div class="shadow-grid">
-          <div class="shadow-demo" style="box-shadow:0 10px 30px rgba(248,168,196,0.15)"><span>Soft Blush</span><code>--shadow-soft</code></div>
-          <div class="shadow-demo" style="box-shadow:0 20px 50px rgba(0,0,0,0.07)"><span>Medium</span><code>--shadow-medium</code></div>
-          <div class="shadow-demo" style="box-shadow:0 0 25px rgba(248,168,196,0.35)"><span>Glow Pink</span><code>--shadow-glow</code></div>
-          <div class="shadow-demo" style="box-shadow:0 0 25px rgba(212,175,55,0.3)"><span>Glow Gold</span><code>--shadow-gold</code></div>
-          <div class="shadow-demo" style="box-shadow:0 0 25px rgba(205,180,255,0.35)"><span>Glow Lavender</span><code>--shadow-lavender</code></div>
-          <div class="shadow-demo" style="box-shadow:0 30px 70px rgba(0,0,0,0.12)"><span>Heavy</span><code>--shadow-heavy</code></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================
-         💅 BUTTONS — 30 VARIANTS
-    ===================================================== -->
-    <section id="sec-buttons" class="lib-section">
-      <div class="lib-section-header">
-        <h1 class="lib-section-title">💅 Buttons</h1>
-        <p class="lib-section-sub">30 button variants — gradients, sizes, shapes &amp; states</p>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Primary — Blush Rose</h3>
-        <div class="comp-row wrap">
-          <button class="btn btn-primary">Blush Primary</button>
-          <button class="btn btn-primary btn-pill">Pill Shape</button>
-          <button class="btn btn-primary btn-sm">Small</button>
-          <button class="btn btn-primary btn-lg">Large</button>
-          <button class="btn btn-primary btn-xl">Extra Large</button>
-          <button class="btn btn-primary" style="width:100%;max-width:260px">Full Width</button>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Secondary — Lavender Purple</h3>
-        <div class="comp-row wrap">
-          <button class="btn btn-secondary">Lavender</button>
-          <button class="btn btn-secondary btn-pill">Pill Shape</button>
-          <button class="btn btn-secondary btn-sm">Small</button>
-          <button class="btn btn-secondary btn-lg">Large</button>
-          <button class="btn btn-secondary btn-xl">Extra Large</button>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Luxury Gold</h3>
-        <div class="comp-row wrap">
-          <button class="btn btn-gold">✦ Gold Luxury</button>
-          <button class="btn btn-gold btn-pill">✦ Pill Gold</button>
-          <button class="btn btn-gold btn-sm">Gold Small</button>
-          <button class="btn btn-gold btn-lg">💎 Shop Gold</button>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Peach &amp; Mint</h3>
-        <div class="comp-row wrap">
-          <button class="btn btn-peach">Peach Glow</button>
-          <button class="btn btn-peach btn-pill">🍑 Peach Pill</button>
-          <button class="btn" style="background:linear-gradient(135deg,#A8E6CF,#68D8A4);color:#1A5C3A;border:none;padding:10px 22px;border-radius:16px;font-weight:600;cursor:pointer">🌿 Mint Fresh</button>
-          <button class="btn" style="background:linear-gradient(135deg,#BDE0FE,#87CEEB);color:#1A4A6B;border:none;padding:10px 22px;border-radius:16px;font-weight:600;cursor:pointer">💧 Sky Blue</button>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Outline &amp; Ghost</h3>
-        <div class="comp-row wrap">
-          <button class="btn btn-outline">Outline Rose</button>
-          <button class="btn btn-outline btn-pill">Pill Outline</button>
-          <button class="btn btn-ghost">Ghost Style</button>
-          <button class="btn" style="background:transparent;border:2px solid var(--secondary);color:var(--secondary-dark);padding:10px 22px;border-radius:16px;font-weight:600;cursor:pointer;transition:all 0.3s">Lavender Outline</button>
-          <button class="btn" style="background:transparent;border:2px solid var(--gold);color:var(--gold-dark);padding:10px 22px;border-radius:16px;font-weight:600;cursor:pointer;transition:all 0.3s">Gold Outline</button>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Glass &amp; Frosted</h3>
-        <div class="comp-row wrap" style="background:linear-gradient(135deg,#F8A8C4,#CDB4FF,#BDE0FE);padding:24px;border-radius:20px">
-          <button class="btn btn-glass">Glass Light</button>
-          <button class="btn btn-glass btn-pill">Glass Pill</button>
-          <button class="btn btn-glass-white">Glass White</button>
-          <button class="btn btn-glass-white btn-pill">Glass White Pill</button>
-          <button class="btn" style="background:rgba(0,0,0,0.2);backdrop-filter:blur(10px);color:#fff;border:1px solid rgba(255,255,255,0.3);padding:10px 22px;border-radius:16px;font-weight:600;cursor:pointer">Dark Glass</button>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Multi-Color Gradients</h3>
-        <div class="comp-row wrap">
-          <button class="btn btn-gradient-rose">🌹 Rose Gradient</button>
-          <button class="btn btn-gradient-lavender">💜 Lavender</button>
-          <button class="btn btn-gradient-peach">🍑 Peach Dreams</button>
-          <button class="btn btn-gradient-luxury">💎 Luxury</button>
-          <button class="btn btn-gradient-aurora">🌈 Aurora</button>
-          <button class="btn" style="background:linear-gradient(135deg,#F8A8C4,#FFD6A5,#A8E6CF);color:#2B2B2B;border:none;padding:10px 22px;border-radius:16px;font-weight:600;cursor:pointer">🌸 Pastel Rainbow</button>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">States &amp; Specials</h3>
-        <div class="comp-row wrap">
-          <button class="btn btn-danger">🗑️ Soft Danger</button>
-          <button class="btn btn-primary" disabled style="opacity:0.5;cursor:not-allowed">Disabled</button>
-          <button class="btn btn-primary" id="lb1" onclick="loadingBtn('lb1','lb1-spinner')"><span>Place Order</span><span id="lb1-spinner" class="btn-spinner hidden"></span></button>
-          <button class="btn" style="background:linear-gradient(135deg,#FF8FAB,#FFD6A5);color:#fff;border:none;padding:10px 22px;border-radius:16px;font-weight:600;cursor:pointer">🎀 Buy Now</button>
-          <button class="btn btn-primary" style="display:flex;gap:8px;align-items:center">♥ <span>Wishlist</span></button>
-          <button class="btn btn-gold" style="display:flex;gap:8px;align-items:center">🛒 <span>Add to Cart</span></button>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Icon Buttons</h3>
-        <div class="comp-row wrap">
-          <button class="btn-icon btn-icon-primary">♥</button>
-          <button class="btn-icon btn-icon-secondary">★</button>
-          <button class="btn-icon btn-icon-gold">✦</button>
-          <button class="btn-icon" style="background:linear-gradient(135deg,#F8A8C4,#E86FA3);color:#fff;width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;font-size:1.1rem">🛒</button>
-          <button class="btn-icon" style="background:linear-gradient(135deg,#A8E6CF,#BDE0FE);color:#1A5C3A;width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;font-size:1.1rem">✓</button>
-          <button class="btn-icon" style="background:linear-gradient(135deg,#CDB4FF,#9B72FF);color:#fff;width:40px;height:40px;border-radius:50%;border:none;cursor:pointer;font-size:1.1rem">🔍</button>
-          <button class="btn-icon" style="background:var(--gold-light);color:var(--gold-dark);width:48px;height:48px;border-radius:50%;border:none;cursor:pointer;font-size:1.2rem">💎</button>
-          <button class="btn-icon" style="background:linear-gradient(135deg,#FF8FAB,#FF5C84);color:#fff;width:48px;height:48px;border-radius:50%;border:none;cursor:pointer;font-size:1.2rem">✕</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================
-         🏷️ BADGES & TAGS — 28 VARIANTS
-    ===================================================== -->
-    <section id="sec-badges" class="lib-section">
-      <div class="lib-section-header">
-        <h1 class="lib-section-title">🏷️ Badges &amp; Tags</h1>
-        <p class="lib-section-sub">28 badge and tag variants for labels, status, and filters</p>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Color Badges</h3>
-        <div class="comp-row wrap">
-          <span class="badge badge-primary">✨ New</span>
-          <span class="badge badge-secondary">Trending</span>
-          <span class="badge badge-gold">💎 Limited</span>
-          <span class="badge badge-success">✓ In Stock</span>
-          <span class="badge badge-warning">⚡ Sale</span>
-          <span class="badge badge-danger">🔥 Hot</span>
-          <span class="badge badge-muted">Sold Out</span>
-          <span class="badge" style="background:linear-gradient(135deg,#F8A8C4,#CDB4FF);color:#fff;padding:3px 12px;border-radius:999px;font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase">Aurora</span>
-          <span class="badge" style="background:linear-gradient(135deg,#BDE0FE,#A8E6CF);color:#1A4A6B;padding:3px 12px;border-radius:999px;font-size:.75rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase">Fresh</span>
-          <span class="badge" style="background:#2B1A30;color:#F8A8C4;padding:3px 12px;border-radius:999px;font-size:.75rem;font-weight:700;letter-spacing:.04em">DARK MODE</span>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Product &amp; Commerce Badges</h3>
-        <div class="comp-row wrap">
-          <span class="badge" style="background:var(--grad-rose);color:#fff;padding:4px 14px;border-radius:999px;font-size:.8rem;font-weight:700">🌸 New Arrival</span>
-          <span class="badge" style="background:var(--grad-luxury);color:var(--gold-dark);padding:4px 14px;border-radius:999px;font-size:.8rem;font-weight:700">✦ Bestseller</span>
-          <span class="badge" style="background:linear-gradient(135deg,#FF8FAB,#FF5C84);color:#fff;padding:4px 14px;border-radius:999px;font-size:.8rem;font-weight:700">🔥 -20% OFF</span>
-          <span class="badge" style="background:linear-gradient(135deg,#A8E6CF,#68D8A4);color:#1A5C3A;padding:4px 14px;border-radius:999px;font-size:.8rem;font-weight:700">🌿 Cruelty Free</span>
-          <span class="badge" style="background:linear-gradient(135deg,#CDB4FF,#9B72FF);color:#fff;padding:4px 14px;border-radius:999px;font-size:.8rem;font-weight:700">💜 Editor's Pick</span>
-          <span class="badge" style="background:var(--champagne);color:var(--gold-dark);border:1px solid var(--gold);padding:4px 14px;border-radius:999px;font-size:.8rem;font-weight:700">💎 Exclusive</span>
-          <span class="badge" style="background:#FFF3CC;color:#9B6B00;padding:4px 14px;border-radius:999px;font-size:.8rem;font-weight:700">⏳ Last Few</span>
-          <span class="badge" style="background:#F0FFF4;color:#1A5C3A;border:1px solid #A8E6CF;padding:4px 14px;border-radius:999px;font-size:.8rem;font-weight:700">✓ Vegan</span>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Filter Tags (click to toggle)</h3>
-        <div class="comp-row wrap">
-          <span class="tag" onclick="toggleTag(this)">Skincare</span>
-          <span class="tag active" onclick="toggleTag(this)">Makeup</span>
-          <span class="tag" onclick="toggleTag(this)">Hair Care</span>
-          <span class="tag" onclick="toggleTag(this)">Nails</span>
-          <span class="tag active" onclick="toggleTag(this)">Fragrance</span>
-          <span class="tag" onclick="toggleTag(this)">Wellness</span>
-          <span class="tag" onclick="toggleTag(this)">Spa</span>
-          <span class="tag" onclick="toggleTag(this)">Organic</span>
-          <span class="tag" onclick="toggleTag(this)">Vegan</span>
-          <span class="tag" onclick="toggleTag(this)">Cruelty-Free</span>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Size Variants</h3>
-        <div class="comp-row wrap align-center">
-          <span class="badge badge-primary" style="font-size:.65rem;padding:2px 8px">Tiny</span>
-          <span class="badge badge-primary">Default</span>
-          <span class="badge badge-primary" style="font-size:.9rem;padding:5px 16px">Large</span>
-          <span class="badge badge-primary" style="font-size:1.1rem;padding:7px 20px">Extra Large</span>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Dot Status Indicators</h3>
-        <div class="comp-row wrap">
-          <span class="status-dot" style="display:inline-flex;align-items:center;gap:8px;font-size:.875rem;font-weight:500"><span style="width:10px;height:10px;border-radius:50%;background:#4CAF80;display:inline-block;box-shadow:0 0 6px rgba(76,175,128,0.5)"></span>Online · Available</span>
-          <span class="status-dot" style="display:inline-flex;align-items:center;gap:8px;font-size:.875rem;font-weight:500"><span style="width:10px;height:10px;border-radius:50%;background:#FFD166;display:inline-block;box-shadow:0 0 6px rgba(255,209,102,0.5)"></span>Busy · 2h wait</span>
-          <span class="status-dot" style="display:inline-flex;align-items:center;gap:8px;font-size:.875rem;font-weight:500"><span style="width:10px;height:10px;border-radius:50%;background:#FF8FAB;display:inline-block;box-shadow:0 0 6px rgba(255,143,171,0.5)"></span>Fully Booked</span>
-          <span class="status-dot" style="display:inline-flex;align-items:center;gap:8px;font-size:.875rem;font-weight:500"><span style="width:10px;height:10px;border-radius:50%;background:var(--primary);display:inline-block;box-shadow:0 0 6px rgba(248,168,196,0.5);animation:pulse 1.5s ease infinite"></span>Live · Processing</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================
-         🧁 CARDS — 25 VARIANTS
-    ===================================================== -->
-    <section id="sec-cards" class="lib-section">
-      <div class="lib-section-header">
-        <h1 class="lib-section-title">🧁 Cards</h1>
-        <p class="lib-section-sub">25 card variants — soft shadow, glass, overlay, profile &amp; more</p>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Soft Shadow Cards</h3>
-        <div class="card-grid-3">
-          <div class="card card-soft"><div class="card-icon-wrap" style="background:linear-gradient(135deg,#F8A8C4,#CDB4FF)">💄</div><h4 class="card-title">Lip Collection</h4><p class="card-text">48 shades of buttery smooth long-lasting color.</p><button class="btn btn-primary btn-sm">Shop Now</button></div>
-          <div class="card card-soft"><div class="card-icon-wrap" style="background:linear-gradient(135deg,#CDB4FF,#BDE0FE)">✨</div><h4 class="card-title">Glow Serums</h4><p class="card-text">Vitamin C &amp; pearl extract for luminous skin.</p><button class="btn btn-secondary btn-sm">Explore</button></div>
-          <div class="card card-soft"><div class="card-icon-wrap" style="background:linear-gradient(135deg,#FFD6A5,#F8A8C4)">🌸</div><h4 class="card-title">Rose Face Mist</h4><p class="card-text">Real rose water for a dewy finish all day.</p><button class="btn btn-peach btn-sm">Discover</button></div>
-          <div class="card card-soft"><div class="card-icon-wrap" style="background:linear-gradient(135deg,#A8E6CF,#BDE0FE)">🌿</div><h4 class="card-title">Botanica Range</h4><p class="card-text">100% organic ingredients, clean beauty certified.</p><button class="btn btn-outline btn-sm">Learn More</button></div>
-          <div class="card card-soft"><div class="card-icon-wrap" style="background:linear-gradient(135deg,#D4AF37,#F7E7CE)">👑</div><h4 class="card-title">Luxury Edit</h4><p class="card-text">Gold-infused formulas for next-level radiance.</p><button class="btn btn-gold btn-sm">Shop Gold</button></div>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Glassmorphism Cards</h3>
-        <div class="card-grid-3" style="background:linear-gradient(135deg,#F8A8C4,#CDB4FF,#BDE0FE);padding:var(--space-xl);border-radius:var(--radius-xl)">
-          <div class="card card-glass"><div class="glass-icon">🌙</div><h4 class="card-title" style="color:#fff">Night Ritual</h4><p class="card-text" style="color:rgba(255,255,255,.85)">Overnight mask that rejuvenates while you dream.</p><button class="btn btn-glass-white btn-sm">Shop Now</button></div>
-          <div class="card card-glass"><div class="glass-icon">☀️</div><h4 class="card-title" style="color:#fff">Morning Glow</h4><p class="card-text" style="color:rgba(255,255,255,.85)">Sun protection meets hydration in featherlight SPF.</p><button class="btn btn-glass-white btn-sm">Shop SPF</button></div>
-          <div class="card card-glass"><div class="glass-icon">🧴</div><h4 class="card-title" style="color:#fff">Glow Drops</h4><p class="card-text" style="color:rgba(255,255,255,.85)">Three drops for glass-skin perfection.</p><button class="btn btn-glass-white btn-sm">Get Yours</button></div>
-          <div class="card card-glass"><div class="glass-icon">💜</div><h4 class="card-title" style="color:#fff">Lavender Bliss</h4><p class="card-text" style="color:rgba(255,255,255,.85)">Aromatherapy body lotion with real lavender oil.</p><button class="btn btn-glass-white btn-sm">Explore</button></div>
-          <div class="card card-glass"><div class="glass-icon">🫧</div><h4 class="card-title" style="color:#fff">Cloud Cleanser</h4><p class="card-text" style="color:rgba(255,255,255,.85)">Whipped foam cleanser for baby-soft skin.</p><button class="btn btn-glass-white btn-sm">Try It</button></div>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Image Overlay Cards</h3>
-        <div class="overlay-card-grid-5">
-          <div class="overlay-card" style="background:linear-gradient(160deg,#F8A8C4,#CDB4FF)"><div class="overlay-content"><span class="overlay-badge">New</span><h4 class="overlay-title">Spring Bloom</h4><p class="overlay-text">Soft pastels for the season</p><button class="btn btn-glass-white btn-sm btn-pill">Explore →</button></div></div>
-          <div class="overlay-card" style="background:linear-gradient(160deg,#D4AF37,#F7E7CE)"><div class="overlay-content"><span class="overlay-badge" style="background:rgba(212,175,55,.3)">Luxury</span><h4 class="overlay-title">Gold Hour</h4><p class="overlay-text">Art of luminous skin</p><button class="btn btn-glass-white btn-sm btn-pill">Shop →</button></div></div>
-          <div class="overlay-card" style="background:linear-gradient(160deg,#BDE0FE,#CDB4FF,#F8A8C4)"><div class="overlay-content"><span class="overlay-badge">Limited</span><h4 class="overlay-title">Dream State</h4><p class="overlay-text">Ethereal colors</p><button class="btn btn-glass-white btn-sm btn-pill">Discover →</button></div></div>
-          <div class="overlay-card" style="background:linear-gradient(160deg,#A8E6CF,#BDE0FE)"><div class="overlay-content"><span class="overlay-badge" style="background:rgba(168,230,207,.3)">Wellness</span><h4 class="overlay-title">Zen Garden</h4><p class="overlay-text">Skincare meets mindfulness</p><button class="btn btn-glass-white btn-sm btn-pill">Explore →</button></div></div>
-          <div class="overlay-card" style="background:linear-gradient(160deg,#FFD6A5,#F8A8C4)"><div class="overlay-content"><span class="overlay-badge" style="background:rgba(255,214,165,.3)">Summer</span><h4 class="overlay-title">Peach Sorbet</h4><p class="overlay-text">Warm &amp; juicy tones</p><button class="btn btn-glass-white btn-sm btn-pill">Shop →</button></div></div>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Profile &amp; Stylist Cards</h3>
-        <div class="profile-card-grid">
-          <div class="profile-card"><div class="profile-avatar" style="background:linear-gradient(135deg,#F8A8C4,#CDB4FF)"><span>AM</span></div><div class="profile-badge">⭐ Top Artist</div><h4 class="profile-name">Amélie Martin</h4><p class="profile-role">Hair Color Specialist</p><div class="rating"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="rating-count">(128)</span></div><div class="profile-tags"><span class="tag active">Balayage</span><span class="tag active">Color</span></div><button class="btn btn-primary btn-pill" style="width:100%;margin-top:12px">Book Amélie</button></div>
-          <div class="profile-card"><div class="profile-avatar" style="background:linear-gradient(135deg,#CDB4FF,#BDE0FE)"><span>SL</span></div><div class="profile-badge" style="background:linear-gradient(135deg,#CDB4FF,#9B72FF);color:#fff">💜 Senior MUA</div><h4 class="profile-name">Sofia Laurent</h4><p class="profile-role">Makeup Artist</p><div class="rating"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star half">★</span><span class="rating-count">(94)</span></div><div class="profile-tags"><span class="tag active">Bridal</span><span class="tag active">Editorial</span></div><button class="btn btn-secondary btn-pill" style="width:100%;margin-top:12px">Book Sofia</button></div>
-          <div class="profile-card"><div class="profile-avatar" style="background:linear-gradient(135deg,#FFD6A5,#F8A8C4)"><span>IC</span></div><div class="profile-badge" style="background:linear-gradient(135deg,#D4AF37,#FFD6A5);color:#6B4800">✦ Gold Artist</div><h4 class="profile-name">Isabelle Chen</h4><p class="profile-role">Nail Art Specialist</p><div class="rating"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="rating-count">(211)</span></div><div class="profile-tags"><span class="tag active">Gel</span><span class="tag active">Art</span></div><button class="btn btn-gold btn-pill" style="width:100%;margin-top:12px">Book Isabelle</button></div>
-          <div class="profile-card"><div class="profile-avatar" style="background:linear-gradient(135deg,#A8E6CF,#BDE0FE)"><span>RK</span></div><div class="profile-badge" style="background:linear-gradient(135deg,#A8E6CF,#68D8A4);color:#1A5C3A">🌿 Wellness Expert</div><h4 class="profile-name">Rose Kim</h4><p class="profile-role">Spa &amp; Facial Therapist</p><div class="rating"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="rating-count">(176)</span></div><div class="profile-tags"><span class="tag active">Facial</span><span class="tag active">Spa</span></div><button class="btn btn-outline btn-pill" style="width:100%;margin-top:12px">Book Rose</button></div>
-          <div class="profile-card"><div class="profile-avatar" style="background:linear-gradient(135deg,#F8A8C4,#FFD6A5)"><span>MP</span></div><div class="profile-badge">🎀 Style Icon</div><h4 class="profile-name">Margot Picard</h4><p class="profile-role">Lash &amp; Brow Artist</p><div class="rating"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="rating-count">(89)</span></div><div class="profile-tags"><span class="tag active">Lashes</span><span class="tag active">Brows</span></div><button class="btn btn-gradient-rose btn-pill" style="width:100%;margin-top:12px">Book Margot</button></div>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Info &amp; Feature Cards</h3>
-        <div class="card-grid-3">
-          <div class="card" style="background:var(--primary-light);border:none;border-radius:var(--radius-xl);padding:var(--space-xl)"><div style="font-size:2.5rem;margin-bottom:12px">💖</div><h4 style="color:var(--primary-dark);margin-bottom:8px">Free Returns</h4><p style="color:var(--text-muted);font-size:.875rem">30-day hassle-free returns on all beauty products.</p></div>
-          <div class="card" style="background:var(--secondary-light);border:none;border-radius:var(--radius-xl);padding:var(--space-xl)"><div style="font-size:2.5rem;margin-bottom:12px">🚚</div><h4 style="color:var(--secondary-dark);margin-bottom:8px">Free Shipping</h4><p style="color:var(--text-muted);font-size:.875rem">Complimentary delivery on orders over $75.</p></div>
-          <div class="card" style="background:var(--gold-light);border:none;border-radius:var(--radius-xl);padding:var(--space-xl)"><div style="font-size:2.5rem;margin-bottom:12px">💎</div><h4 style="color:var(--gold-dark);margin-bottom:8px">Loyalty Rewards</h4><p style="color:var(--text-muted);font-size:.875rem">Earn Blush Points on every purchase. Redeem anytime.</p></div>
-          <div class="card" style="background:linear-gradient(135deg,#FFF0F5,#FEF0F7);border:1px solid var(--border);border-radius:var(--radius-xl);padding:var(--space-xl)"><div style="font-size:2.5rem;margin-bottom:12px">⭐</div><h4 style="margin-bottom:8px">4.9 Rating</h4><p style="color:var(--text-muted);font-size:.875rem">Over 50,000 verified 5-star reviews from happy customers.</p></div>
-          <div class="card" style="background:linear-gradient(135deg,#E8F8F0,#F0FFF8);border:1px solid #A8E6CF;border-radius:var(--radius-xl);padding:var(--space-xl)"><div style="font-size:2.5rem;margin-bottom:12px">🌿</div><h4 style="color:#1A5C3A;margin-bottom:8px">100% Clean</h4><p style="color:var(--text-muted);font-size:.875rem">No harmful ingredients, ever. Certified cruelty-free &amp; vegan.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================
-         🧾 FORMS — 22 VARIANTS
-    ===================================================== -->
-    <section id="sec-forms" class="lib-section">
-      <div class="lib-section-header">
-        <h1 class="lib-section-title">🧾 Forms</h1>
-        <p class="lib-section-sub">22 form elements — inputs, selects, toggles, checkboxes &amp; more</p>
-      </div>
-
-      <div class="form-library-grid">
-        <div>
-          <div class="comp-group">
-            <h3 class="comp-group-title">Text Inputs</h3>
-            <div class="form-stack">
-              <div class="form-group"><input class="input-soft" type="text" placeholder=" " id="fi1"/><label class="input-label" for="fi1">Full Name</label></div>
-              <div class="form-group"><input class="input-soft" type="email" placeholder=" " id="fi2"/><label class="input-label" for="fi2">Email Address</label></div>
-              <div class="form-group"><input class="input-soft" type="tel" placeholder=" " id="fi3"/><label class="input-label" for="fi3">Phone Number</label></div>
-              <div class="form-group"><input class="input-soft" type="password" placeholder=" " id="fi4"/><label class="input-label" for="fi4">Password</label></div>
-              <div class="form-group"><input class="input-soft input-success" type="text" value="BLUSH20" placeholder=" " id="fi5"/><label class="input-label float" for="fi5">Promo Code</label><span class="input-hint success">✓ 20% discount applied!</span></div>
-              <div class="form-group"><input class="input-soft input-error" type="text" placeholder=" " id="fi6"/><label class="input-label" for="fi6">Card Number</label><span class="input-hint error">Please enter a valid card number</span></div>
-              <div class="form-group"><textarea class="input-soft textarea-soft" placeholder=" " id="fi7" rows="3"></textarea><label class="input-label" for="fi7">Special Requests</label></div>
-              <div class="form-group" style="position:relative"><input class="input-soft" type="text" placeholder="Search products…" style="padding-left:40px"/><span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-muted)">🔍</span></div>
+        <div class="comp-group">
+          <h3 class="comp-group-title">Spacing & Border Radius</h3>
+          <div class="token-grid">
+            <div class="token-row">
+              <div class="token-bar" style="width:var(--space-sm); height:20px; background:var(--primary);"></div>
+              <code>--space-sm: 8px</code>
+            </div>
+            <div class="token-row">
+              <div class="token-bar" style="width:var(--space-md); height:20px; background:var(--primary);"></div>
+              <code>--space-md: 16px</code>
+            </div>
+            <div class="token-row">
+              <div class="token-bar" style="width:var(--space-lg); height:20px; background:var(--primary);"></div>
+              <code>--space-lg: 24px</code>
+            </div>
+            <hr style="border:none; border-top:1px solid var(--border); margin:10px 0;">
+            <div class="token-row">
+              <div class="token-radius" style="border-radius:var(--radius-md);"></div>
+              <code>--radius-md: 8px</code>
+            </div>
+            <div class="token-row">
+              <div class="token-radius" style="border-radius:var(--radius-lg);"></div>
+              <code>--radius-lg: 16px</code>
+            </div>
+            <div class="token-row">
+              <div class="token-radius" style="border-radius:var(--radius-xl);"></div>
+              <code>--radius-xl: 32px</code>
             </div>
           </div>
+        </div>
+      </section>
 
-          <div class="comp-group">
-            <h3 class="comp-group-title">Select Dropdowns</h3>
-            <div class="form-stack">
-              <select class="select-soft"><option>Choose a service…</option><option>💆 Luxury Facial — $95</option><option>💅 Gel Manicure — $65</option><option>💇 Balayage — $220+</option></select>
-              <select class="select-soft"><option>Filter by category…</option><option>🌸 Skincare</option><option>💄 Makeup</option><option>💅 Nails</option><option>💆 Spa</option></select>
-              <select class="select-soft"><option>Sort by…</option><option>Newest First</option><option>Price: Low to High</option><option>Price: High to Low</option><option>Best Rated</option></select>
+      <!-- ====================================================
+           💅 BUTTONS
+      ===================================================== -->
+      <section id="sec-buttons" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">💅 Buttons</h1>
+          <p class="lib-section-sub">50 high-end button variants. Click any button to copy its HTML.</p>
+        </div>
+
+        <div class="comp-group">
+          <h3 class="comp-group-title">Base & Shape Variants</h3>
+          <div class="comp-row wrap" style="gap: 12px; margin-bottom: 24px;">
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-primary">Primary Rose</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-secondary">Secondary Lavender</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-gold">✦ Luxury Gold</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-outline">Outline Pink</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-glass">Glass Light</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-pill btn-primary">Pill Shape</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-square btn-primary">Square Edge</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-primary btn-glow-rose">Glowing Rose</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-gold btn-glow-gold">Glowing Gold</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-outline btn-pill">Outline Pill</button></div>
+          </div>
+        </div>
+
+        <div class="comp-group">
+          <h3 class="comp-group-title">Neumorphic & Specialized</h3>
+          <div class="comp-row wrap" style="gap: 16px; margin-bottom: 24px;">
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-neumorph-light">Soft Neumorph</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-neumorph-light btn-neumorph-press">Pressable Light</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-neumorph-dark">Dark Neumorph</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-glass-dark">Glass Deep</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-glass-rose">Glass Rose</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-3d">Luxury 3D Press</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-3d" style="background:var(--grad-luxury); color:var(--gold-dark); border-bottom-color:#b89b30;">Gold 3D</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-pill btn-glass">Glass Pill</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-outline" style="border-style: dashed;">Dashed Outline</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-primary" style="opacity: 0.6; cursor: not-allowed;">Disabled State</button></div>
+          </div>
+        </div>
+
+        <div class="comp-group">
+          <h3 class="comp-group-title">Social & Action</h3>
+          <div class="comp-row wrap" style="gap: 12px; margin-bottom: 24px;">
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-insta">Instagram</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-pinterest">Pinterest</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-tiktok">TikTok</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-linkedin">LinkedIn</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-youtube">YouTube</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-pill btn-insta">Insta Pill</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-pill btn-tiktok">TikTok Pill</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-secondary">✉ Contact Us</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-gold">✦ Premium</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-primary">❤ Favorites</button></div>
+          </div>
+        </div>
+
+        <div class="comp-group">
+          <h3 class="comp-group-title">Interactive FX & Loading</h3>
+          <div class="comp-row wrap" style="gap: 12px;">
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-primary btn-loading">Loading</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-secondary btn-loading">Processing</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-gold btn-loading">Fetching</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-primary btn-pulse">Pulse</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-secondary btn-pulse">Soft Pulse</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-primary btn-shimmer">Shimmer</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-gold btn-shimmer">Luxury Shimmer</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-outline btn-shimmer">Outline Shimmer</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-glass btn-pulse">Glass Pulse</button></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><button class="btn btn-primary" style="letter-spacing: 0.1em;">Spaced Text</button></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================
+           🧭 NAVIGATION
+      ===================================================== -->
+      <section id="sec-navigation" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">🧭 Navigation</h1>
+          <p class="lib-section-sub">50 navigation variants curated for luxury and professional brands.</p>
+        </div>
+
+        <div class="comp-group">
+          <h3 class="comp-group-title">Luxury Headers (Navbars)</h3>
+          <div style="display:flex; flex-direction:column; gap:24px;">
+            <div class="comp-preview">
+              <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+              <nav class="nav-classic">
+                <span style="font-weight:700; color:var(--primary-dark);">FEMME.</span>
+                <div style="display:flex; gap:20px; font-size:14px;"><a>Home</a><a>Gallery</a><a>Shop</a><a>Profile</a></div>
+                <button class="btn btn-primary btn-pill" style="padding:6px 16px;">Get Started</button>
+              </nav>
+            </div>
+            <div class="comp-preview">
+              <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+              <nav class="nav-classic nav-glass">
+                <span style="font-weight:700;">GLASSED.</span>
+                <div style="display:flex; gap:20px; font-size:14px;"><a>Collections</a><a>Journal</a><a>About</a></div>
+                <span style="cursor:pointer;">🔍</span>
+              </nav>
+            </div>
+            <div class="comp-preview">
+              <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+              <nav class="nav-classic nav-luxury">
+                <span style="font-weight:700;">PREMIUM</span>
+                <div style="display:flex; gap:30px; font-size:12px; letter-spacing:0.1em; text-transform:uppercase;"><a>Catalog</a><a>Archives</a><a>Membership</a></div>
+              </nav>
             </div>
           </div>
         </div>
 
-        <div>
-          <div class="comp-group">
-            <h3 class="comp-group-title">Toggles</h3>
-            <div class="form-stack">
-              <div class="toggle-group"><label class="toggle-label">Email Notifications</label><label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label></div>
-              <div class="toggle-group"><label class="toggle-label">SMS Reminders</label><label class="toggle"><input type="checkbox"/><span class="toggle-slider"></span></label></div>
-              <div class="toggle-group"><label class="toggle-label">Beauty Tips &amp; Offers</label><label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label></div>
-              <div class="toggle-group"><label class="toggle-label">Dark Mode</label><label class="toggle"><input type="checkbox"/><span class="toggle-slider"></span></label></div>
-              <div class="toggle-group"><label class="toggle-label">Save Payment Method</label><label class="toggle"><input type="checkbox" checked/><span class="toggle-slider"></span></label></div>
-              <div class="toggle-group"><label class="toggle-label">Public Profile</label><label class="toggle"><input type="checkbox"/><span class="toggle-slider"></span></label></div>
+        <div class="comp-group">
+          <h3 class="comp-group-title">Interactive Tabs</h3>
+          <div style="display:flex; flex-direction:column; gap:32px;">
+            <div class="comp-preview">
+              <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+              <div class="tabs-minimal">
+                <button class="tab-minimal active">Overview</button>
+                <button class="tab-minimal">Specifications</button>
+                <button class="tab-minimal">Reviews</button>
+              </div>
             </div>
-          </div>
-
-          <div class="comp-group">
-            <h3 class="comp-group-title">Heart Checkboxes</h3>
-            <div class="checkbox-fancy-group">
-              <label class="checkbox-fancy" for="chk1"><input type="checkbox" id="chk1" checked/><span class="checkbox-heart">♥</span><span>Blush &amp; Bronze</span></label>
-              <label class="checkbox-fancy" for="chk2"><input type="checkbox" id="chk2"/><span class="checkbox-heart">♥</span><span>Lash Extensions</span></label>
-              <label class="checkbox-fancy" for="chk3"><input type="checkbox" id="chk3" checked/><span class="checkbox-heart">♥</span><span>Brow Lamination</span></label>
-              <label class="checkbox-fancy" for="chk4"><input type="checkbox" id="chk4"/><span class="checkbox-heart">♥</span><span>Hydro Facial</span></label>
-              <label class="checkbox-fancy" for="chk5"><input type="checkbox" id="chk5" checked/><span class="checkbox-heart">♥</span><span>Nail Art Design</span></label>
-            </div>
-          </div>
-
-          <div class="comp-group">
-            <h3 class="comp-group-title">Sliders &amp; Radio</h3>
-            <div class="form-stack">
-              <div><label class="slider-label">Price Range: <strong id="sv1">$150</strong></label><input type="range" class="slider-soft" min="50" max="500" value="150" oninput="document.getElementById('sv1').textContent='$'+this.value"/><div class="slider-ticks"><span>$50</span><span>$500</span></div></div>
-              <div><label class="slider-label">Rating: <strong id="sv2">4</strong> stars</label><input type="range" class="slider-soft" min="1" max="5" value="4" oninput="document.getElementById('sv2').textContent=this.value"/></div>
-              <div class="radio-group">
-                <label class="radio-fancy" for="r1"><input type="radio" id="r1" name="style"/> Natural Glow</label>
-                <label class="radio-fancy" for="r2"><input type="radio" id="r2" name="style" checked/> Full Glam</label>
-                <label class="radio-fancy" for="r3"><input type="radio" id="r3" name="style"/> Minimalist Chic</label>
+            <div class="comp-preview">
+              <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+              <div class="tabs-pills" style="display:inline-flex;">
+                <button class="tab-pill active">Personal</button>
+                <button class="tab-pill">Business</button>
+                <button class="tab-pill">Enterprise</button>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- ====================================================
-         👤 AVATARS — 20 VARIANTS
-    ===================================================== -->
-    <section id="sec-avatars" class="lib-section">
-      <div class="lib-section-header">
-        <h1 class="lib-section-title">👤 Avatars</h1>
-        <p class="lib-section-sub">20 avatar styles — sizes, groups, stacks &amp; status indicators</p>
-      </div>
-      <div class="comp-group">
-        <h3 class="comp-group-title">Size Scale</h3>
-        <div class="comp-row wrap align-center">
-          <div class="avatar" style="width:24px;height:24px;font-size:.65rem;background:linear-gradient(135deg,#F8A8C4,#CDB4FF)"><span>A</span></div>
-          <div class="avatar avatar-sm" style="background:linear-gradient(135deg,#F8A8C4,#CDB4FF)"><span>AM</span></div>
-          <div class="avatar" style="background:linear-gradient(135deg,#CDB4FF,#BDE0FE)"><span>SL</span></div>
-          <div class="avatar avatar-lg" style="background:linear-gradient(135deg,#FFD6A5,#F8A8C4)"><span>IC</span></div>
-          <div class="avatar avatar-xl" style="background:linear-gradient(135deg,#A8E6CF,#BDE0FE)"><span>RK</span></div>
-          <div class="avatar" style="width:88px;height:88px;font-size:1.8rem;background:linear-gradient(135deg,#D4AF37,#F7E7CE)"><span>MP</span></div>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Color Variants</h3>
-        <div class="comp-row wrap">
-          <div class="avatar" style="background:linear-gradient(135deg,#F8A8C4,#E86FA3)"><span>A</span></div>
-          <div class="avatar" style="background:linear-gradient(135deg,#CDB4FF,#9B72FF)"><span>B</span></div>
-          <div class="avatar" style="background:linear-gradient(135deg,#FFD6A5,#F5AE5A)"><span>C</span></div>
-          <div class="avatar" style="background:linear-gradient(135deg,#BDE0FE,#87CEEB)"><span>D</span></div>
-          <div class="avatar" style="background:linear-gradient(135deg,#A8E6CF,#68D8A4)"><span>E</span></div>
-          <div class="avatar" style="background:linear-gradient(135deg,#D4AF37,#F7E7CE)"><span>F</span></div>
-          <div class="avatar" style="background:linear-gradient(135deg,#FF8FAB,#FFD6A5)"><span>G</span></div>
-          <div class="avatar" style="background:linear-gradient(135deg,#F8A8C4,#FFD6A5,#A8E6CF)"><span>H</span></div>
-          <div class="avatar" style="background:#2B1A30;color:var(--primary)"><span>I</span></div>
-          <div class="avatar" style="background:rgba(255,255,255,.6);backdrop-filter:blur(10px);border:2px solid var(--border);color:var(--primary-dark)"><span>J</span></div>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Avatars with Status</h3>
-        <div class="comp-row wrap">
-          <div style="position:relative;display:inline-block"><div class="avatar" style="background:linear-gradient(135deg,#F8A8C4,#CDB4FF)"><span>AM</span></div><span style="position:absolute;bottom:1px;right:1px;width:12px;height:12px;border-radius:50%;background:#4CAF80;border:2px solid #fff"></span></div>
-          <div style="position:relative;display:inline-block"><div class="avatar" style="background:linear-gradient(135deg,#CDB4FF,#BDE0FE)"><span>SL</span></div><span style="position:absolute;bottom:1px;right:1px;width:12px;height:12px;border-radius:50%;background:#FFD166;border:2px solid #fff"></span></div>
-          <div style="position:relative;display:inline-block"><div class="avatar" style="background:linear-gradient(135deg,#FFD6A5,#F8A8C4)"><span>IC</span></div><span style="position:absolute;bottom:1px;right:1px;width:12px;height:12px;border-radius:50%;background:#FF8FAB;border:2px solid #fff"></span></div>
-          <div style="position:relative;display:inline-block"><div class="avatar avatar-lg" style="background:linear-gradient(135deg,#D4AF37,#F7E7CE)"><span>MP</span></div><span style="position:absolute;top:0;right:0;background:var(--grad-rose);color:#fff;font-size:.6rem;font-weight:700;padding:2px 5px;border-radius:999px;border:2px solid #fff">PRO</span></div>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Avatar Groups &amp; Stacks</h3>
-        <div class="comp-row wrap" style="gap:var(--space-xl)">
-          <div class="avatar-group">
-            <div class="avatar" style="background:linear-gradient(135deg,#F8A8C4,#CDB4FF)"><span>AM</span></div>
-            <div class="avatar" style="background:linear-gradient(135deg,#CDB4FF,#BDE0FE)"><span>SL</span></div>
-            <div class="avatar" style="background:linear-gradient(135deg,#FFD6A5,#F8A8C4)"><span>IC</span></div>
-            <div class="avatar" style="background:linear-gradient(135deg,#A8E6CF,#BDE0FE)"><span>RK</span></div>
-          </div>
-          <div class="avatar-stack">
-            <div class="avatar avatar-sm avatar-stacked" style="background:linear-gradient(135deg,#F8A8C4,#CDB4FF)"><span>A</span></div>
-            <div class="avatar avatar-sm avatar-stacked" style="background:linear-gradient(135deg,#CDB4FF,#BDE0FE)"><span>S</span></div>
-            <div class="avatar avatar-sm avatar-stacked" style="background:linear-gradient(135deg,#FFD6A5,#F8A8C4)"><span>I</span></div>
-            <div class="avatar avatar-sm avatar-stacked" style="background:linear-gradient(135deg,#A8E6CF,#BDE0FE)"><span>R</span></div>
-            <div class="avatar avatar-sm avatar-stacked avatar-more"><span>+12</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================
-         📊 PROGRESS & LOADERS — 24 VARIANTS
-    ===================================================== -->
-    <section id="sec-progress" class="lib-section">
-      <div class="lib-section-header">
-        <h1 class="lib-section-title">📊 Progress &amp; Loaders</h1>
-        <p class="lib-section-sub">24 variants — progress bars, spinners, skeletons &amp; data visualizations</p>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Progress Bars</h3>
-        <div class="progress-stack">
-          <div class="progress-item"><div class="progress-label"><span>Skin Glow Level</span><span>87%</span></div><div class="progress-bar"><div class="progress-fill" style="width:87%;background:linear-gradient(90deg,#F8A8C4,#E86FA3)"></div></div></div>
-          <div class="progress-item"><div class="progress-label"><span>Hydration Score</span><span>64%</span></div><div class="progress-bar"><div class="progress-fill" style="width:64%;background:linear-gradient(90deg,#CDB4FF,#9B72FF)"></div></div></div>
-          <div class="progress-item"><div class="progress-label"><span>Loyalty Points</span><span>42%</span></div><div class="progress-bar"><div class="progress-fill" style="width:42%;background:linear-gradient(90deg,#FFD6A5,#F5AE5A)"></div></div></div>
-          <div class="progress-item"><div class="progress-label"><span>Product Match</span><span>95%</span></div><div class="progress-bar"><div class="progress-fill" style="width:95%;background:linear-gradient(90deg,#A8E6CF,#4CAF80)"></div></div></div>
-          <div class="progress-item"><div class="progress-label"><span>Loading…</span><span class="shimmer-text">Processing</span></div><div class="progress-bar progress-shimmer"><div class="progress-fill shimmer" style="width:60%"></div></div></div>
-          <div class="progress-item"><div class="progress-label"><span>Gold Tier Progress</span><span>78%</span></div><div class="progress-bar" style="height:12px;border-radius:999px"><div class="progress-fill" style="width:78%;background:linear-gradient(90deg,#D4AF37,#F7E7CE,#D4AF37);height:100%;border-radius:999px"></div></div></div>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Rating Stars</h3>
-        <div class="comp-row" style="flex-direction:column;gap:12px">
-          <div class="comp-row" style="gap:16px;align-items:center"><span style="color:#FFB800;font-size:1.4rem">★★★★★</span><span style="font-weight:600">5.0</span><span style="color:var(--text-muted);font-size:.875rem">(211 reviews)</span></div>
-          <div class="comp-row" style="gap:16px;align-items:center"><span style="color:#FFB800;font-size:1.4rem">★★★★</span><span style="color:#E0E0E0;font-size:1.4rem">★</span><span style="font-weight:600">4.0</span><span style="color:var(--text-muted);font-size:.875rem">(94 reviews)</span></div>
-          <div class="comp-row" style="gap:16px;align-items:center"><span style="color:#FFB800;font-size:1rem">★★★★★</span><span style="font-weight:500;font-size:.875rem">Exceptional</span></div>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Loaders &amp; Spinners</h3>
-        <div class="comp-row wrap" style="gap:var(--space-xl);align-items:center">
-          <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div class="loader loader-spin"></div><span style="font-size:.75rem;color:var(--text-muted)">Spinner</span></div>
-          <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div class="loader loader-dots"><span></span><span></span><span></span></div><span style="font-size:.75rem;color:var(--text-muted)">Dots</span></div>
-          <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div class="loader loader-heart">♥</div><span style="font-size:.75rem;color:var(--text-muted)">Heart Pulse</span></div>
-          <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div class="loader loader-pulse"></div><span style="font-size:.75rem;color:var(--text-muted)">Pulse</span></div>
-          <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="width:40px;height:40px;border:3px solid var(--secondary-light);border-top-color:var(--secondary);border-radius:50%;animation:spin .8s linear infinite"></div><span style="font-size:.75rem;color:var(--text-muted)">Lavender</span></div>
-          <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="width:40px;height:40px;border:3px solid var(--gold-light);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite"></div><span style="font-size:.75rem;color:var(--text-muted)">Gold</span></div>
-          <div style="display:flex;flex-direction:column;align-items:center;gap:8px"><div style="display:flex;gap:4px"><span style="width:8px;height:24px;background:var(--primary);border-radius:4px;animation:dotBounce 1.2s ease infinite"></span><span style="width:8px;height:24px;background:var(--secondary);border-radius:4px;animation:dotBounce 1.2s ease .2s infinite"></span><span style="width:8px;height:24px;background:var(--accent-dark);border-radius:4px;animation:dotBounce 1.2s ease .4s infinite"></span></div><span style="font-size:.75rem;color:var(--text-muted)">Bars</span></div>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Skeleton Loading</h3>
-        <div class="card-grid-3">
-          <div class="card card-soft" style="gap:12px;display:flex;flex-direction:column"><div class="skeleton" style="height:120px;border-radius:var(--radius-lg)"></div><div class="skeleton" style="height:16px;width:80%"></div><div class="skeleton" style="height:12px;width:60%"></div><div class="skeleton" style="height:36px;border-radius:999px"></div></div>
-          <div class="card card-soft" style="gap:12px;display:flex;flex-direction:column"><div style="display:flex;gap:12px;align-items:center"><div class="skeleton" style="width:48px;height:48px;border-radius:50%;flex-shrink:0"></div><div style="flex:1;display:flex;flex-direction:column;gap:8px"><div class="skeleton" style="height:14px;width:70%"></div><div class="skeleton" style="height:12px;width:50%"></div></div></div><div class="skeleton" style="height:80px"></div><div class="skeleton" style="height:36px;border-radius:999px"></div></div>
-          <div class="card card-soft" style="gap:12px;display:flex;flex-direction:column"><div class="skeleton" style="height:16px;width:40%"></div><div class="skeleton" style="height:12px"></div><div class="skeleton" style="height:12px;width:90%"></div><div class="skeleton" style="height:12px;width:75%"></div><div class="skeleton" style="height:36px;border-radius:999px;margin-top:8px"></div></div>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Stepper — Checkout Progress</h3>
-        <div class="stepper">
-          <div class="step step-done"><div class="step-circle">✓</div><div class="step-label">Cart</div></div>
-          <div class="step-line step-line-done"></div>
-          <div class="step step-active"><div class="step-circle">2</div><div class="step-label">Shipping</div></div>
-          <div class="step-line"></div>
-          <div class="step"><div class="step-circle">3</div><div class="step-label">Payment</div></div>
-          <div class="step-line"></div>
-          <div class="step"><div class="step-circle">4</div><div class="step-label">Confirm</div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================
-         🧭 NAVIGATION — 20 VARIANTS
-    ===================================================== -->
-    <section id="sec-navigation" class="lib-section">
-      <div class="lib-section-header">
-        <h1 class="lib-section-title">🧭 Navigation</h1>
-        <p class="lib-section-sub">20 navigation patterns — tabs, breadcrumbs, pagination &amp; more</p>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Tab Styles</h3>
-        <div class="form-stack">
-          <!-- Style 1: pill tabs -->
-          <div class="tabs" id="t1">
-            <button class="tab active" onclick="switchTab2('t1','tp1-all',this)">All</button>
-            <button class="tab" onclick="switchTab2('t1','tp1-face',this)">Face</button>
-            <button class="tab" onclick="switchTab2('t1','tp1-eyes',this)">Eyes</button>
-            <button class="tab" onclick="switchTab2('t1','tp1-lips',this)">Lips</button>
-          </div>
-          <div id="tp1-all" class="tab-pane" style="padding:12px;color:var(--text-muted);font-size:.875rem">All 128 products shown</div>
-          <div id="tp1-face" class="tab-pane hidden" style="padding:12px;color:var(--text-muted);font-size:.875rem">32 Face products</div>
-          <div id="tp1-eyes" class="tab-pane hidden" style="padding:12px;color:var(--text-muted);font-size:.875rem">28 Eye products</div>
-          <div id="tp1-lips" class="tab-pane hidden" style="padding:12px;color:var(--text-muted);font-size:.875rem">24 Lip products</div>
-
-          <!-- Style 2: underline tabs -->
-          <div class="tabs-underline" id="t2">
-            <button class="tab-ul active" onclick="switchTab2('t2','tp2-new',this)">New Arrivals</button>
-            <button class="tab-ul" onclick="switchTab2('t2','tp2-best',this)">Best Sellers</button>
-            <button class="tab-ul" onclick="switchTab2('t2','tp2-sale',this)">Sale</button>
-            <button class="tab-ul" onclick="switchTab2('t2','tp2-vip',this)">VIP Only</button>
-          </div>
-          <div id="tp2-new" class="tab-pane" style="padding:12px;color:var(--text-muted);font-size:.875rem">Showing newest arrivals</div>
-          <div id="tp2-best" class="tab-pane hidden" style="padding:12px;color:var(--text-muted);font-size:.875rem">Showing bestsellers</div>
-          <div id="tp2-sale" class="tab-pane hidden" style="padding:12px;color:var(--text-muted);font-size:.875rem">Sale items — up to 40% off</div>
-          <div id="tp2-vip" class="tab-pane hidden" style="padding:12px;color:var(--text-muted);font-size:.875rem">VIP exclusive products</div>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Breadcrumbs</h3>
-        <div class="form-stack">
-          <div class="breadcrumb"><a class="bc-link" href="#">Home</a><span class="bc-sep">›</span><a class="bc-link" href="#">Skincare</a><span class="bc-sep">›</span><span class="bc-current">Serums</span></div>
-          <div class="breadcrumb"><a class="bc-link" href="#">🌸 FemmeUI</a><span class="bc-sep">·</span><a class="bc-link" href="#">Shop</a><span class="bc-sep">·</span><a class="bc-link" href="#">Makeup</a><span class="bc-sep">·</span><span class="bc-current">Lip Color</span></div>
-          <div class="breadcrumb" style="gap:6px"><span style="background:var(--primary-light);color:var(--primary-dark);padding:3px 10px;border-radius:999px;font-size:.8rem;font-weight:600">Home</span><span class="bc-sep">›</span><span style="background:var(--secondary-light);color:var(--secondary-dark);padding:3px 10px;border-radius:999px;font-size:.8rem;font-weight:600">Salon</span><span class="bc-sep">›</span><span style="background:var(--primary);color:#fff;padding:3px 10px;border-radius:999px;font-size:.8rem;font-weight:600">Book Now</span></div>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Pagination</h3>
-        <div class="form-stack">
-          <div class="pagination">
-            <button class="page-btn">← Prev</button>
-            <button class="page-btn active">1</button>
-            <button class="page-btn">2</button>
-            <button class="page-btn">3</button>
-            <span class="page-ellipsis">…</span>
-            <button class="page-btn">12</button>
-            <button class="page-btn">Next →</button>
-          </div>
-          <div class="pagination">
-            <button class="page-btn btn-pill" style="background:var(--grad-rose);color:#fff;border:none">← Previous</button>
-            <button class="page-btn" style="background:var(--primary-light);color:var(--primary-dark);border-color:var(--primary)">1</button>
-            <button class="page-btn">2</button>
-            <button class="page-btn">3</button>
-            <button class="page-btn btn-pill" style="background:var(--grad-rose);color:#fff;border:none">Next →</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Accordion — FAQ</h3>
-        <div class="accordion">
-          <div class="accordion-item"><button class="accordion-trigger" onclick="toggleAccordion(this)"><span>What is your cancellation policy?</span><span class="accordion-icon">↓</span></button><div class="accordion-body"><p>We kindly ask for 24 hours notice. Same-day cancellations may incur a 50% fee.</p></div></div>
-          <div class="accordion-item"><button class="accordion-trigger" onclick="toggleAccordion(this)"><span>Do you offer loyalty rewards?</span><span class="accordion-icon">↓</span></button><div class="accordion-body"><p>Yes! Earn Blush Points on every purchase. Redeem 500 points for $25 credit.</p></div></div>
-          <div class="accordion-item active"><button class="accordion-trigger" onclick="toggleAccordion(this)"><span>Are your products cruelty-free?</span><span class="accordion-icon">↑</span></button><div class="accordion-body" style="display:block"><p>Absolutely! All products are 100% cruelty-free and certified by Leaping Bunny.</p></div></div>
-          <div class="accordion-item"><button class="accordion-trigger" onclick="toggleAccordion(this)"><span>What payment methods do you accept?</span><span class="accordion-icon">↓</span></button><div class="accordion-body"><p>All major credit cards, PayPal, Apple Pay, Google Pay, and Klarna.</p></div></div>
-          <div class="accordion-item"><button class="accordion-trigger" onclick="toggleAccordion(this)"><span>How long does shipping take?</span><span class="accordion-icon">↓</span></button><div class="accordion-body"><p>Standard 3-5 business days. Express 1-2 days. Free shipping on orders over $75.</p></div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================
-         🪟 OVERLAYS — 12 VARIANTS
-    ===================================================== -->
-    <section id="sec-overlays" class="lib-section">
-      <div class="lib-section-header">
-        <h1 class="lib-section-title">🪟 Modals &amp; Sheets</h1>
-        <p class="lib-section-sub">12 overlay patterns — modals, tooltips, bottom sheets &amp; drawers</p>
-      </div>
-      <div class="comp-group">
-        <h3 class="comp-group-title">Modals (click to open)</h3>
-        <div class="comp-row wrap">
-          <button class="btn btn-primary" onclick="openModal('modal-welcome')">💖 Welcome Modal</button>
-          <button class="btn btn-secondary" onclick="openModal('modal-booking')">📅 Booking Modal</button>
-          <button class="btn btn-gold" onclick="openModal('modal-cart')">🛒 Mini Cart</button>
-          <button class="btn btn-gradient-lavender" onclick="openModal('modal-confirm')">⚠️ Confirm Dialog</button>
-          <button class="btn btn-outline" onclick="openModal('modal-gallery')">🖼️ Gallery Preview</button>
-        </div>
-      </div>
-      <div class="comp-group">
-        <h3 class="comp-group-title">Tooltips</h3>
-        <div class="comp-row wrap">
-          <div class="tooltip-wrap"><button class="btn btn-primary">Hover Me ✨</button><div class="tooltip">Soft luxury glow — hover for magic!</div></div>
-          <div class="tooltip-wrap"><button class="btn btn-secondary">More Info 💜</button><div class="tooltip">Lavender-scented body butter, 200ml</div></div>
-          <div class="tooltip-wrap"><button class="btn btn-gold">Details ✦</button><div class="tooltip">24K gold-infused serum, limited edition</div></div>
-          <div class="tooltip-wrap"><button class="btn btn-outline">? Help</button><div class="tooltip tooltip-left">Tap to learn more about this feature</div></div>
-        </div>
-      </div>
-      <div class="comp-group">
-        <h3 class="comp-group-title">Inline Alerts</h3>
-        <div class="form-stack">
-          <div class="inline-alert alert-success">✅ <strong>Order Confirmed!</strong> Your order #4821 has been placed and will ship within 2 business days.</div>
-          <div class="inline-alert alert-warning">⚡ <strong>Low Stock!</strong> Only 2 items remaining in this shade. Add to cart soon!</div>
-          <div class="inline-alert alert-error">❌ <strong>Payment Failed.</strong> Your card was declined. Please check your details and try again.</div>
-          <div class="inline-alert alert-info">💜 <strong>Beauty Tip:</strong> Apply serum to damp skin for 40% better absorption and longer-lasting hydration.</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================
-         📢 NOTIFICATIONS — 20 VARIANTS
-    ===================================================== -->
-    <section id="sec-notifications" class="lib-section">
-      <div class="lib-section-header">
-        <h1 class="lib-section-title">📢 Notifications</h1>
-        <p class="lib-section-sub">20 notification patterns — toasts, banners, callouts &amp; alerts</p>
-      </div>
-      <div class="comp-group">
-        <h3 class="comp-group-title">Toast Notifications (click to trigger)</h3>
-        <div class="comp-row wrap">
-          <button class="btn btn-outline" onclick="showToast('success','✓ Added to bag!','Rose Velvet Lip Crème has been added to your bag.')">Success Toast</button>
-          <button class="btn btn-outline" onclick="showToast('warning','⚡ Low stock!','Only 2 items left in this shade.')">Warning Toast</button>
-          <button class="btn btn-outline" onclick="showToast('error','Payment declined','Please check your card details and try again.')">Error Toast</button>
-          <button class="btn btn-outline" onclick="showToast('info','💜 Beauty Tip!','Apply serum on damp skin for best results.')">Info Toast</button>
-          <button class="btn btn-outline" onclick="showToast('success','💖 Wishlist saved!','Your wishlist has been saved to your account.')">Wishlist Toast</button>
-          <button class="btn btn-outline" onclick="showToast('success','📅 Booking confirmed!','Appointment with Amélie on April 18 at 2:00 PM.')">Booking Toast</button>
-          <button class="btn btn-outline" onclick="showToast('warning','🎁 Limited offer!','Your 20% discount code expires in 2 hours.')">Promo Toast</button>
-          <button class="btn btn-outline" onclick="showToast('info','✦ You reached Gold Tier!','Enjoy free shipping &amp; exclusive early access to new launches.')">Gold Tier Toast</button>
-        </div>
-      </div>
-      <div class="comp-group">
-        <h3 class="comp-group-title">Static Banner Notifications</h3>
-        <div class="form-stack">
-          <div class="notif-banner success"><span>🌸 Free shipping on all orders today! Use code <strong>BLOOM</strong> at checkout.</span><button class="notif-close" onclick="this.closest('.notif-banner').remove()">✕</button></div>
-          <div class="notif-banner warning"><span>⏳ Your cart is expiring in <strong>8 minutes</strong>. Complete checkout now!</span><button class="notif-close" onclick="this.closest('.notif-banner').remove()">✕</button></div>
-          <div class="notif-banner info"><span>💜 New: Lavender Dreams collection is live. <strong>Shop now →</strong></span><button class="notif-close" onclick="this.closest('.notif-banner').remove()">✕</button></div>
-          <div class="notif-banner luxury"><span>✦ You have <strong>2,450 Blush Points</strong> ready to redeem — worth $60 off your next order.</span><button class="notif-close" onclick="this.closest('.notif-banner').remove()">✕</button></div>
-        </div>
-      </div>
-      <div class="comp-group">
-        <h3 class="comp-group-title">Notification Items (inbox style)</h3>
-        <div class="notif-list">
-          <div class="notif-item unread"><div class="notif-dot"></div><div class="notif-icon" style="background:var(--primary-light)">🛍️</div><div class="notif-content"><div class="notif-title">Your order has been shipped!</div><div class="notif-body">Order #4821 · Estimated delivery April 16</div><div class="notif-time">2 min ago</div></div></div>
-          <div class="notif-item unread"><div class="notif-dot"></div><div class="notif-icon" style="background:var(--secondary-light)">💜</div><div class="notif-content"><div class="notif-title">Amélie confirmed your booking</div><div class="notif-body">Hair Color · April 18 · 2:00 PM</div><div class="notif-time">1 hr ago</div></div></div>
-          <div class="notif-item"><div style="width:10px"></div><div class="notif-icon" style="background:var(--gold-light)">✦</div><div class="notif-content"><div class="notif-title">You've reached Gold Tier!</div><div class="notif-body">Enjoy free shipping &amp; exclusive perks</div><div class="notif-time">Yesterday</div></div></div>
-          <div class="notif-item"><div style="width:10px"></div><div class="notif-icon" style="background:#FFF3CC)">⚡</div><div class="notif-content"><div class="notif-title">Flash Sale: 30% off serums</div><div class="notif-body">Today only — ends at midnight</div><div class="notif-time">2 days ago</div></div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================
-         🛍️ PRODUCT CARDS — 20 VARIANTS
-    ===================================================== -->
-    <section id="sec-products" class="lib-section">
-      <div class="lib-section-header">
-        <h1 class="lib-section-title">🛍️ Product Cards</h1>
-        <p class="lib-section-sub">20 product card layouts for beauty, fashion &amp; boutique stores</p>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Standard Product Grid</h3>
-        <div class="product-grid">
-          <div class="product-card"><div class="product-image" style="background:linear-gradient(135deg,#FFF0F5,#F8A8C4 80%)"><div class="product-emoji">🌹</div><button class="wishlist-btn active" onclick="toggleWishlist(this)">♥</button><span class="product-badge">New</span></div><div class="product-info"><span class="product-brand">BLUSH LAB</span><h4 class="product-name">Rose Velvet Lip Crème</h4><div class="product-rating">★★★★★ <span class="rating-num">4.9</span></div><div class="product-price-row"><span class="product-price">$34</span><span class="product-price-old">$45</span></div><button class="btn btn-primary btn-pill product-btn" onclick="addToCart('Rose Velvet Lip Crème','$34')">Add to Bag 🛍️</button></div></div>
-          <div class="product-card"><div class="product-image" style="background:linear-gradient(135deg,#F5F0FF,#CDB4FF 80%)"><div class="product-emoji">🫧</div><button class="wishlist-btn" onclick="toggleWishlist(this)">♥</button><span class="product-badge badge-lavender">Bestseller</span></div><div class="product-info"><span class="product-brand">GLOW LAB</span><h4 class="product-name">Cloud Skin Serum</h4><div class="product-rating">★★★★★ <span class="rating-num">4.8</span></div><div class="product-price-row"><span class="product-price">$68</span></div><button class="btn btn-secondary btn-pill product-btn" onclick="addToCart('Cloud Skin Serum','$68')">Add to Bag 🛍️</button></div></div>
-          <div class="product-card"><div class="product-image" style="background:linear-gradient(135deg,#FFFAF0,#FFD6A5 80%)"><div class="product-emoji">✨</div><button class="wishlist-btn" onclick="toggleWishlist(this)">♥</button><span class="product-badge badge-gold">✦ Luxury</span></div><div class="product-info"><span class="product-brand">LUMIÈRE</span><h4 class="product-name">24K Glow Drops</h4><div class="product-rating">★★★★★ <span class="rating-num">5.0</span></div><div class="product-price-row"><span class="product-price">$120</span></div><button class="btn btn-gold btn-pill product-btn" onclick="addToCart('24K Glow Drops','$120')">Add to Bag ✦</button></div></div>
-          <div class="product-card"><div class="product-image" style="background:linear-gradient(135deg,#F0FFF8,#A8E6CF 80%)"><div class="product-emoji">🌿</div><button class="wishlist-btn" onclick="toggleWishlist(this)">♥</button><span class="product-badge badge-mint">Clean</span></div><div class="product-info"><span class="product-brand">BOTANICA</span><h4 class="product-name">Herb Renewal Mask</h4><div class="product-rating">★★★★☆ <span class="rating-num">4.6</span></div><div class="product-price-row"><span class="product-price">$52</span><span class="product-price-old">$65</span></div><button class="btn btn-outline btn-pill product-btn" onclick="addToCart('Herb Renewal Mask','$52')">Add to Bag 🌿</button></div></div>
-          <div class="product-card"><div class="product-image" style="background:linear-gradient(135deg,#FFF0F0,#FFCDD5 80%)"><div class="product-emoji">🌸</div><button class="wishlist-btn" onclick="toggleWishlist(this)">♥</button><span class="product-badge" style="background:linear-gradient(135deg,#FF8FAB,#FF5C84)">🔥 -30%</span></div><div class="product-info"><span class="product-brand">SAKURA</span><h4 class="product-name">Cherry Blossom Mist</h4><div class="product-rating">★★★★★ <span class="rating-num">4.7</span></div><div class="product-price-row"><span class="product-price">$28</span><span class="product-price-old">$40</span></div><button class="btn btn-gradient-rose btn-pill product-btn" onclick="addToCart('Cherry Blossom Mist','$28')">Add to Bag 🌸</button></div></div>
-          <div class="product-card"><div class="product-image" style="background:linear-gradient(135deg,#F0F0FF,#BDE0FE 80%)"><div class="product-emoji">💙</div><button class="wishlist-btn" onclick="toggleWishlist(this)">♥</button><span class="product-badge badge-lavender">New</span></div><div class="product-info"><span class="product-brand">AQUA GLOW</span><h4 class="product-name">Hyaluronic Essence</h4><div class="product-rating">★★★★★ <span class="rating-num">4.9</span></div><div class="product-price-row"><span class="product-price">$78</span></div><button class="btn btn-gradient-lavender btn-pill product-btn" onclick="addToCart('Hyaluronic Essence','$78')">Add to Bag 💜</button></div></div>
-          <div class="product-card"><div class="product-image" style="background:linear-gradient(135deg,#FFF8E8,#FFD6A5 80%)"><div class="product-emoji">🍯</div><button class="wishlist-btn active" onclick="toggleWishlist(this)">♥</button><span class="product-badge badge-gold">Bestseller</span></div><div class="product-info"><span class="product-brand">HONEY GLOW</span><h4 class="product-name">Gold Honey Balm</h4><div class="product-rating">★★★★★ <span class="rating-num">4.8</span></div><div class="product-price-row"><span class="product-price">$45</span></div><button class="btn btn-gold btn-pill product-btn" onclick="addToCart('Gold Honey Balm','$45')">Add to Bag ✦</button></div></div>
-          <div class="product-card"><div class="product-image" style="background:linear-gradient(135deg,#F5FFF5,#A8E6CF 80%)"><div class="product-emoji">🫙</div><button class="wishlist-btn" onclick="toggleWishlist(this)">♥</button><span class="product-badge" style="background:linear-gradient(135deg,#A8E6CF,#68D8A4);color:#1A5C3A">🌿 Vegan</span></div><div class="product-info"><span class="product-brand">GREEN BEAUTY</span><h4 class="product-name">Aloe Vera Gel</h4><div class="product-rating">★★★★☆ <span class="rating-num">4.5</span></div><div class="product-price-row"><span class="product-price">$22</span></div><button class="btn btn-outline btn-pill product-btn" onclick="addToCart('Aloe Vera Gel','$22')">Add to Bag</button></div></div>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Horizontal Product Cards</h3>
-        <div class="h-product-list">
-          <div class="h-product-card"><div class="h-product-img" style="background:linear-gradient(135deg,#FFF0F5,#F8A8C4)"><span>🌹</span></div><div class="h-product-info"><span class="product-brand">BLUSH LAB</span><h4 class="product-name">Rose Velvet Lip Crème</h4><div class="product-rating" style="font-size:.8rem">★★★★★ 4.9 (128)</div></div><div class="h-product-actions"><div class="product-price-row" style="justify-content:flex-end"><span class="product-price">$34</span><span class="product-price-old">$45</span></div><button class="btn btn-primary btn-sm btn-pill" onclick="addToCart('Rose Velvet Lip Crème','$34')">Add to Bag</button></div></div>
-          <div class="h-product-card"><div class="h-product-img" style="background:linear-gradient(135deg,#F5F0FF,#CDB4FF)"><span>🫧</span></div><div class="h-product-info"><span class="product-brand">GLOW LAB</span><h4 class="product-name">Cloud Skin Serum</h4><div class="product-rating" style="font-size:.8rem">★★★★★ 4.8 (94)</div></div><div class="h-product-actions"><div class="product-price-row" style="justify-content:flex-end"><span class="product-price">$68</span></div><button class="btn btn-secondary btn-sm btn-pill" onclick="addToCart('Cloud Skin Serum','$68')">Add to Bag</button></div></div>
-          <div class="h-product-card"><div class="h-product-img" style="background:linear-gradient(135deg,#FFFAF0,#FFD6A5)"><span>✨</span></div><div class="h-product-info"><span class="product-brand">LUMIÈRE</span><h4 class="product-name">24K Glow Drops</h4><div class="product-rating" style="font-size:.8rem">★★★★★ 5.0 (211)</div></div><div class="h-product-actions"><div class="product-price-row" style="justify-content:flex-end"><span class="product-price">$120</span></div><button class="btn btn-gold btn-sm btn-pill" onclick="addToCart('24K Glow Drops','$120')">Add to Bag</button></div></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================
-         💄 SERVICES — 15 VARIANTS
-    ===================================================== -->
-    <section id="sec-services" class="lib-section">
-      <div class="lib-section-header">
-        <h1 class="lib-section-title">💄 Service Cards</h1>
-        <p class="lib-section-sub">15 service card layouts for beauty salons &amp; spas</p>
-      </div>
-      <div class="comp-group">
-        <h3 class="comp-group-title">Service Grid</h3>
-        <div class="service-grid">
-          <div class="service-card"><div class="service-icon" style="background:linear-gradient(135deg,#F8A8C4,#E86FA3)">💆</div><h4 class="service-name">Luxury Facial</h4><p class="service-desc">Deep cleanse, extractions and hydrating glow mask</p><div class="service-meta"><span class="service-time">⏱ 75 min</span><span class="service-price">$95</span></div><button class="btn btn-primary btn-sm btn-pill service-btn" onclick="showToast('success','📅 Booking opened','Choose your date and time for Luxury Facial')">Book Now</button></div>
-          <div class="service-card"><div class="service-icon" style="background:linear-gradient(135deg,#CDB4FF,#BDE0FE)">💅</div><h4 class="service-name">Gel Manicure</h4><p class="service-desc">Long-lasting gel polish with cuticle care and hand massage</p><div class="service-meta"><span class="service-time">⏱ 60 min</span><span class="service-price">$65</span></div><button class="btn btn-secondary btn-sm btn-pill service-btn" onclick="showToast('success','📅 Booking opened','Choose your date and time for Gel Manicure')">Book Now</button></div>
-          <div class="service-card"><div class="service-icon" style="background:linear-gradient(135deg,#FFD6A5,#D4AF37)">💫</div><h4 class="service-name">Balayage Color</h4><p class="service-desc">Hand-painted highlights for sun-kissed dimension</p><div class="service-meta"><span class="service-time">⏱ 3 hrs</span><span class="service-price">$220+</span></div><button class="btn btn-gold btn-sm btn-pill service-btn" onclick="showToast('success','📅 Booking opened','Choose your date and time for Balayage')">Book Now</button></div>
-          <div class="service-card"><div class="service-icon" style="background:linear-gradient(135deg,#A8E6CF,#BDE0FE)">🧖</div><h4 class="service-name">Spa Package</h4><p class="service-desc">Full body wrap, aromatherapy and scalp ritual</p><div class="service-meta"><span class="service-time">⏱ 2 hrs</span><span class="service-price">$180</span></div><button class="btn btn-outline btn-sm btn-pill service-btn" onclick="showToast('success','📅 Booking opened','Choose your date and time for Spa Package')">Book Now</button></div>
-          <div class="service-card"><div class="service-icon" style="background:linear-gradient(135deg,#F8A8C4,#FFD6A5)">👁️</div><h4 class="service-name">Lash Extensions</h4><p class="service-desc">Classic or volume lash sets for dramatic defined eyes</p><div class="service-meta"><span class="service-time">⏱ 90 min</span><span class="service-price">$130</span></div><button class="btn btn-gradient-rose btn-sm btn-pill service-btn" onclick="showToast('success','📅 Booking opened','Choose your date and time for Lash Extensions')">Book Now</button></div>
-          <div class="service-card"><div class="service-icon" style="background:linear-gradient(135deg,#D4AF37,#F7E7CE)">👑</div><h4 class="service-name">Bridal Package</h4><p class="service-desc">Full glam hair, makeup, lashes &amp; trial included</p><div class="service-meta"><span class="service-time">⏱ 4 hrs</span><span class="service-price">$450</span></div><button class="btn btn-gold btn-sm btn-pill service-btn" onclick="showToast('success','📅 Booking opened','Choose your date and time for Bridal Package')">Book Now</button></div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================
-         📅 BOOKING — 6 VARIANTS
-    ===================================================== -->
-    <section id="sec-booking" class="lib-section">
-      <div class="lib-section-header">
-        <h1 class="lib-section-title">📅 Booking System</h1>
-        <p class="lib-section-sub">Interactive calendar, time slots &amp; booking flow</p>
-      </div>
-      <div class="comp-group">
-        <h3 class="comp-group-title">Booking Calendar</h3>
-        <div class="booking-panel">
-          <div class="calendar-header"><button class="cal-nav" onclick="shiftMonth(-1)">←</button><h4 id="cal-month-label">April 2026</h4><button class="cal-nav" onclick="shiftMonth(1)">→</button></div>
-          <div class="calendar-grid" id="calendar-grid"></div>
-          <div class="time-slots" id="time-slots"><p class="time-slot-hint">Select a date to see available times</p></div>
-          <button class="btn btn-primary btn-pill" style="width:100%;margin-top:16px" onclick="showToast('success','💖 Booking Confirmed!','Your appointment has been confirmed. Check your email.')">Confirm Appointment</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================
-         🛒 CART — 5 VARIANTS
-    ===================================================== -->
-    <section id="sec-cart" class="lib-section">
-      <div class="lib-section-header">
-        <h1 class="lib-section-title">🛒 Cart &amp; Checkout</h1>
-        <p class="lib-section-sub">Cart drawer, item controls, checkout stepper &amp; order summary</p>
-      </div>
-      <div class="comp-group">
-        <h3 class="comp-group-title">Cart Items</h3>
-        <div class="cart-preview" id="main-cart">
-          <div class="cart-item"><div class="cart-item-img" style="background:linear-gradient(135deg,#FFF0F5,#F8A8C4)">🌹</div><div class="cart-item-details"><div class="cart-item-name">Rose Velvet Lip Crème</div><div class="cart-item-variant">Shade: Ruby Blush</div><div class="cart-item-price">$34.00</div></div><div class="qty-stepper"><button class="qty-btn" onclick="adjustQty(this,-1)">−</button><span class="qty-val">2</span><button class="qty-btn" onclick="adjustQty(this,1)">+</button></div><button class="cart-remove" onclick="removeCartItem(this)">✕</button></div>
-          <div class="cart-item"><div class="cart-item-img" style="background:linear-gradient(135deg,#F5F0FF,#CDB4FF)">🫧</div><div class="cart-item-details"><div class="cart-item-name">Cloud Skin Serum</div><div class="cart-item-variant">30ml · All skin types</div><div class="cart-item-price">$68.00</div></div><div class="qty-stepper"><button class="qty-btn" onclick="adjustQty(this,-1)">−</button><span class="qty-val">1</span><button class="qty-btn" onclick="adjustQty(this,1)">+</button></div><button class="cart-remove" onclick="removeCartItem(this)">✕</button></div>
-          <div class="cart-item"><div class="cart-item-img" style="background:linear-gradient(135deg,#FFFAF0,#FFD6A5)">✨</div><div class="cart-item-details"><div class="cart-item-name">24K Glow Drops</div><div class="cart-item-variant">15ml · All skin types</div><div class="cart-item-price">$120.00</div></div><div class="qty-stepper"><button class="qty-btn" onclick="adjustQty(this,-1)">−</button><span class="qty-val">1</span><button class="qty-btn" onclick="adjustQty(this,1)">+</button></div><button class="cart-remove" onclick="removeCartItem(this)">✕</button></div>
-          <div class="cart-footer">
-            <div class="cart-total"><span>Subtotal (4 items)</span><strong>$256.00</strong></div>
-            <button class="btn btn-gradient-rose btn-pill" style="width:100%" onclick="showToast('success','✓ Order Placed! 💖','Your order is confirmed. Estimated delivery: 3-5 days.')">Checkout Now →</button>
-          </div>
-        </div>
-      </div>
-      <div class="comp-group">
-        <h3 class="comp-group-title">Order Summary</h3>
-        <div class="order-summary">
-          <div class="order-row"><span>Subtotal</span><span>$256.00</span></div>
-          <div class="order-row"><span>Shipping</span><span style="color:var(--success-dark);font-weight:600">Free 🎉</span></div>
-          <div class="order-row"><span>Promo (BLUSH20)</span><span style="color:var(--primary-dark)">−$51.20</span></div>
-          <div class="order-row order-total"><span>Total</span><span>$204.80</span></div>
-          <button class="btn btn-gradient-rose btn-pill" style="width:100%;margin-top:12px" onclick="showToast('success','💖 Order Confirmed!','Your order #4821 is on its way!')">Place Order</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====================================================
-         🪄 ANIMATIONS — 20 VARIANTS
-    ===================================================== -->
-    <section id="sec-animations" class="lib-section">
-      <div class="lib-section-header">
-        <h1 class="lib-section-title">🪄 Animations</h1>
-        <p class="lib-section-sub">20 micro-animation examples — hover, load, pulse &amp; float</p>
-      </div>
-      <div class="comp-group">
-        <h3 class="comp-group-title">Hover Effects (hover to see)</h3>
-        <div class="anim-grid">
-          <div class="anim-demo" style="transition:transform .3s cubic-bezier(.34,1.56,.64,1);" onmouseover="this.style.transform='translateY(-8px) scale(1.03)'" onmouseout="this.style.transform=''"><div class="anim-icon">☁️</div><span>Soft Lift</span></div>
-          <div class="anim-demo" onmouseover="this.style.boxShadow='0 0 30px rgba(248,168,196,.5)';this.style.borderColor='var(--primary)'" onmouseout="this.style.boxShadow='';this.style.borderColor=''"><div class="anim-icon">✨</div><span>Glow Border</span></div>
-          <div class="anim-demo" style="transition:all .3s ease" onmouseover="this.style.transform='scale(1.05)';this.style.background='var(--primary-light)'" onmouseout="this.style.transform='';this.style.background=''"><div class="anim-icon">🌸</div><span>Scale Zoom</span></div>
-          <div class="anim-demo" style="transition:all .3s ease;overflow:hidden;position:relative" onmouseover="this.querySelector('.shimmer-overlay').style.left='100%'" onmouseout="this.querySelector('.shimmer-overlay').style.left='-100%'"><div class="anim-icon">💎</div><span>Shimmer Sweep</span><div class="shimmer-overlay" style="position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);transition:left .5s ease;pointer-events:none"></div></div>
-          <div class="anim-demo" style="transition:all .3s ease" onmouseover="this.querySelector('.anim-icon').style.transform='rotate(15deg) scale(1.3)'" onmouseout="this.querySelector('.anim-icon').style.transform=''"><div class="anim-icon" style="transition:transform .3s cubic-bezier(.34,1.56,.64,1)">🎀</div><span>Icon Spring</span></div>
-          <div class="anim-demo" style="transition:all .3s ease" onmouseover="this.style.background='linear-gradient(135deg,#F8A8C4,#CDB4FF)';this.style.color='#fff';this.querySelectorAll('span')[1].style.color='rgba(255,255,255,.8)'" onmouseout="this.style.background='';this.style.color='';this.querySelectorAll('span')[1].style.color=''" ><div class="anim-icon">🌈</div><span>Color Fill</span></div>
-        </div>
-      </div>
-      <div class="comp-group">
-        <h3 class="comp-group-title">Continuous Animations</h3>
-        <div class="anim-grid">
-          <div class="anim-demo" style="animation:float 4s ease-in-out infinite"><div class="anim-icon">🌸</div><span>Float</span></div>
-          <div class="anim-demo" style="animation:pulse 2s ease infinite"><div class="anim-icon">💜</div><span>Pulse</span></div>
-          <div class="anim-demo"><div class="anim-icon" style="animation:heartbeat 1.5s ease infinite">♥</div><span>Heartbeat</span></div>
-          <div class="anim-demo"><div class="anim-icon" style="animation:spin 2s linear infinite">✦</div><span>Spin</span></div>
-          <div class="anim-demo"><div style="width:36px;height:36px;border:3px solid var(--primary-light);border-top-color:var(--primary);border-radius:50%;animation:spin .8s linear infinite;margin-bottom:8px"></div><span>Spinner</span></div>
-          <div class="anim-demo"><div class="loader-dots" style="margin-bottom:8px"><span></span><span></span><span></span></div><span>Dot Bounce</span></div>
-        </div>
-      </div>
-      <div class="comp-group">
-        <h3 class="comp-group-title">Text Animations</h3>
-        <div class="form-stack" style="gap:20px">
-          <div class="shimmer-text" style="font-size:1.5rem;font-family:'Playfair Display',serif;font-weight:700">✨ Shimmer Text Effect ✨</div>
-          <div style="font-size:1.5rem;font-family:'Playfair Display',serif;font-weight:700;background:linear-gradient(90deg,#F8A8C4,#E86FA3,#CDB4FF,#BDE0FE,#F8A8C4);background-size:300% 100%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:gradientShift 4s ease infinite">Moving Gradient Text</div>
-          <div style="font-size:1.5rem;font-family:'Playfair Display',serif;font-weight:700;animation:pulse 2s ease infinite;color:var(--primary-dark)">Pulsing Text Effect</div>
-        </div>
-      </div>
-      <div class="comp-group">
-        <h3 class="comp-group-title">Skeleton Loading (animated)</h3>
-        <div class="comp-row wrap" style="gap:var(--space-xl)">
-          <div style="display:flex;flex-direction:column;gap:10px;width:220px">
-            <div class="skeleton" style="height:140px;border-radius:16px"></div>
-            <div class="skeleton" style="height:16px;width:70%"></div>
-            <div class="skeleton" style="height:12px;width:50%"></div>
-            <div class="skeleton" style="height:36px;border-radius:999px"></div>
-          </div>
-          <div style="display:flex;flex-direction:column;gap:10px;width:280px">
-            <div style="display:flex;gap:12px;align-items:center">
-              <div class="skeleton" style="width:44px;height:44px;border-radius:50%;flex-shrink:0"></div>
-              <div style="flex:1;display:flex;flex-direction:column;gap:8px">
-                <div class="skeleton" style="height:14px;width:60%"></div>
-                <div class="skeleton" style="height:12px;width:40%"></div>
+        <div class="comp-group">
+          <h3 class="comp-group-title">Pagination & Breadcrumbs</h3>
+          <div style="display:flex; flex-direction:column; gap:24px;">
+            <div class="comp-preview">
+              <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+              <div class="pag-lux" style="display:flex; gap:8px;">
+                <button class="pag-btn">«</button>
+                <button class="pag-btn active">1</button>
+                <button class="pag-btn">2</button>
+                <button class="pag-btn">3</button>
+                <button class="pag-btn">»</button>
               </div>
             </div>
-            <div class="skeleton" style="height:100px"></div>
-            <div class="skeleton" style="height:36px;border-radius:999px"></div>
+            <div class="comp-preview">
+              <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+              <div class="breadcrumb">
+                <a class="bc-link">Home</a> <span class="bc-sep-chevron"></span>
+                <a class="bc-link">Collections</a> <span class="bc-sep-chevron"></span>
+                <span class="bc-current">Silk Dresses</span>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- ====================================================
-         📐 LAYOUT — 10 VARIANTS
-    ===================================================== -->
-    <section id="sec-layout" class="lib-section">
-      <div class="lib-section-header">
-        <h1 class="lib-section-title">📐 Layout Sections</h1>
-        <p class="lib-section-sub">10 pre-built page layout sections ready to use</p>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Testimonials Slider</h3>
-        <div class="testimonials-slider">
-          <div class="testimonial-card active"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"Absolutely obsessed. The packaging is gorgeous and my skin has never looked better. 10/10!"</p><div class="testimonial-author"><div class="avatar avatar-sm" style="background:linear-gradient(135deg,#F8A8C4,#CDB4FF)"><span>JM</span></div><div><div class="author-name">Jade Monroe</div><div class="author-role">Beauty Editor · NYC</div></div></div></div>
-          <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"The Luxury Facial completely transformed my skin. Amélie is an absolute artist!"</p><div class="testimonial-author"><div class="avatar avatar-sm" style="background:linear-gradient(135deg,#CDB4FF,#BDE0FE)"><span>SC</span></div><div><div class="author-name">Sophie Chen</div><div class="author-role">Designer · LA</div></div></div></div>
-          <div class="testimonial-card"><div class="testimonial-stars">★★★★★</div><p class="testimonial-text">"FemmeUI is the most beautiful design system I've ever used. Instantly premium."</p><div class="testimonial-author"><div class="avatar avatar-sm" style="background:linear-gradient(135deg,#FFD6A5,#F8A8C4)"><span>LB</span></div><div><div class="author-name">Luna Baptiste</div><div class="author-role">Brand Founder · Paris</div></div></div></div>
-          <div class="testimonial-dots" id="testimonial-dots"><button class="t-dot active" onclick="goToTestimonial(0)"></button><button class="t-dot" onclick="goToTestimonial(1)"></button><button class="t-dot" onclick="goToTestimonial(2)"></button></div>
-        </div>
-      </div>
-
-      <div class="comp-group">
-        <h3 class="comp-group-title">Newsletter Section</h3>
-        <div class="newsletter-section">
-          <div class="newsletter-orbs"><div class="nl-orb nl-orb-1"></div><div class="nl-orb nl-orb-2"></div></div>
-          <div class="newsletter-content">
-            <div class="newsletter-icon">💌</div>
-            <h3 class="newsletter-title">Join the Blush Circle</h3>
-            <p class="newsletter-text">Get early access to new collections, exclusive offers, and beauty tips.</p>
-            <div class="newsletter-form"><input type="email" class="nl-input" placeholder="your@email.com" id="nl-email2"/><button class="btn btn-primary btn-pill" onclick="subscribeNewsletter('nl-email2')">Subscribe ✨</button></div>
-            <p class="newsletter-disclaimer">No spam, unsubscribe anytime. 💖</p>
+        <div class="comp-group">
+          <h3 class="comp-group-title">Luxury Steppers</h3>
+          <div class="comp-preview">
+            <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+            <div class="stepper-lux" style="max-width:400px;">
+              <div class="step-item done">✓</div>
+              <div class="step-item active">2</div>
+              <div class="step-item">3</div>
+              <div class="step-item">4</div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="comp-group">
-        <h3 class="comp-group-title">Stats Section</h3>
-        <div class="stats-row">
-          <div class="stat-card"><div class="stat-num" style="font-size:3rem;font-weight:800;background:var(--grad-rose);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">50K+</div><div class="stat-label">Happy Clients</div></div>
-          <div class="stat-card"><div class="stat-num" style="font-size:3rem;font-weight:800;background:linear-gradient(135deg,#CDB4FF,#9B72FF);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">4.9★</div><div class="stat-label">Average Rating</div></div>
-          <div class="stat-card"><div class="stat-num" style="font-size:3rem;font-weight:800;background:linear-gradient(135deg,#D4AF37,#F7E7CE);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">128+</div><div class="stat-label">Products</div></div>
-          <div class="stat-card"><div class="stat-num" style="font-size:3rem;font-weight:800;background:linear-gradient(135deg,#A8E6CF,#4CAF80);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">100%</div><div class="stat-label">Cruelty-Free</div></div>
+      <!-- ====================================================
+           🏷️ BADGES & TAGS
+      ===================================================== -->
+      <section id="sec-badges" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">🏷️ Badges & Tags</h1>
+          <p class="lib-section-sub">28 chic status markers and category tags for high-end UI.</p>
         </div>
-      </div>
-    </section>
 
-  </main>
-</div>
+        <div class="comp-group">
+          <h3 class="comp-group-title">Glass & Luxury Soft</h3>
+          <div class="comp-row wrap">
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><span class="badge" style="background:var(--primary-light); color:var(--primary-dark); padding:4px 12px; border-radius:999px; font-size:12px; font-weight:600;">NEW ARRIVAL</span></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><span class="badge" style="background:var(--grad-rose); color:#fff; padding:4px 12px; border-radius:999px; font-size:12px; font-weight:600; box-shadow:var(--shadow-soft);">BEST SELLER</span></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><span class="badge" style="background:rgba(255,255,255,0.4); backdrop-filter:blur(8px); border:1px solid var(--primary); color:var(--primary-dark); padding:4px 12px; border-radius:999px; font-size:12px; font-weight:600;">PREMIUM</span></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><span class="badge" style="background:var(--grad-luxury); color:var(--gold-dark); border:1px solid var(--gold); padding:4px 12px; border-radius:999px; font-size:12px; font-weight:700;">✦ GOLD</span></div>
+            <div class="comp-preview"><button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button><span class="badge" style="background:var(--secondary-light); color:var(--secondary-dark); padding:4px 12px; border-radius:8px; font-size:12px; font-weight:600;">COLLECTION</span></div>
+          </div>
+        </div>
+      </section>
 
-<!-- ░░ TOAST CONTAINER ░░ -->
-<div class="toast-container" id="toast-container"></div>
+      <!-- ====================================================
+           🧁 CARDS
+      ===================================================== -->
+      <section id="sec-cards" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">🧁 Cards</h1>
+          <p class="lib-section-sub">25 luxury card layouts for products, features, and content blocks.</p>
+        </div>
 
-<!-- ░░ MODALS ░░ -->
-<div class="modal-backdrop hidden" id="modal-welcome" onclick="closeModalOnBackdrop(event,'modal-welcome')">
-  <div class="modal glass"><button class="modal-close" onclick="closeModal('modal-welcome')">✕</button><div class="modal-icon">💖</div><h3 class="modal-title">Welcome to FemmeUI</h3><p class="modal-text">The most beautiful soft-luxury UI design system for feminine brands. 32+ components, drop-in ready.</p><div class="modal-actions"><button class="btn btn-primary btn-pill" onclick="closeModal('modal-welcome')">Start Exploring 🌸</button><button class="btn btn-ghost" onclick="closeModal('modal-welcome')">Maybe Later</button></div></div>
-</div>
+        <div class="comp-group">
+          <h3 class="comp-group-title">Product & Glass Cards</h3>
+          <div class="comp-row wrap" style="gap:24px;">
+            <div class="comp-preview">
+              <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+              <div style="width:240px; background:var(--surface); border-radius:var(--radius-xl); overflow:hidden; border:1px solid var(--border); box-shadow:var(--shadow-soft);">
+                <div style="height:160px; background:var(--grad-rose); display:flex; align-items:center; justify-content:center; font-size:3rem;">👗</div>
+                <div style="padding:20px;">
+                  <h4 style="margin:0; font-family:var(--font-heading);">Silk Rose Gown</h4>
+                  <p style="color:var(--text-muted); font-size:14px; margin:8px 0;">Premium mulberry silk, handcrafted elegance.</p>
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-top:16px;">
+                    <span style="font-weight:700; color:var(--primary-dark);">$299</span>
+                    <button class="btn btn-primary btn-pill" style="padding:6px 12px; font-size:12px;">Add to Bag</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="comp-preview">
+              <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+              <div style="width:240px; background:rgba(255,255,255,0.6); backdrop-filter:blur(15px); border-radius:var(--radius-xl); padding:24px; border:1px solid rgba(255,255,255,0.4); box-shadow:var(--shadow-medium);">
+                <span style="color:var(--gold-dark); font-size:10px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase;">EXCLUSIVE ACCESS</span>
+                <h4 style="margin:10px 0 5px; font-family:var(--font-heading);">Inner Circle</h4>
+                <p style="color:var(--text-muted); font-size:13px;">Join our premium membership for editorial content and early releases.</p>
+                <div style="margin-top:20px; border-top:1px solid var(--border); padding-top:15px; display:flex; align-items:center; gap:10px;">
+                  <div style="width:32px; height:32px; border-radius:50%; background:var(--grad-luxury);"></div>
+                  <span style="font-size:12px; font-weight:600;">Join Now →</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-<div class="modal-backdrop hidden" id="modal-booking" onclick="closeModalOnBackdrop(event,'modal-booking')">
-  <div class="modal glass" style="max-width:480px"><button class="modal-close" onclick="closeModal('modal-booking')">✕</button><div class="modal-icon">📅</div><h3 class="modal-title">Book an Appointment</h3><div class="form-group" style="margin-top:16px"><select class="select-soft"><option>💆 Luxury Facial — $95</option><option>💅 Gel Manicure — $65</option><option>💇 Balayage — $220+</option></select></div><div class="form-group"><input class="input-soft" type="date"/></div><div class="form-group"><input class="input-soft" placeholder="Your name…"/></div><div class="modal-actions"><button class="btn btn-primary btn-pill" onclick="closeModal('modal-booking');showToast('success','✓ Booking Confirmed!','Your appointment has been scheduled. Check your email!')">Confirm Booking 💖</button><button class="btn btn-ghost" onclick="closeModal('modal-booking')">Cancel</button></div></div>
-</div>
+      <!-- ====================================================
+           🪟 OVERLAYS
+      ===================================================== -->
+      <section id="sec-overlays" class="lib-section">
+        <div class="lib-section-header">
+          <h1 class="lib-section-title">🪟 Overlays</h1>
+          <p class="lib-section-sub">10 premium modal, toast, and tooltip designs.</p>
+        </div>
 
-<div class="modal-backdrop hidden" id="modal-cart" onclick="closeModalOnBackdrop(event,'modal-cart')">
-  <div class="modal glass" style="max-width:420px;text-align:left"><button class="modal-close" onclick="closeModal('modal-cart')">✕</button><h3 class="modal-title">🛍️ Your Bag</h3><div class="cart-item"><div class="cart-item-img" style="background:linear-gradient(135deg,#FFF0F5,#F8A8C4)">🌹</div><div class="cart-item-details"><div class="cart-item-name">Rose Velvet Lip Crème</div><div class="cart-item-price">$34.00</div></div><div class="qty-stepper"><button class="qty-btn" onclick="adjustQty(this,-1)">−</button><span class="qty-val">1</span><button class="qty-btn" onclick="adjustQty(this,1)">+</button></div></div><div class="cart-footer"><div class="cart-total"><span>Total</span><strong>$34.00</strong></div><button class="btn btn-gradient-rose btn-pill" style="width:100%" onclick="closeModal('modal-cart');showToast('success','Order placed! 💖','Estimated delivery: 3-5 days.')">Checkout →</button></div></div>
-</div>
+        <div class="comp-group">
+          <h3 class="comp-group-title">Modal & Notification</h3>
+          <div class="comp-row wrap">
+            <div class="comp-preview">
+              <button class="copy-btn-pop" onclick="copyComponentHTML(this.parentElement)">Copy Code</button>
+              <div style="width:320px; background:var(--surface); border-radius:var(--radius-xl); padding:32px; text-align:center; box-shadow:var(--shadow-heavy);">
+                <div style="width:64px; height:64px; background:var(--primary-light); color:var(--primary-dark); border-radius:50%; display:flex; align-items:center; justify-content:center; margin:0 auto 20px; font-size:1.5rem;">💌</div>
+                <h3 style="font-family:var(--font-heading); margin-bottom:10px;">Join the Mailing List</h3>
+                <p style="color:var(--text-muted); font-size:14px; margin-bottom:24px;">Get curated beauty tips and exclusive collection reveals in your inbox.</p>
+                <input type="text" placeholder="your@email.com" style="width:100%; padding:12px; border-radius:999px; border:1px solid var(--border); margin-bottom:12px; outline:none;">
+                <button class="btn btn-primary btn-pill" style="width:100%;">Subscribe</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
 
-<div class="modal-backdrop hidden" id="modal-confirm" onclick="closeModalOnBackdrop(event,'modal-confirm')">
-  <div class="modal glass" style="max-width:400px"><button class="modal-close" onclick="closeModal('modal-confirm')">✕</button><div class="modal-icon">⚠️</div><h3 class="modal-title">Remove Item?</h3><p class="modal-text">Are you sure you want to remove this item from your wishlist? This action cannot be undone.</p><div class="modal-actions"><button class="btn btn-danger btn-pill" onclick="closeModal('modal-confirm');showToast('info','Item removed','The item has been removed from your wishlist.')">Yes, Remove</button><button class="btn btn-outline btn-pill" onclick="closeModal('modal-confirm')">Keep It ♥</button></div></div>
-</div>
+  <!-- Toast & Notification Containers -->
+  <div id="toast-container" style="position:fixed; bottom:24px; right:24px; z-index:9999; display:flex; flex-direction:column; gap:10px;"></div>
+  
+  <div id="copy-toast">
+    <span class="toast-icon">✓</span>
+    <span class="toast-msg">Hex code copied!</span>
+  </div>
 
-<div class="modal-backdrop hidden" id="modal-gallery" onclick="closeModalOnBackdrop(event,'modal-gallery')">
-  <div class="modal glass" style="max-width:560px"><button class="modal-close" onclick="closeModal('modal-gallery')">✕</button><h3 class="modal-title" style="margin-bottom:16px">🖼️ Product Gallery</h3><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px"><div style="aspect-ratio:1;border-radius:12px;background:linear-gradient(135deg,#F8A8C4,#CDB4FF);display:flex;align-items:center;justify-content:center;font-size:2.5rem">🌹</div><div style="aspect-ratio:1;border-radius:12px;background:linear-gradient(135deg,#CDB4FF,#BDE0FE);display:flex;align-items:center;justify-content:center;font-size:2.5rem">🫧</div><div style="aspect-ratio:1;border-radius:12px;background:linear-gradient(135deg,#FFD6A5,#F8A8C4);display:flex;align-items:center;justify-content:center;font-size:2.5rem">✨</div><div style="aspect-ratio:1;border-radius:12px;background:linear-gradient(135deg,#A8E6CF,#BDE0FE);display:flex;align-items:center;justify-content:center;font-size:2.5rem">🌿</div><div style="aspect-ratio:1;border-radius:12px;background:linear-gradient(135deg,#D4AF37,#F7E7CE);display:flex;align-items:center;justify-content:center;font-size:2.5rem">👑</div><div style="aspect-ratio:1;border-radius:12px;background:linear-gradient(135deg,#FF8FAB,#FFD6A5);display:flex;align-items:center;justify-content:center;font-size:2.5rem">🎀</div></div><button class="btn btn-primary btn-pill" style="width:100%;margin-top:16px" onclick="closeModal('modal-gallery')">Close Gallery</button></div>
-</div>
-
-<script src="js/main.js"></script>
-<script src="js/library.js"></script>
+  <script src="js/library.js"></script>
 </body>
 </html>

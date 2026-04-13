@@ -1,44 +1,133 @@
-/* =====================================================
-   FEMME UI — LIBRARY JS
-   Sidebar navigation and component interactions
-   ===================================================== */
+/**
+ * FEMME UI — LIBRARY JS
+ * Global controller for sidebar navigation, component interactions, 
+ * and library-wide utility functions (like copy-to-clipboard).
+ * 
+ * This file is designed for easy learning and extension.
+ */
 
 'use strict';
 
-// ── SECTION NAVIGATION ─────────────────────────────────────
+/**
+ * Navigation handler to switch between component sections.
+ * @param {string} id - The ID suffix of the section to show (e.g., 'colors').
+ * @param {HTMLElement} btn - The sidebar button that was clicked.
+ */
 function showSection(id, btn) {
-  // Hide all sections
+  // Hide all sections using a common class selector
   document.querySelectorAll('.lib-section').forEach(s => s.classList.remove('active'));
-  // Show target
+  
+  // Show the target section by its ID
   const target = document.getElementById('sec-' + id);
   if (target) {
     target.classList.add('active');
-    document.querySelector('.lib-main').scrollTop = 0;
+    // Reset scroll position to top when switching sections
+    const mainContent = document.querySelector('.lib-main');
+    if (mainContent) mainContent.scrollTop = 0;
   }
-  // Update sidebar active state
+  
+  // Update sidebar active state for visual feedback
   document.querySelectorAll('.lib-nav-item').forEach(b => b.classList.remove('active'));
   if (btn) btn.classList.add('active');
-  // Update count
+  
+  // Update the component counter in the header
   updateComponentCount(id);
 }
 
 // Show first section on load
 document.addEventListener('DOMContentLoaded', () => {
+  populateLibrary();
   showSection('colors', document.querySelector('.lib-nav-item'));
-  renderCalendar();
-  goToTestimonial(0);
-  startTestimonialAuto();
   updateComponentCount('colors');
 });
 
-// ── COMPONENT COUNT ────────────────────────────────────────
+// ── COMPONENT DATA ────────────────────────────────────────
+const COLOR_PALETTE = [
+  { name: 'Silk Pink', hex: '#FFF0F5' }, { name: 'Blush Rose', hex: '#F8A8C4' }, { name: 'Petal', hex: '#FDDCEC' },
+  { name: 'Peony', hex: '#FFB7CE' }, { name: 'Rose Quartz', hex: '#F7CAC9' }, { name: 'Sakura', hex: '#FFDDE2' },
+  { name: 'Desert Rose', hex: '#E86FA3' }, { name: 'Flamingo', hex: '#FC8EAC' }, { name: 'Berry', hex: '#D44D5C' },
+  { name: 'Mauve', hex: '#E0B0FF' }, { name: 'Cotton Candy', hex: '#FFBCD9' }, { name: 'Tulip', hex: '#FFB3E6' },
+  { name: 'Camellia', hex: '#F3A1BE' }, { name: 'Magnolia', hex: '#F8F1F1' }, { name: 'Lavender', hex: '#CDB4FF' },
+  { name: 'Amethyst', hex: '#9B72FF' }, { name: 'Lilac', hex: '#EDE5FF' }, { name: 'Wisteria', hex: '#B9A2D8' },
+  { name: 'Iris', hex: '#5D3FD3' }, { name: 'Periwinkle', hex: '#CCCCFF' }, { name: 'Thistle', hex: '#D8BFD8' },
+  { name: 'Plum', hex: '#DDA0DD' }, { name: 'Orchid', hex: '#DA70D6' }, { name: 'Heather', hex: '#A79AFF' },
+  { name: 'Violet', hex: '#8F00FF' }, { name: 'Grape', hex: '#6F2DA8' }, { name: 'Indigo', hex: '#4B0082' },
+  { name: 'Mulberry', hex: '#C54B8C' }, { name: 'Peach Glow', hex: '#FFD6A5' }, { name: 'Apricot', hex: '#FFB347' },
+  { name: 'Cantaloupe', hex: '#FEC89A' }, { name: 'Sunrise', hex: '#FFD1DC' }, { name: 'Sherbet', hex: '#FFDAB9' },
+  { name: 'Melon', hex: '#FDBCB4' }, { name: 'Coral Rose', hex: '#F88379' }, { name: 'Tea Rose', hex: '#F4C2C2' },
+  { name: 'Misty Rose', hex: '#FFE4E1' }, { name: 'Champagne', hex: '#F7E7CE' }, { name: 'Ivory Blush', hex: '#FFF5F5' },
+  { name: 'Cream', hex: '#FFFDD0' }, { name: 'Buttercup', hex: '#FFF9C4' }, { name: 'Lemon Chiffon', hex: '#FFFACD' },
+  { name: 'Banana', hex: '#FFE135' }, { name: 'Honey', hex: '#F9E076' }, { name: 'Amber', hex: '#FFBF00' },
+  { name: 'Gold Dust', hex: '#E6BE8A' }, { name: 'Luxury Gold', hex: '#D4AF37' }, { name: 'Royal Gold', hex: '#C5A059' },
+  { name: 'Bronze', hex: '#CD7F32' }, { name: 'Copper', hex: '#B87333' }, { name: 'Mint Cream', hex: '#F5FFFA' },
+  { name: 'Sage', hex: '#BCCA8A' }, { name: 'Pistachio', hex: '#93C572' }, { name: 'Honeydew', hex: '#F0FFF0' },
+  { name: 'Seafoam', hex: '#9FE2BF' }, { name: 'Aquamarine', hex: '#7FFFD4' }, { name: 'Celeste', hex: '#B2FFFF' },
+  { name: 'Eucalyptus', hex: '#D0F0C0' }, { name: 'Jade', hex: '#00A86B' }, { name: 'Emerald', hex: '#50C878' },
+  { name: 'Sky Blue', hex: '#87CEEB' }, { name: 'Powder Blue', hex: '#B0E0E6' }, { name: 'Alice Blue', hex: '#F0F8FF' },
+  { name: 'Baby Blue', hex: '#89CFF0' }, { name: 'Morning Mist', hex: '#E0F2F1' }, { name: 'Azure Whisper', hex: '#F0FFFF' },
+  { name: 'Cornflower', hex: '#6495ED' }, { name: 'Forget-me-not', hex: '#AAF0D1' }, { name: 'Slate Blossom', hex: '#A0B2C6' },
+  { name: 'Deep Ocean', hex: '#0047AB' }, { name: 'Nude', hex: '#E3BC9A' }, { name: 'Sand', hex: '#F4A460' },
+  { name: 'Beige', hex: '#F5F5DC' }, { name: 'Taupe', hex: '#483C32' }, { name: 'Pebble', hex: '#333333' },
+  { name: 'Charcoal', hex: '#36454F' }, { name: 'Midnight', hex: '#191970' }, { name: 'Rosewood', hex: '#65000B' },
+  { name: 'Espresso', hex: '#3D2B1F' }, { name: 'Mink', hex: '#88716B' }, { name: 'Pearl', hex: '#FDEEF4' },
+  { name: 'Seashell', hex: '#FFF5EE' }, { name: 'Linen', hex: '#FAF0E6' }, { name: 'Snow', hex: '#FFFAFA' },
+  { name: 'Vapor', hex: '#F5F5F5' }, { name: 'Cloud', hex: '#ECF0F1' }, { name: 'Silver', hex: '#C0C0C0' },
+  { name: 'Platinum', hex: '#E5E4E2' }, { name: 'Diamond', hex: '#B9F2FF' }, { name: 'Stardust', hex: '#FBFBFB' },
+  { name: 'Berry Punch', hex: '#FF1493' }, { name: 'Gummy Bear', hex: '#FF69B4' }, { name: 'Sweet Tart', hex: '#EE82EE' },
+  { name: 'Taffy', hex: '#FFC0CB' }, { name: 'Marshmallow', hex: '#F9F7F7' }, { name: 'Macaron', hex: '#F7D7B5' },
+  { name: 'Meringue', hex: '#FFFFFF' }, { name: 'Gelato', hex: '#FADADD' }, { name: 'Sorbet', hex: '#FFDAB9' },
+  { name: 'Cupcake', hex: '#F8C8DC' }
+];
+
+const FONT_LIST = [
+  'Playfair Display', 'Cormorant Garamond', 'Cinzel', 'Bodoni Moda', 'Lora', 'Merriweather', 'Prata', 'EB Garamond',
+  'Libre Baskerville', 'Cardo', 'Crimson Text', 'Domine', 'Old Standard TT', 'Alice', 'Spectral', 'Vollkorn',
+  'Zilla Slab', 'Bitter', 'Abril Fatface', 'Arvo', 'Josefin Slab', 'Rokkitt', 'Vidaloka', 'Gentium Book Plus',
+  'Poppins', 'Montserrat', 'Raleway', 'Inter', 'Lato', 'Open Sans', 'Roboto', 'Quicksand',
+  'Outfit', 'Mulish', 'Work Sans', 'Nunito', 'Montserrat Alternates', 'Josefin Sans', 'Urbanist', 'League Spartan',
+  'Questrial', 'Tenor Sans', 'Kumbh Sans', 'Lexend', 'Space Grotesk', 'Syne', 'Manrope', 'Be Vietnam Pro',
+  'Public Sans', 'Righteous', 'Comfortaa', 'Fredoka', 'DM Serif Display', 'Syncopate', 'Michroma', 'Forum',
+  'Marcellus', 'Bellefair', 'Yeseva One', 'Italiana', 'Julius Sans One', 'Unna', 'Gilda Display', 'Rozha One',
+  'Cinzel Decorative', 'Major Mono Display', 'Monoton', 'Staatliches', 'Bebas Neue', 'Oswald', 'Anton', 'Lobster',
+  'Pacifico', 'Caveat', 'Great Vibes', 'Dancing Script', 'Alex Brush', 'Sacramento', 'Allura', 'Pinyon Script',
+  'Petit Formal Script', 'Mrs Saint Delafield', 'Meow Script', 'Homemade Apple', 'Reenie Beanie', 'Nothing You Could Do',
+  'Shadows Into Light', 'Indie Flower', 'Gloria Hallelujah', 'Amatic SC', 'Cookie', 'Yellowtail', 'Satisfy', 'Courgette',
+  'Kaushan Script', 'Grand Hotel', 'Damion', 'Clicker Script', 'Herr Von Muellerhoff', 'Parisienne', 'Rochester'
+];
+
+function populateLibrary() {
+  // Populate Colors
+  const colorGrid = document.getElementById('main-swatch-grid');
+  if (colorGrid) {
+    colorGrid.innerHTML = COLOR_PALETTE.map(c => `
+      <div class="color-swatch-wrapper comp-preview">
+        <button class="copy-btn-pop" onclick="copyHex(this.parentElement)">Copy Hex</button>
+        <div class="color-swatch" style="background:${c.hex}"></div>
+        <div class="color-meta" style="pointer-events: none;">
+          <span class="color-name">${c.name}</span>
+          <span class="color-hex">${c.hex}</span>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Populate Fonts
+  const fontList = document.getElementById('main-type-list');
+  if (fontList) {
+    fontList.innerHTML = FONT_LIST.map(f => `
+      <div class="type-row comp-preview">
+        <button class="copy-btn-pop" onclick="copyToClipboard('${f}')">Copy Font</button>
+        <span class="type-label" style="pointer-events:none;">${f}</span>
+        <div style="font-family:'${f}', sans-serif; font-size: 2rem; color: var(--text); pointer-events:none;">Elegant Typography Sample</div>
+      </div>
+    `).join('');
+  }
+}
+
 const sectionCounts = {
-  colors: 20, typography: 20, tokens: 18,
-  buttons: 30, badges: 28, cards: 25,
-  forms: 22, avatars: 20, progress: 24,
-  navigation: 20, overlays: 12, notifications: 20,
-  products: 20, services: 15, booking: 6,
-  cart: 5, animations: 20, layout: 10
+  colors: 100, typography: 100, tokens: 18,
+  buttons: 50, badges: 28, cards: 25,
+  forms: 18, navigation: 50, overlays: 10
 };
 
 function updateComponentCount(id) {
@@ -55,6 +144,62 @@ function searchComponents(query) {
     item.style.display = (!q || text.includes(q)) ? '' : 'none';
   });
 }
+
+function copyComponentHTML(el) {
+  // Create a deep clone to manipulate without affecting DOM
+  const clone = el.cloneNode(true);
+  
+  // Remove the copy button itself and any specific library overlays
+  const copyBtn = clone.querySelector('.copy-btn-pop');
+  if (copyBtn) copyBtn.remove();
+  
+  // Get the innerHTML of the remaining content
+  const htmlToCopy = clone.innerHTML.trim();
+  
+  copyToClipboard(htmlToCopy).then(() => {
+    showToast('success', '🧬 HTML Copied!', 'The component code is ready for use.');
+  }).catch(err => {
+    showToast('error', 'Copy Failed', 'Please try again.');
+  });
+}
+
+/**
+ * Enhanced toast notification system.
+ */
+function showToast(type, message) {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  toast.style.cssText = `
+    background: var(--text);
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    animation: toastScaleIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    font-size: 14px;
+    font-weight: 500;
+  `;
+  
+  const icon = type === 'success' ? '✓' : '✕';
+  toast.innerHTML = `<span style="background:rgba(255,255,255,0.2); width:20px; height:20px; display:flex; align-items:center; justify-content:center; border-radius:50%; font-size:10px;">${icon}</span> ${message}`;
+  
+  container.appendChild(toast);
+  
+  setTimeout(() => {
+    toast.style.animation = 'toastScaleOut 0.3s forwards';
+    setTimeout(() => toast.remove(), 300);
+  }, 3000);
+}
+
+// Add these to CSS keyframes if missing
+// @keyframes toastScaleIn { from { transform: scale(0.8) translateY(20px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+// @keyframes toastScaleOut { from { transform: scale(1); opacity: 1; } to { transform: scale(0.8) translateY(20px); opacity: 0; } }
 
 // ── DARK MODE ──────────────────────────────────────────────
 let isDark = false;
@@ -102,10 +247,47 @@ function showToast(type, title, message, duration = 4500) {
   setTimeout(() => dismissToast(toast), duration);
 }
 
-function dismissToast(toast) {
-  if (!toast?.parentNode) return;
-  toast.classList.add('removing');
-  setTimeout(() => toast.remove(), 300);
+/**
+ * Generic utility to copy text to the user's clipboard.
+ * @param {string} text - The string to copy.
+ * @returns {Promise} Resolves when the copy is complete.
+ */
+async function copyToClipboard(text) {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      return await navigator.clipboard.writeText(text);
+    } else {
+      // Fallback for older browsers or non-secure contexts
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-9999px";
+      textArea.style.top = "0";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      return new Promise((res, rej) => {
+        document.execCommand('copy') ? res() : rej();
+        textArea.remove();
+      });
+    }
+  } catch (err) {
+    console.error('Failed to copy text: ', err);
+  }
+}
+
+/**
+ * Specialized handler for copying color hex codes from swatch UI elements.
+ * Extracts the hex code from the .color-hex sibling of the clicked element.
+ * @param {HTMLElement} el - The clicked swatch wrapper.
+ */
+function copyHex(el) {
+  const hex = el.querySelector('.color-hex')?.textContent || '';
+  if (hex) {
+    copyToClipboard(hex).then(() => {
+      showToast('success', '🎨 Color Copied!', `${hex} is now in your clipboard.`);
+    });
+  }
 }
 
 // ── TABS (for nav section) ─────────────────────────────────
