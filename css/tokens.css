@@ -1,0 +1,128 @@
+/* =====================================================
+   FEMME UI — DESIGN TOKENS
+   Soft Luxury Feminine Design System
+   ===================================================== */
+
+:root {
+  /* ── COLORS ── */
+  --background:    #FFF7FB;
+  --surface:       #FFFFFF;
+  --surface-alt:   #FEF0F7;
+
+  --primary:       #F8A8C4;
+  --primary-dark:  #E86FA3;
+  --primary-light: #FDDCEC;
+
+  --secondary:     #CDB4FF;
+  --secondary-dark:#9B72FF;
+  --secondary-light:#EDE5FF;
+
+  --accent:        #FFD6A5;
+  --accent-dark:   #F5AE5A;
+  --accent-light:  #FFF3E5;
+
+  --highlight:     #BDE0FE;
+  --highlight-dark:#6EC0FA;
+
+  --gold:          #D4AF37;
+  --gold-light:    #F7E7CE;
+  --gold-dark:     #A87F1A;
+
+  --mint:          #A8E6CF;
+  --champagne:     #F7E7CE;
+  --ivory:         #FFFCF7;
+
+  --text:          #2B2B2B;
+  --text-muted:    #6B6B6B;
+  --text-light:    #9E9E9E;
+  --border:        #F2DCE5;
+  --border-light:  #FAF0F5;
+
+  --success:       #A8E6CF;
+  --success-dark:  #4CAF80;
+  --warning:       #FFD166;
+  --warning-dark:  #E6A800;
+  --error:         #FF8FAB;
+  --error-dark:    #E63B60;
+  --info:          #BDE0FE;
+
+  /* ── GRADIENTS ── */
+  --grad-rose:      linear-gradient(135deg, #F8A8C4 0%, #E86FA3 100%);
+  --grad-lavender:  linear-gradient(135deg, #CDB4FF 0%, #BDE0FE 100%);
+  --grad-peach:     linear-gradient(135deg, #FFD6A5 0%, #F8A8C4 100%);
+  --grad-luxury:    linear-gradient(135deg, #D4AF37 0%, #F7E7CE 50%, #D4AF37 100%);
+  --grad-aurora:    linear-gradient(135deg, #F8A8C4 0%, #CDB4FF 50%, #BDE0FE 100%);
+  --grad-hero:      linear-gradient(145deg, #FFF7FB 0%, #FDDCEC 40%, #EDE5FF 80%, #E5F4FF 100%);
+
+  /* ── SPACING ── */
+  --space-xs:  4px;
+  --space-sm:  8px;
+  --space-md:  16px;
+  --space-lg:  24px;
+  --space-xl:  40px;
+  --space-xxl: 64px;
+  --space-3xl: 96px;
+
+  /* ── RADIUS ── */
+  --radius-xs:   4px;
+  --radius-sm:   8px;
+  --radius-md:   16px;
+  --radius-lg:   24px;
+  --radius-xl:   32px;
+  --radius-full: 999px;
+
+  /* ── SHADOWS ── */
+  --shadow-soft:   0 10px 30px rgba(248, 168, 196, 0.15);
+  --shadow-medium: 0 20px 50px rgba(0, 0, 0, 0.07);
+  --shadow-glow:   0 0 25px rgba(248, 168, 196, 0.35);
+  --shadow-gold:   0 0 25px rgba(212, 175, 55, 0.3);
+  --shadow-lavender: 0 0 25px rgba(205, 180, 255, 0.35);
+  --shadow-heavy:  0 30px 70px rgba(0, 0, 0, 0.12);
+  --shadow-inner:  inset 0 2px 8px rgba(248, 168, 196, 0.12);
+
+  /* ── TYPOGRAPHY ── */
+  --font-heading:  'Playfair Display', 'Georgia', serif;
+  --font-editorial:'Cormorant Garamond', 'Georgia', serif;
+  --font-body:     'Poppins', 'Inter', sans-serif;
+  --font-brand:    'Quicksand', 'Poppins', sans-serif;
+
+  --text-xs:   0.75rem;
+  --text-sm:   0.875rem;
+  --text-base: 1rem;
+  --text-lg:   1.125rem;
+  --text-xl:   1.25rem;
+  --text-2xl:  1.5rem;
+  --text-3xl:  2rem;
+  --text-4xl:  2.75rem;
+  --text-5xl:  3.5rem;
+  --text-6xl:  4.5rem;
+
+  /* ── TRANSITIONS ── */
+  --transition-fast:   all 0.15s ease;
+  --transition-base:   all 0.3s ease;
+  --transition-smooth: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-slow:   all 0.6s ease;
+
+  /* ── Z-INDEX ── */
+  --z-dropdown: 100;
+  --z-sticky:   200;
+  --z-overlay:  300;
+  --z-modal:    400;
+  --z-toast:    500;
+}
+
+/* ── DARK MODE OVERRIDES (optional) ── */
+[data-theme="dark"] {
+  --background:    #1A0E1F;
+  --surface:       #241428;
+  --surface-alt:   #2E1A35;
+  --text:          #F5E6F0;
+  --text-muted:    #C4A8C9;
+  --text-light:    #9A7FA0;
+  --border:        #3D2449;
+  --border-light:  #2E1A35;
+
+  --shadow-soft:   0 10px 30px rgba(248, 168, 196, 0.08);
+  --shadow-medium: 0 20px 50px rgba(0, 0, 0, 0.3);
+  --shadow-glow:   0 0 30px rgba(248, 168, 196, 0.2);
+}

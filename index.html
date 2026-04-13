@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>💖 Feminine UI Kit — Soft Luxury Design System</title>
+  <meta name="description" content="A full feminine UI design system featuring soft luxury components, pastel gradients, glassmorphism, and elegant typography for beauty, boutique, and fashion brands." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Poppins:wght@300;400;500;600;700&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar glass" id="main-navbar">
+    <div class="navbar-brand">
+      <span class="brand-icon">🌸</span>
+      <span class="brand-name">FemmeUI</span>
+    </div>
+    <ul class="navbar-links">
+      <li><a href="#buttons" class="nav-link">Buttons</a></li>
+      <li><a href="#cards" class="nav-link">Cards</a></li>
+      <li><a href="#forms" class="nav-link">Forms</a></li>
+      <li><a href="#overlays" class="nav-link">Overlays</a></li>
+      <li><a href="#layout" class="nav-link">Layout</a></li>
+      <li><a href="#commerce" class="nav-link">Commerce</a></li>
+    </ul>
+    <div class="navbar-actions">
+      <button class="btn btn-primary btn-sm" onclick="openModal('welcome-modal')">Get Started</button>
+      <button class="btn-icon" id="theme-toggle" onclick="toggleTheme()" title="Toggle theme">✨</button>
+    </div>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()" id="mobile-menu-btn">☰</button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#buttons" class="mobile-nav-link" onclick="closeMobileMenu()">Buttons</a>
+    <a href="#cards" class="mobile-nav-link" onclick="closeMobileMenu()">Cards</a>
+    <a href="#forms" class="mobile-nav-link" onclick="closeMobileMenu()">Forms</a>
+    <a href="#overlays" class="mobile-nav-link" onclick="closeMobileMenu()">Overlays</a>
+    <a href="#layout" class="mobile-nav-link" onclick="closeMobileMenu()">Layout</a>
+    <a href="#commerce" class="mobile-nav-link" onclick="closeMobileMenu()">Commerce</a>
+  </div>
+
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg-orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+    <div class="hero-content reveal">
+      <div class="hero-badge">
+        <span>💎 Soft Luxury Design System</span>
+      </div>
+      <h1 class="hero-title">
+        Beautiful <em>Feminine</em><br/>UI Components
+      </h1>
+      <p class="hero-subtitle">
+        A complete design kit crafted for beauty brands, boutiques &amp; salons.<br/>
+        Pastel palettes · Glassmorphism · Micro-animations · Editorial feel.
+      </p>
+      <div class="hero-actions">
+        <button class="btn btn-primary btn-lg" onclick="document.getElementById('buttons').scrollIntoView({behavior:'smooth'})">
+          Explore Components
+        </button>
+        <button class="btn btn-outline btn-lg" onclick="document.getElementById('commerce').scrollIntoView({behavior:'smooth'})">
+          See Commerce Kit ✨
+        </button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item"><span class="stat-num">32+</span><span class="stat-label">Components</span></div>
+        <div class="stat-dot">·</div>
+        <div class="stat-item"><span class="stat-num">6</span><span class="stat-label">Color Themes</span></div>
+        <div class="stat-dot">·</div>
+        <div class="stat-item"><span class="stat-num">∞</span><span class="stat-label">Possibilities</span></div>
+      </div>
+    </div>
+    <div class="hero-visual reveal-delay">
+      <div class="hero-card-stack">
+        <div class="floating-card card-1 glass">
+          <div class="fc-icon">🌸</div>
+          <div class="fc-text">Blush Collection</div>
+          <div class="fc-sub">New Arrivals</div>
+        </div>
+        <div class="floating-card card-2 glass">
+          <div class="fc-icon">💜</div>
+          <div class="fc-text">Lavender Dreams</div>
+          <div class="fc-sub">Bestseller</div>
+        </div>
+        <div class="floating-card card-3 glass">
+          <div class="fc-icon">🍑</div>
+          <div class="fc-text">Peach Glow</div>
+          <div class="fc-sub">Limited Edition</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COLOR SYSTEM ===== -->
+  <section class="section" id="colors">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">🎨 Design Tokens</div>
+        <h2 class="section-title">Color System</h2>
+        <p class="section-subtitle">Soft luxury palette designed for feminine aesthetic brands</p>
+      </div>
+      <div class="color-grid reveal">
+        <div class="color-swatch" style="--swatch:#FFF7FB">
+          <div class="swatch-color" style="background:#FFF7FB;border:1px solid #F2DCE5"></div>
+          <div class="swatch-name">Background</div>
+          <div class="swatch-hex">#FFF7FB</div>
+        </div>
+        <div class="color-swatch" style="--swatch:#F8A8C4">
+          <div class="swatch-color" style="background:#F8A8C4"></div>
+          <div class="swatch-name">Primary Blush</div>
+          <div class="swatch-hex">#F8A8C4</div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#E86FA3"></div>
+          <div class="swatch-name">Primary Dark</div>
+          <div class="swatch-hex">#E86FA3</div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#CDB4FF"></div>
+          <div class="swatch-name">Lavender</div>
+          <div class="swatch-hex">#CDB4FF</div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#FFD6A5"></div>
+          <div class="swatch-name">Peach Gold</div>
+          <div class="swatch-hex">#FFD6A5</div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#BDE0FE"></div>
+          <div class="swatch-name">Baby Blue</div>
+          <div class="swatch-hex">#BDE0FE</div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#D4AF37"></div>
+          <div class="swatch-name">Gold Luxury</div>
+          <div class="swatch-hex">#D4AF37</div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#F7E7CE"></div>
+          <div class="swatch-name">Champagne</div>
+          <div class="swatch-hex">#F7E7CE</div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#A8E6CF"></div>
+          <div class="swatch-name">Mint Success</div>
+          <div class="swatch-hex">#A8E6CF</div>
+        </div>
+        <div class="color-swatch">
+          <div class="swatch-color" style="background:#2B2B2B"></div>
+          <div class="swatch-name">Ink Text</div>
+          <div class="swatch-hex">#2B2B2B</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TYPOGRAPHY ===== -->
+  <section class="section section-alt" id="typography">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">✍️ Typography</div>
+        <h2 class="section-title">Elegant Fonts</h2>
+        <p class="section-subtitle">Editorial headings meet clean body copy</p>
+      </div>
+      <div class="type-showcase reveal">
+        <div class="type-sample">
+          <div class="type-meta">Playfair Display · Heading 1</div>
+          <h1 class="type-h1" style="font-family:'Playfair Display',serif">Luxury Beauty Awaits You</h1>
+        </div>
+        <div class="type-sample">
+          <div class="type-meta">Cormorant Garamond · Heading 2</div>
+          <h2 class="type-h2" style="font-family:'Cormorant Garamond',serif;font-style:italic">Crafted With Love &amp; Grace</h2>
+        </div>
+        <div class="type-sample">
+          <div class="type-meta">Poppins · Body</div>
+          <p class="type-body" style="font-family:'Poppins',sans-serif">Clean, modern, and feminine. Every word feels considered, every sentence breathes with generous spacing and soft warmth that invites you to stay.</p>
+        </div>
+        <div class="type-sample">
+          <div class="type-meta">Quicksand · Brand Accent</div>
+          <p class="type-brand" style="font-family:'Quicksand',sans-serif;font-weight:700;font-size:1.5rem;color:var(--primary)">✨ Soft · Playful · Friendly</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BUTTONS ===== -->
+  <section class="section" id="buttons">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">💅 Buttons</div>
+        <h2 class="section-title">Button System</h2>
+        <p class="section-subtitle">Every interaction feels soft, elevated, and intentional</p>
+      </div>
+
+      <div class="component-group reveal">
+        <h3 class="group-title">Primary Variants</h3>
+        <div class="btn-showcase">
+          <button class="btn btn-primary">Blush Primary</button>
+          <button class="btn btn-secondary">Lavender</button>
+          <button class="btn btn-gold">✨ Luxury Gold</button>
+          <button class="btn btn-peach">Peach Glow</button>
+          <button class="btn btn-outline">Outline Rose</button>
+          <button class="btn btn-ghost">Ghost Style</button>
+          <button class="btn btn-glass">Glass Effect</button>
+          <button class="btn btn-danger">Soft Danger</button>
+        </div>
+      </div>
+
+      <div class="component-group reveal">
+        <h3 class="group-title">Sizes</h3>
+        <div class="btn-showcase align-center">
+          <button class="btn btn-primary btn-xs">Tiny</button>
+          <button class="btn btn-primary btn-sm">Small</button>
+          <button class="btn btn-primary">Default</button>
+          <button class="btn btn-primary btn-lg">Large</button>
+          <button class="btn btn-primary btn-xl">Extra Large</button>
+        </div>
+      </div>
+
+      <div class="component-group reveal">
+        <h3 class="group-title">Icon Buttons &amp; Pills</h3>
+        <div class="btn-showcase">
+          <button class="btn btn-primary btn-pill">💖 Add to Wishlist</button>
+          <button class="btn btn-gold btn-pill">🛒 Shop Now</button>
+          <button class="btn btn-secondary btn-pill">📅 Book Appointment</button>
+          <button class="btn-icon btn-icon-primary">♥</button>
+          <button class="btn-icon btn-icon-secondary">★</button>
+          <button class="btn-icon btn-icon-gold">✦</button>
+          <button class="btn btn-primary btn-loading" id="loading-btn" onclick="triggerLoadingDemo()">
+            <span class="btn-text">Place Order</span>
+            <span class="btn-spinner hidden"></span>
+          </button>
+        </div>
+      </div>
+
+      <div class="component-group reveal">
+        <h3 class="group-title">Gradient Buttons</h3>
+        <div class="btn-showcase">
+          <button class="btn btn-gradient-rose">Rose Gradient</button>
+          <button class="btn btn-gradient-lavender">Lavender Sky</button>
+          <button class="btn btn-gradient-peach">Peach Dreams</button>
+          <button class="btn btn-gradient-luxury">💎 Luxury</button>
+          <button class="btn btn-gradient-aurora">Aurora</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BADGES & TAGS ===== -->
+  <section class="section section-alt" id="badges">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">🏷️ Badges & Tags</div>
+        <h2 class="section-title">Labels &amp; Chips</h2>
+        <p class="section-subtitle">Soft pill-shaped status indicators</p>
+      </div>
+      <div class="component-group reveal">
+        <div class="badge-showcase">
+          <span class="badge badge-primary">✨ New</span>
+          <span class="badge badge-secondary">Trending</span>
+          <span class="badge badge-gold">💎 Limited</span>
+          <span class="badge badge-success">✓ In Stock</span>
+          <span class="badge badge-warning">⚡ Sale</span>
+          <span class="badge badge-danger">🔥 Hot</span>
+          <span class="badge badge-muted">Sold Out</span>
+        </div>
+        <div class="tag-showcase">
+          <span class="tag" onclick="toggleTag(this)">Skincare</span>
+          <span class="tag" onclick="toggleTag(this)">Makeup</span>
+          <span class="tag active" onclick="toggleTag(this)">Hair Care</span>
+          <span class="tag" onclick="toggleTag(this)">Nails</span>
+          <span class="tag" onclick="toggleTag(this)">Fragrance</span>
+          <span class="tag" onclick="toggleTag(this)">Wellness</span>
+          <span class="tag" onclick="toggleTag(this)">Spa</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CARDS ===== -->
+  <section class="section" id="cards">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">🧁 Cards</div>
+        <h2 class="section-title">Card Components</h2>
+        <p class="section-subtitle">Beautiful containers for every content type</p>
+      </div>
+
+      <!-- Standard Cards -->
+      <div class="component-group reveal">
+        <h3 class="group-title">Soft Shadow Cards</h3>
+        <div class="card-grid">
+          <div class="card card-soft">
+            <div class="card-icon-wrap" style="background:linear-gradient(135deg,#F8A8C4,#CDB4FF)">💄</div>
+            <h4 class="card-title">Lip Collection</h4>
+            <p class="card-text">Buttery smooth formulas in 48 shades. Long-lasting, moisturizing, and utterly gorgeous.</p>
+            <button class="btn btn-primary btn-sm">Shop Now</button>
+          </div>
+          <div class="card card-soft">
+            <div class="card-icon-wrap" style="background:linear-gradient(135deg,#CDB4FF,#BDE0FE)">✨</div>
+            <h4 class="card-title">Glow Serums</h4>
+            <p class="card-text">Vitamin C, hyaluronic acid and pearl extract for luminous, radiant skin.</p>
+            <button class="btn btn-secondary btn-sm">Explore</button>
+          </div>
+          <div class="card card-soft">
+            <div class="card-icon-wrap" style="background:linear-gradient(135deg,#FFD6A5,#F8A8C4)">🌸</div>
+            <h4 class="card-title">Rose Face Mist</h4>
+            <p class="card-text">Refreshing botanical mist with real rose water for a dewy finish all day.</p>
+            <button class="btn btn-peach btn-sm">Discover</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Glassmorphism Cards -->
+      <div class="component-group reveal" style="background:linear-gradient(135deg,#F8A8C4 0%,#CDB4FF 50%,#BDE0FE 100%);border-radius:var(--radius-xl);padding:var(--space-xl)">
+        <h3 class="group-title" style="color:#fff;text-shadow:0 2px 8px rgba(0,0,0,0.15)">Glassmorphism Cards</h3>
+        <div class="card-grid">
+          <div class="card card-glass">
+            <div class="glass-icon">🌙</div>
+            <h4 class="card-title" style="color:#fff">Night Ritual</h4>
+            <p class="card-text" style="color:rgba(255,255,255,0.85)">Indulge in an overnight repair mask that rejuvenates while you dream.</p>
+            <button class="btn btn-glass-white btn-sm">Learn More</button>
+          </div>
+          <div class="card card-glass">
+            <div class="glass-icon">☀️</div>
+            <h4 class="card-title" style="color:#fff">Morning Glow</h4>
+            <p class="card-text" style="color:rgba(255,255,255,0.85)">Sun protection meets hydration in this featherlight daily SPF serum.</p>
+            <button class="btn btn-glass-white btn-sm">Shop SPF</button>
+          </div>
+          <div class="card card-glass">
+            <div class="glass-icon">🧴</div>
+            <h4 class="card-title" style="color:#fff">Glow Drops</h4>
+            <p class="card-text" style="color:rgba(255,255,255,0.85)">Three drops for radiant, glass-skin perfection. Mix with foundation or wear alone.</p>
+            <button class="btn btn-glass-white btn-sm">Get Yours</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Profile Cards -->
+      <div class="component-group reveal">
+        <h3 class="group-title">Profile &amp; Stylist Cards</h3>
+        <div class="profile-card-grid">
+          <div class="profile-card">
+            <div class="profile-avatar" style="background:linear-gradient(135deg,#F8A8C4,#CDB4FF)">
+              <span>AM</span>
+            </div>
+            <div class="profile-badge">⭐ Top Artist</div>
+            <h4 class="profile-name">Amélie Martin</h4>
+            <p class="profile-role">Hair Color Specialist</p>
+            <div class="rating">
+              <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span>
+              <span class="rating-count">(128)</span>
+            </div>
+            <div class="profile-tags">
+              <span class="tag active">Balayage</span>
+              <span class="tag active">Color</span>
+              <span class="tag active">Cuts</span>
+            </div>
+            <button class="btn btn-primary btn-pill" style="width:100%;margin-top:12px">Book Amélie</button>
+          </div>
+          <div class="profile-card">
+            <div class="profile-avatar" style="background:linear-gradient(135deg,#CDB4FF,#BDE0FE)">
+              <span>SL</span>
+            </div>
+            <div class="profile-badge" style="background:linear-gradient(135deg,#CDB4FF,#BDE0FE);color:#fff">💜 Senior MUA</div>
+            <h4 class="profile-name">Sofia Laurent</h4>
+            <p class="profile-role">Makeup Artist</p>
+            <div class="rating">
+              <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star half">★</span>
+              <span class="rating-count">(94)</span>
+            </div>
+            <div class="profile-tags">
+              <span class="tag active">Bridal</span>
+              <span class="tag active">Editorial</span>
+            </div>
+            <button class="btn btn-secondary btn-pill" style="width:100%;margin-top:12px">Book Sofia</button>
+          </div>
+          <div class="profile-card">
+            <div class="profile-avatar" style="background:linear-gradient(135deg,#FFD6A5,#F8A8C4)">
+              <span>IC</span>
+            </div>
+            <div class="profile-badge" style="background:linear-gradient(135deg,#D4AF37,#FFD6A5);color:#6B4800">✦ Gold Artist</div>
+            <h4 class="profile-name">Isabelle Chen</h4>
+            <p class="profile-role">Nail Art Specialist</p>
+            <div class="rating">
+              <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span>
+              <span class="rating-count">(211)</span>
+            </div>
+            <div class="profile-tags">
+              <span class="tag active">Gel</span>
+              <span class="tag active">Acrylics</span>
+              <span class="tag active">Art</span>
+            </div>
+            <button class="btn btn-gold btn-pill" style="width:100%;margin-top:12px">Book Isabelle</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Image Overlay Cards -->
+      <div class="component-group reveal">
+        <h3 class="group-title">Image Overlay Cards</h3>
+        <div class="overlay-card-grid">
+          <div class="overlay-card" style="background:linear-gradient(160deg,#F8A8C4 0%,#CDB4FF 100%)">
+            <div class="overlay-content">
+              <span class="overlay-badge">New Collection</span>
+              <h4 class="overlay-title">Spring Bloom</h4>
+              <p class="overlay-text">Soft pastels for the season</p>
+              <button class="btn btn-glass-white btn-sm btn-pill">Explore →</button>
+            </div>
+          </div>
+          <div class="overlay-card" style="background:linear-gradient(160deg,#D4AF37 0%,#F7E7CE 100%)">
+            <div class="overlay-content">
+              <span class="overlay-badge" style="background:rgba(212,175,55,0.3)">Luxury Edit</span>
+              <h4 class="overlay-title">Gold Hour</h4>
+              <p class="overlay-text">The art of luminous skin</p>
+              <button class="btn btn-glass-white btn-sm btn-pill">Shop Gold →</button>
+            </div>
+          </div>
+          <div class="overlay-card" style="background:linear-gradient(160deg,#BDE0FE 0%,#CDB4FF 60%,#F8A8C4 100%)">
+            <div class="overlay-content">
+              <span class="overlay-badge" style="background:rgba(189,224,254,0.3)">Limited</span>
+              <h4 class="overlay-title">Dream State</h4>
+              <p class="overlay-text">Ethereal color collection</p>
+              <button class="btn btn-glass-white btn-sm btn-pill">Discover →</button>
+            </div>
+          </div>
+          <div class="overlay-card" style="background:linear-gradient(160deg,#A8E6CF 0%,#BDE0FE 100%)">
+            <div class="overlay-content">
+              <span class="overlay-badge" style="background:rgba(168,230,207,0.3)">Wellness</span>
+              <h4 class="overlay-title">Zen Garden</h4>
+              <p class="overlay-text">Skincare meets mindfulness</p>
+              <button class="btn btn-glass-white btn-sm btn-pill">Explore →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FORMS ===== -->
+  <section class="section section-alt" id="forms">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">🧾 Forms</div>
+        <h2 class="section-title">Form Components</h2>
+        <p class="section-subtitle">Inputs that feel soft and inviting to interact with</p>
+      </div>
+
+      <div class="form-showcase-grid reveal">
+        <!-- Left: input demo -->
+        <div class="form-demo">
+          <h3 class="group-title">Floating Label Inputs</h3>
+
+          <div class="form-group">
+            <input class="input-soft" id="input-name" type="text" placeholder=" " />
+            <label class="input-label" for="input-name">Full Name</label>
+          </div>
+          <div class="form-group">
+            <input class="input-soft" id="input-email" type="email" placeholder=" " />
+            <label class="input-label" for="input-email">Email Address</label>
+          </div>
+          <div class="form-group">
+            <input class="input-soft" id="input-phone" type="tel" placeholder=" " />
+            <label class="input-label" for="input-phone">Phone Number</label>
+          </div>
+          <div class="form-group">
+            <input class="input-soft input-success" id="input-promo" type="text" value="BLUSH20" placeholder=" " />
+            <label class="input-label float" for="input-promo">Promo Code</label>
+            <span class="input-hint success">✓ Code applied — 20% off!</span>
+          </div>
+          <div class="form-group">
+            <input class="input-soft input-error" id="input-card" type="text" placeholder=" " />
+            <label class="input-label" for="input-card">Card Number</label>
+            <span class="input-hint error">Please enter a valid card number</span>
+          </div>
+          <div class="form-group">
+            <textarea class="input-soft textarea-soft" id="textarea-msg" placeholder=" " rows="3"></textarea>
+            <label class="input-label" for="textarea-msg">Special Requests</label>
+          </div>
+
+          <h3 class="group-title" style="margin-top:var(--space-lg)">Select &amp; Dropdowns</h3>
+          <div class="form-group">
+            <select class="select-soft" id="select-service">
+              <option value="">Choose a service…</option>
+              <option>💄 Makeup – Full Glam ($120)</option>
+              <option>💅 Nails – Gel Manicure ($65)</option>
+              <option>💆 Facial – Deep Cleanse ($95)</option>
+              <option>💇 Hair – Balayage ($200+)</option>
+              <option>🧖 Spa – Full Body ($180)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Right: toggles, checkboxes etc -->
+        <div class="form-demo">
+          <h3 class="group-title">Toggles &amp; Checkboxes</h3>
+          <div class="toggle-group">
+            <label class="toggle-label" for="toggle-notif">Email Notifications</label>
+            <label class="toggle">
+              <input type="checkbox" id="toggle-notif" checked />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="toggle-group">
+            <label class="toggle-label" for="toggle-sms">SMS Reminders</label>
+            <label class="toggle">
+              <input type="checkbox" id="toggle-sms" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="toggle-group">
+            <label class="toggle-label" for="toggle-marketing">Beauty Tips &amp; Offers</label>
+            <label class="toggle">
+              <input type="checkbox" id="toggle-marketing" checked />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+
+          <h3 class="group-title" style="margin-top:var(--space-lg)">Heart Checkboxes</h3>
+          <div class="checkbox-fancy-group">
+            <label class="checkbox-fancy" for="chk-bb">
+              <input type="checkbox" id="chk-bb" checked />
+              <span class="checkbox-heart">♥</span>
+              <span>Blush & Bronze</span>
+            </label>
+            <label class="checkbox-fancy" for="chk-lash">
+              <input type="checkbox" id="chk-lash" />
+              <span class="checkbox-heart">♥</span>
+              <span>Lash Extensions</span>
+            </label>
+            <label class="checkbox-fancy" for="chk-brow">
+              <input type="checkbox" id="chk-brow" checked />
+              <span class="checkbox-heart">♥</span>
+              <span>Brow Lamination</span>
+            </label>
+            <label class="checkbox-fancy" for="chk-facial">
+              <input type="checkbox" id="chk-facial" />
+              <span class="checkbox-heart">♥</span>
+              <span>Hydro Facial</span>
+            </label>
+          </div>
+
+          <h3 class="group-title" style="margin-top:var(--space-lg)">Slider</h3>
+          <div class="form-group">
+            <label class="slider-label">Budget Range: <strong id="budget-val">$150</strong></label>
+            <input type="range" class="slider-soft" id="budget-slider" min="50" max="500" value="150" oninput="document.getElementById('budget-val').textContent='$'+this.value" />
+            <div class="slider-ticks"><span>$50</span><span>$500</span></div>
+          </div>
+
+          <h3 class="group-title" style="margin-top:var(--space-lg)">Radio (Style Preference)</h3>
+          <div class="radio-group">
+            <label class="radio-fancy" for="r-natural"><input type="radio" id="r-natural" name="style" /> Natural Glow</label>
+            <label class="radio-fancy" for="r-glam"><input type="radio" id="r-glam" name="style" checked /> Full Glam</label>
+            <label class="radio-fancy" for="r-minimal"><input type="radio" id="r-minimal" name="style" /> Minimalist</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== AVATARS & PROGRESS ===== -->
+  <section class="section" id="misc">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">🪄 Misc Components</div>
+        <h2 class="section-title">Avatars, Progress &amp; More</h2>
+        <p class="section-subtitle">The finishing touches that make an interface feel complete</p>
+      </div>
+
+      <div class="misc-grid reveal">
+        <!-- Avatars -->
+        <div class="misc-block">
+          <h3 class="group-title">Avatar System</h3>
+          <div class="avatar-group">
+            <div class="avatar avatar-xl" style="background:linear-gradient(135deg,#F8A8C4,#CDB4FF)"><span>AM</span></div>
+            <div class="avatar avatar-lg" style="background:linear-gradient(135deg,#CDB4FF,#BDE0FE)"><span>SL</span></div>
+            <div class="avatar" style="background:linear-gradient(135deg,#FFD6A5,#F8A8C4)"><span>IC</span></div>
+            <div class="avatar avatar-sm" style="background:linear-gradient(135deg,#BDE0FE,#A8E6CF)"><span>RB</span></div>
+          </div>
+          <div class="avatar-stack">
+            <div class="avatar avatar-sm avatar-stacked" style="background:linear-gradient(135deg,#F8A8C4,#CDB4FF)"><span>A</span></div>
+            <div class="avatar avatar-sm avatar-stacked" style="background:linear-gradient(135deg,#CDB4FF,#BDE0FE)"><span>S</span></div>
+            <div class="avatar avatar-sm avatar-stacked" style="background:linear-gradient(135deg,#FFD6A5,#F8A8C4)"><span>I</span></div>
+            <div class="avatar avatar-sm avatar-stacked avatar-more"><span>+8</span></div>
+          </div>
+        </div>
+
+        <!-- Progress Bars -->
+        <div class="misc-block">
+          <h3 class="group-title">Progress Bars</h3>
+          <div class="progress-item">
+            <div class="progress-label"><span>Skin Glow Level</span><span>87%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:87%;background:linear-gradient(90deg,#F8A8C4,#E86FA3)"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-label"><span>Hydration Score</span><span>64%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:64%;background:linear-gradient(90deg,#CDB4FF,#BDE0FE)"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-label"><span>Loyalty Points</span><span>42%</span></div>
+            <div class="progress-bar"><div class="progress-fill" style="width:42%;background:linear-gradient(90deg,#FFD6A5,#F8A8C4)"></div></div>
+          </div>
+          <div class="progress-item">
+            <div class="progress-label"><span>Order Progress</span><span class="shimmer-text">Processing…</span></div>
+            <div class="progress-bar progress-shimmer"><div class="progress-fill shimmer" style="width:60%"></div></div>
+          </div>
+        </div>
+
+        <!-- Loader / Spinner -->
+        <div class="misc-block">
+          <h3 class="group-title">Loaders</h3>
+          <div class="loaders-row">
+            <div class="loader loader-spin"></div>
+            <div class="loader loader-dots"><span></span><span></span><span></span></div>
+            <div class="loader loader-heart">♥</div>
+            <div class="loader loader-pulse"></div>
+          </div>
+        </div>
+
+        <!-- Stepper -->
+        <div class="misc-block">
+          <h3 class="group-title">Checkout Stepper</h3>
+          <div class="stepper">
+            <div class="step step-done">
+              <div class="step-circle">✓</div>
+              <div class="step-label">Cart</div>
+            </div>
+            <div class="step-line step-line-done"></div>
+            <div class="step step-active">
+              <div class="step-circle">2</div>
+              <div class="step-label">Shipping</div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step">
+              <div class="step-circle">3</div>
+              <div class="step-label">Payment</div>
+            </div>
+            <div class="step-line"></div>
+            <div class="step">
+              <div class="step-circle">4</div>
+              <div class="step-label">Confirm</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="component-group reveal" style="margin-top:var(--space-xl)">
+        <h3 class="group-title">Tab Components</h3>
+        <div class="tabs" id="demo-tabs">
+          <button class="tab active" onclick="switchTab('tab-all',this)">All Products</button>
+          <button class="tab" onclick="switchTab('tab-face',this)">Face</button>
+          <button class="tab" onclick="switchTab('tab-eyes',this)">Eyes</button>
+          <button class="tab" onclick="switchTab('tab-lips',this)">Lips</button>
+          <button class="tab" onclick="switchTab('tab-skin',this)">Skincare</button>
+        </div>
+        <div class="tab-content" id="tab-all">
+          <p style="color:var(--text-muted);padding:var(--space-md)">Showing all 128 products across every category. Use tabs above to filter by type.</p>
+        </div>
+        <div class="tab-content hidden" id="tab-face">
+          <p style="color:var(--text-muted);padding:var(--space-md)">Foundation, Blush, Bronzer, Highlighter, Setting Powder — 32 products.</p>
+        </div>
+        <div class="tab-content hidden" id="tab-eyes">
+          <p style="color:var(--text-muted);padding:var(--space-md)">Mascara, Eyeshadow, Liner, Brow — 28 products.</p>
+        </div>
+        <div class="tab-content hidden" id="tab-lips">
+          <p style="color:var(--text-muted);padding:var(--space-md)">Lipstick, Gloss, Liner, Balm — 24 products.</p>
+        </div>
+        <div class="tab-content hidden" id="tab-skin">
+          <p style="color:var(--text-muted);padding:var(--space-md)">Cleanser, Serum, Moisturizer, SPF, Treatments — 44 products.</p>
+        </div>
+      </div>
+
+      <!-- Accordion -->
+      <div class="component-group reveal" style="margin-top:var(--space-xl)">
+        <h3 class="group-title">FAQ Accordion</h3>
+        <div class="accordion">
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)">
+              <span>What is your cancellation policy?</span>
+              <span class="accordion-icon">↓</span>
+            </button>
+            <div class="accordion-body">
+              <p>We kindly ask for 24 hours notice for any cancellations or rescheduling. Same-day cancellations may incur a 50% fee of the booked service.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)">
+              <span>Do you offer loyalty rewards?</span>
+              <span class="accordion-icon">↓</span>
+            </button>
+            <div class="accordion-body">
+              <p>Yes! Every purchase earns Blush Points. Redeem 500 points for $25 credit. Members also get early access to new collections and exclusive offers.</p>
+            </div>
+          </div>
+          <div class="accordion-item active">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)">
+              <span>Are your products cruelty-free?</span>
+              <span class="accordion-icon">↑</span>
+            </button>
+            <div class="accordion-body" style="display:block">
+              <p>Absolutely! All our products are 100% cruelty-free and certified by Leaping Bunny. We also carry a growing selection of vegan formulas.</p>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-trigger" onclick="toggleAccordion(this)">
+              <span>What payment methods do you accept?</span>
+              <span class="accordion-icon">↓</span>
+            </button>
+            <div class="accordion-body">
+              <p>We accept all major credit cards, PayPal, Apple Pay, Google Pay, and Klarna buy-now-pay-later for orders over $50.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== OVERLAYS & NOTIFICATIONS ===== -->
+  <section class="section section-alt" id="overlays">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">🪟 Overlays</div>
+        <h2 class="section-title">Modals, Toasts &amp; Tooltips</h2>
+        <p class="section-subtitle">Elegant interruptions and gentle feedback</p>
+      </div>
+      <div class="overlay-demo-grid reveal">
+        <div class="demo-block">
+          <h3 class="group-title">Modals</h3>
+          <div class="btn-showcase">
+            <button class="btn btn-primary" onclick="openModal('welcome-modal')">💖 Welcome Modal</button>
+            <button class="btn btn-secondary" onclick="openModal('booking-modal')">📅 Booking Modal</button>
+            <button class="btn btn-gold" onclick="openModal('cart-modal')">🛒 Mini Cart</button>
+          </div>
+        </div>
+        <div class="demo-block">
+          <h3 class="group-title">Toast Notifications</h3>
+          <div class="btn-showcase">
+            <button class="btn btn-outline" onclick="showToast('success','✓ Added to bag!','Your item has been added to your shopping bag.')">Success Toast</button>
+            <button class="btn btn-outline" onclick="showToast('warning','⚡ Low stock!','Only 2 items left in this shade.')">Warning Toast</button>
+            <button class="btn btn-outline" onclick="showToast('error','Oops!','Something went wrong. Please try again.')">Error Toast</button>
+            <button class="btn btn-outline" onclick="showToast('info','💜 Tip!','Apply serum to damp skin for best absorption.')">Info Toast</button>
+          </div>
+        </div>
+        <div class="demo-block">
+          <h3 class="group-title">Tooltips</h3>
+          <div class="btn-showcase">
+            <div class="tooltip-wrap">
+              <button class="btn btn-primary">Hover Me ✨</button>
+              <div class="tooltip">Soft luxury glow effect — hover for magic!</div>
+            </div>
+            <div class="tooltip-wrap">
+              <button class="btn btn-secondary">More Info 💜</button>
+              <div class="tooltip tooltip-left">Lavender-scented body butter, 200ml</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Toast container -->
+      <div class="toast-container" id="toast-container"></div>
+    </div>
+  </section>
+
+  <!-- ===== COMMERCE KIT ===== -->
+  <section class="section" id="commerce">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">🛍️ Commerce Kit</div>
+        <h2 class="section-title">Product &amp; Shop Components</h2>
+        <p class="section-subtitle">Everything you need for a boutique beauty store</p>
+      </div>
+
+      <!-- Product Grid -->
+      <div class="component-group reveal">
+        <h3 class="group-title">Product Cards</h3>
+        <div class="product-grid">
+
+          <div class="product-card" id="prod-1">
+            <div class="product-image" style="background:linear-gradient(135deg,#FFF0F5,#F8A8C4 80%)">
+              <div class="product-emoji">🌹</div>
+              <button class="wishlist-btn active" onclick="toggleWishlist(this)" title="Wishlist">♥</button>
+              <span class="product-badge">New</span>
+            </div>
+            <div class="product-info">
+              <span class="product-brand">BLUSH LAB</span>
+              <h4 class="product-name">Rose Velvet Lip Crème</h4>
+              <div class="product-rating">
+                ★★★★★ <span class="rating-num">4.9</span>
+              </div>
+              <div class="product-price-row">
+                <span class="product-price">$34</span>
+                <span class="product-price-old">$45</span>
+              </div>
+              <button class="btn btn-primary btn-pill product-btn" onclick="addToCartDemo()">Add to Bag 🛍️</button>
+            </div>
+          </div>
+
+          <div class="product-card" id="prod-2">
+            <div class="product-image" style="background:linear-gradient(135deg,#F5F0FF,#CDB4FF 80%)">
+              <div class="product-emoji">🫧</div>
+              <button class="wishlist-btn" onclick="toggleWishlist(this)" title="Wishlist">♥</button>
+              <span class="product-badge badge-lavender">Bestseller</span>
+            </div>
+            <div class="product-info">
+              <span class="product-brand">GLOW LAB</span>
+              <h4 class="product-name">Cloud Skin Serum</h4>
+              <div class="product-rating">
+                ★★★★★ <span class="rating-num">4.8</span>
+              </div>
+              <div class="product-price-row">
+                <span class="product-price">$68</span>
+              </div>
+              <button class="btn btn-secondary btn-pill product-btn">Add to Bag 🛍️</button>
+            </div>
+          </div>
+
+          <div class="product-card" id="prod-3">
+            <div class="product-image" style="background:linear-gradient(135deg,#FFFAF0,#FFD6A5 80%)">
+              <div class="product-emoji">✨</div>
+              <button class="wishlist-btn" onclick="toggleWishlist(this)" title="Wishlist">♥</button>
+              <span class="product-badge badge-gold">✦ Luxury</span>
+            </div>
+            <div class="product-info">
+              <span class="product-brand">LUMIÈRE</span>
+              <h4 class="product-name">24K Glow Drops</h4>
+              <div class="product-rating">
+                ★★★★★ <span class="rating-num">5.0</span>
+              </div>
+              <div class="product-price-row">
+                <span class="product-price">$120</span>
+              </div>
+              <button class="btn btn-gold btn-pill product-btn">Add to Bag ✦</button>
+            </div>
+          </div>
+
+          <div class="product-card" id="prod-4">
+            <div class="product-image" style="background:linear-gradient(135deg,#F0FFF8,#A8E6CF 80%)">
+              <div class="product-emoji">🌿</div>
+              <button class="wishlist-btn" onclick="toggleWishlist(this)" title="Wishlist">♥</button>
+              <span class="product-badge badge-mint">Clean Beauty</span>
+            </div>
+            <div class="product-info">
+              <span class="product-brand">BOTANICA</span>
+              <h4 class="product-name">Herb Renewal Mask</h4>
+              <div class="product-rating">
+                ★★★★☆ <span class="rating-num">4.6</span>
+              </div>
+              <div class="product-price-row">
+                <span class="product-price">$52</span>
+                <span class="product-price-old">$65</span>
+              </div>
+              <button class="btn btn-outline btn-pill product-btn">Add to Bag 🌿</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Service Cards -->
+      <div class="component-group reveal" style="margin-top:var(--space-xl)">
+        <h3 class="group-title">Salon Service Cards</h3>
+        <div class="service-grid">
+          <div class="service-card">
+            <div class="service-icon" style="background:linear-gradient(135deg,#F8A8C4,#E86FA3)">💆</div>
+            <h4 class="service-name">Luxury Facial</h4>
+            <p class="service-desc">Deep cleanse, extractions, and a hydrating glow mask</p>
+            <div class="service-meta">
+              <span class="service-time">⏱ 75 min</span>
+              <span class="service-price">$95</span>
+            </div>
+            <button class="btn btn-primary btn-sm btn-pill service-btn">Book Now</button>
+          </div>
+          <div class="service-card">
+            <div class="service-icon" style="background:linear-gradient(135deg,#CDB4FF,#BDE0FE)">💅</div>
+            <h4 class="service-name">Gel Manicure</h4>
+            <p class="service-desc">Long-lasting gel polish with cuticle care and hand massage</p>
+            <div class="service-meta">
+              <span class="service-time">⏱ 60 min</span>
+              <span class="service-price">$65</span>
+            </div>
+            <button class="btn btn-secondary btn-sm btn-pill service-btn">Book Now</button>
+          </div>
+          <div class="service-card">
+            <div class="service-icon" style="background:linear-gradient(135deg,#FFD6A5,#D4AF37)">💫</div>
+            <h4 class="service-name">Balayage Color</h4>
+            <p class="service-desc">Hand-painted highlights for natural, sun-kissed dimension</p>
+            <div class="service-meta">
+              <span class="service-time">⏱ 3 hrs</span>
+              <span class="service-price">$220+</span>
+            </div>
+            <button class="btn btn-gold btn-sm btn-pill service-btn">Book Now</button>
+          </div>
+          <div class="service-card">
+            <div class="service-icon" style="background:linear-gradient(135deg,#A8E6CF,#BDE0FE)">🧖</div>
+            <h4 class="service-name">Spa Package</h4>
+            <p class="service-desc">Full body wrap, aromatherapy massage &amp; scalp ritual</p>
+            <div class="service-meta">
+              <span class="service-time">⏱ 2 hrs</span>
+              <span class="service-price">$180</span>
+            </div>
+            <button class="btn btn-outline btn-sm btn-pill service-btn">Book Now</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cart Drawer Preview -->
+      <div class="component-group reveal" style="margin-top:var(--space-xl)">
+        <h3 class="group-title">Cart Drawer &amp; Quantity Stepper</h3>
+        <div class="cart-preview">
+          <div class="cart-item">
+            <div class="cart-item-img" style="background:linear-gradient(135deg,#FFF0F5,#F8A8C4)">🌹</div>
+            <div class="cart-item-details">
+              <div class="cart-item-name">Rose Velvet Lip Crème</div>
+              <div class="cart-item-variant">Shade: Ruby Blush</div>
+              <div class="cart-item-price">$34.00</div>
+            </div>
+            <div class="qty-stepper">
+              <button class="qty-btn" onclick="adjustQty(this,-1)">−</button>
+              <span class="qty-val">2</span>
+              <button class="qty-btn" onclick="adjustQty(this,1)">+</button>
+            </div>
+            <button class="cart-remove" onclick="removeCartItem(this)">✕</button>
+          </div>
+          <div class="cart-item">
+            <div class="cart-item-img" style="background:linear-gradient(135deg,#F5F0FF,#CDB4FF)">🫧</div>
+            <div class="cart-item-details">
+              <div class="cart-item-name">Cloud Skin Serum</div>
+              <div class="cart-item-variant">30ml · All skin types</div>
+              <div class="cart-item-price">$68.00</div>
+            </div>
+            <div class="qty-stepper">
+              <button class="qty-btn" onclick="adjustQty(this,-1)">−</button>
+              <span class="qty-val">1</span>
+              <button class="qty-btn" onclick="adjustQty(this,1)">+</button>
+            </div>
+            <button class="cart-remove" onclick="removeCartItem(this)">✕</button>
+          </div>
+          <div class="cart-footer">
+            <div class="cart-total">
+              <span>Subtotal</span>
+              <strong>$136.00</strong>
+            </div>
+            <button class="btn btn-gradient-rose btn-pill" style="width:100%">Proceed to Checkout →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking Calendar Preview -->
+      <div class="component-group reveal" style="margin-top:var(--space-xl)">
+        <h3 class="group-title">Booking Calendar</h3>
+        <div class="booking-panel">
+          <div class="calendar-header">
+            <button class="cal-nav" onclick="shiftMonth(-1)">←</button>
+            <h4 id="cal-month-label">April 2026</h4>
+            <button class="cal-nav" onclick="shiftMonth(1)">→</button>
+          </div>
+          <div class="calendar-grid" id="calendar-grid"></div>
+          <div class="time-slots" id="time-slots">
+            <p class="time-slot-hint">Select a date to see available times</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LAYOUT SECTION ===== -->
+  <section class="section section-alt" id="layout">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">📐 Layout</div>
+        <h2 class="section-title">Hero &amp; Section Layouts</h2>
+        <p class="section-subtitle">Structural components for airy, editorial pages</p>
+      </div>
+
+      <!-- Testimonials -->
+      <div class="component-group reveal">
+        <h3 class="group-title">Testimonials Slider</h3>
+        <div class="testimonials-slider" id="testimonials">
+          <div class="testimonial-card active">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Absolutely obsessed with this brand. The packaging is gorgeous, the formulas are incredible — and my skin has never looked better. 10/10 no notes!"</p>
+            <div class="testimonial-author">
+              <div class="avatar avatar-sm" style="background:linear-gradient(135deg,#F8A8C4,#CDB4FF)"><span>JM</span></div>
+              <div>
+                <div class="author-name">Jade Monroe</div>
+                <div class="author-role">Beauty Editor · NYC</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"The Luxury Facial completely transformed my skin. Amélie is a true artist — she listened to every concern and the results were beyond my expectations."</p>
+            <div class="testimonial-author">
+              <div class="avatar avatar-sm" style="background:linear-gradient(135deg,#CDB4FF,#BDE0FE)"><span>SC</span></div>
+              <div>
+                <div class="author-name">Sophie Chen</div>
+                <div class="author-role">Interior Designer · LA</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"FemmeUI is the most beautiful design system I've ever used. Dropped it into my boutique site and instantly looked like a $1M brand."</p>
+            <div class="testimonial-author">
+              <div class="avatar avatar-sm" style="background:linear-gradient(135deg,#FFD6A5,#F8A8C4)"><span>LB</span></div>
+              <div>
+                <div class="author-name">Luna Baptiste</div>
+                <div class="author-role">Brand Founder · Paris</div>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-dots" id="testimonial-dots">
+            <button class="t-dot active" onclick="goToTestimonial(0)"></button>
+            <button class="t-dot" onclick="goToTestimonial(1)"></button>
+            <button class="t-dot" onclick="goToTestimonial(2)"></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pagination -->
+      <div class="component-group reveal" style="margin-top:var(--space-xl)">
+        <h3 class="group-title">Pagination</h3>
+        <div class="pagination" id="pagination">
+          <button class="page-btn" onclick="changePage(this,'prev')">← Prev</button>
+          <button class="page-btn active" onclick="changePage(this,1)">1</button>
+          <button class="page-btn" onclick="changePage(this,2)">2</button>
+          <button class="page-btn" onclick="changePage(this,3)">3</button>
+          <span class="page-ellipsis">…</span>
+          <button class="page-btn" onclick="changePage(this,12)">12</button>
+          <button class="page-btn" onclick="changePage(this,'next')">Next →</button>
+        </div>
+      </div>
+
+      <!-- Newsletter Section -->
+      <div class="newsletter-section reveal" style="margin-top:var(--space-xl)">
+        <div class="newsletter-orbs">
+          <div class="nl-orb nl-orb-1"></div>
+          <div class="nl-orb nl-orb-2"></div>
+        </div>
+        <div class="newsletter-content">
+          <div class="newsletter-icon">💌</div>
+          <h3 class="newsletter-title">Join the Blush Circle</h3>
+          <p class="newsletter-text">Get early access to new collections, exclusive member offers, and beauty tips from our experts.</p>
+          <div class="newsletter-form">
+            <input type="email" class="nl-input" placeholder="your@email.com" id="nl-email" />
+            <button class="btn btn-primary btn-pill" onclick="subscribeNewsletter()">Subscribe ✨</button>
+          </div>
+          <p class="newsletter-disclaimer">No spam, unsubscribe anytime. 💖</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-bg">
+      <div class="footer-orb footer-orb-1"></div>
+      <div class="footer-orb footer-orb-2"></div>
+    </div>
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="brand-icon">🌸</span>
+          <span class="brand-name">FemmeUI</span>
+        </div>
+        <p class="footer-tagline">Soft luxury design for the modern feminine brand.</p>
+        <div class="footer-social">
+          <a href="#" class="social-btn">◆ Instagram</a>
+          <a href="#" class="social-btn">◆ Pinterest</a>
+          <a href="#" class="social-btn">◆ TikTok</a>
+        </div>
+      </div>
+      <div class="footer-links-grid">
+        <div class="footer-col">
+          <h5>Components</h5>
+          <a href="#buttons">Buttons</a>
+          <a href="#cards">Cards</a>
+          <a href="#forms">Forms</a>
+          <a href="#overlays">Overlays</a>
+        </div>
+        <div class="footer-col">
+          <h5>Commerce</h5>
+          <a href="#commerce">Products</a>
+          <a href="#commerce">Services</a>
+          <a href="#commerce">Booking</a>
+          <a href="#commerce">Cart</a>
+        </div>
+        <div class="footer-col">
+          <h5>Tokens</h5>
+          <a href="#colors">Colors</a>
+          <a href="#typography">Typography</a>
+          <a href="#misc">Spacing</a>
+          <a href="#misc">Shadows</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>💖 Built with love for Alysha93 · FemmeUI Design System</p>
+      <p class="footer-credit">Soft luxury · Modern feminine · Editorial beauty</p>
+    </div>
+  </footer>
+
+  <!-- ===== MODALS ===== -->
+
+  <!-- Welcome Modal -->
+  <div class="modal-backdrop hidden" id="welcome-modal" onclick="closeModalOnBackdrop(event,'welcome-modal')">
+    <div class="modal glass">
+      <button class="modal-close" onclick="closeModal('welcome-modal')">✕</button>
+      <div class="modal-icon">💖</div>
+      <h3 class="modal-title">Welcome to FemmeUI</h3>
+      <p class="modal-text">The most beautiful, soft-luxury UI design system for feminine brands. Drop it into any project and instantly feel premium.</p>
+      <div class="modal-actions">
+        <button class="btn btn-primary btn-pill" onclick="closeModal('welcome-modal')">Start Exploring 🌸</button>
+        <button class="btn btn-ghost" onclick="closeModal('welcome-modal')">Maybe Later</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Modal -->
+  <div class="modal-backdrop hidden" id="booking-modal" onclick="closeModalOnBackdrop(event,'booking-modal')">
+    <div class="modal glass" style="max-width:480px">
+      <button class="modal-close" onclick="closeModal('booking-modal')">✕</button>
+      <div class="modal-icon">📅</div>
+      <h3 class="modal-title">Book Your Appointment</h3>
+      <div class="form-group" style="margin-top:var(--space-md)">
+        <select class="select-soft">
+          <option>💆 Luxury Facial — $95</option>
+          <option>💅 Gel Manicure — $65</option>
+          <option>💇 Balayage — $220+</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <input class="input-soft" type="date" />
+      </div>
+      <div class="form-group">
+        <input class="input-soft" type="time" />
+      </div>
+      <div class="form-group">
+        <input class="input-soft" placeholder="Your name…" />
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-primary btn-pill" onclick="closeModal('booking-modal');showToast('success','✓ Booking Confirmed!','Your appointment has been scheduled. Check your email for details.')">Confirm Booking 💖</button>
+        <button class="btn btn-ghost" onclick="closeModal('booking-modal')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart Modal -->
+  <div class="modal-backdrop hidden" id="cart-modal" onclick="closeModalOnBackdrop(event,'cart-modal')">
+    <div class="modal glass" style="max-width:420px">
+      <button class="modal-close" onclick="closeModal('cart-modal')">✕</button>
+      <h3 class="modal-title" style="text-align:left;margin-bottom:var(--space-md)">🛍️ Your Bag</h3>
+      <div class="cart-item">
+        <div class="cart-item-img" style="background:linear-gradient(135deg,#FFF0F5,#F8A8C4)">🌹</div>
+        <div class="cart-item-details">
+          <div class="cart-item-name">Rose Velvet Lip Crème</div>
+          <div class="cart-item-price">$34.00</div>
+        </div>
+        <div class="qty-stepper">
+          <button class="qty-btn" onclick="adjustQty(this,-1)">−</button>
+          <span class="qty-val">1</span>
+          <button class="qty-btn" onclick="adjustQty(this,1)">+</button>
+        </div>
+      </div>
+      <div class="cart-footer">
+        <div class="cart-total"><span>Total</span><strong>$34.00</strong></div>
+        <button class="btn btn-gradient-rose btn-pill" style="width:100%" onclick="closeModal('cart-modal');showToast('success','Order placed! 💖','Your order has been confirmed. Estimated delivery: 3-5 days.')">Checkout Now →</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
